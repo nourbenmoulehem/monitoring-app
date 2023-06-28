@@ -48,8 +48,10 @@ const createToken = (_id) => {
 
 // refresh token
 export const refreshToken = (req, res, next) => {
-  
+  console.log("**********************************************************************************")
   const cookies = req.headers.cookie;
+  console.log("🚀 ~ file: auth.js:53 ~ refreshToken ~ req.headers.cookie:", req.headers.cookie)
+  console.log(req.cookies)
   const prevToken = cookies.split("=")[1];
   if (!prevToken) {
     return res.status(400).json({ message: "Couldn't find token" });
@@ -59,7 +61,8 @@ export const refreshToken = (req, res, next) => {
       console.log(err);
       return res.status(403).json({ message: "Authentication failed" });
     }
-
+    console.log(user)
+    console.log("avant: user_id:", user._id)
     console.log("avant: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:", req.cookies)
     res.clearCookie(`${user._id}`);
  
@@ -67,12 +70,12 @@ export const refreshToken = (req, res, next) => {
 
     console.log("apres: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:", req.cookies)
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "35s",
     });
     console.log("Regenerated Token\n", token);
 
-    res.cookie(String(user.id), token, {
+    res.cookie(String(user._id), token, {
       path: "/",
       expires: new Date(Date.now() + 1000 * 30), // 30 seconds
       httpOnly: true,
@@ -84,8 +87,11 @@ export const refreshToken = (req, res, next) => {
     // console.log("🚀 ~ file: auth.js:84 ~ jwt.verify ~ user._id:", user._id)
     // console.log("🚀 ~ req.user._id:", req.user)
     // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req:", req)
+
+    req._id = user._id
+    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ req._idid:", req._id)
+    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ user._id:", user._id)
     
-    console.log(req)
     next();
   });
 };
@@ -183,7 +189,7 @@ export const login = async (req, res) => {
 
 //for testing purposes
 export const getUser = async (req, res, next) => {
-  const userId = req.user._id;
+  const userId = req._id;
   console.log("🚀 ~ file: auth.js:176 ~ getUser ~ userId:", userId)
   
   
