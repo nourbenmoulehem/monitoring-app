@@ -23,7 +23,7 @@ import StatBox from "../../components/StatBox";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-let firstRender = false;
+let firstRender = true;
 
 
 
@@ -81,24 +81,25 @@ const Dashboard = () => {
     const data = await res.data;
     return data;
   };
-
+  console.log("🚀 ~ file: index.jsx:87 ~ useEffect ~ firstRender:", firstRender)
   useEffect(() => {
     if (firstRender) {
       firstRender = false;
       sendRequest().then((data) => setUser(data.user));
-      console.log("🚀 ~ file: index.jsx:89 ~ useEffect ~ user:", user)
     }
     let interval = setInterval(() => {
       refreshToken().then((data) => setUser(data.user));
     }, 1000 * 29);
     return () => clearInterval(interval);
+   
   }, []);
-
+  console.log(user)
+  console.log("🚀 ~ file: index.jsx:96 ~ Dashboard ~ user:", user)
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard " />
-        <div>{user && <h1>{user.name}</h1>}</div>
+        <div><Header title="DASHBOARD" subtitle="Welcome to your dashboard "/></div>
+        <div>{user && <p>{user.fName}</p>}</div>
         <Box>
           <Button
             sx={{
