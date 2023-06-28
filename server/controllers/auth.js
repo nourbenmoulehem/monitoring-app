@@ -48,9 +48,9 @@ const createToken = (_id) => {
 
 // refresh token
 export const refreshToken = (req, res, next) => {
+  
   const cookies = req.headers.cookie;
   const prevToken = cookies.split("=")[1];
-  console.log("🚀 ~ file: auth.js:54 ~ refreshToken ~ prevToken:", prevToken)
   if (!prevToken) {
     return res.status(400).json({ message: "Couldn't find token" });
   }
@@ -59,11 +59,13 @@ export const refreshToken = (req, res, next) => {
       console.log(err);
       return res.status(403).json({ message: "Authentication failed" });
     }
+
+    console.log("avant: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:", req.cookies)
     res.clearCookie(`${user._id}`);
  
     req.cookies[`${user._id}`] = "";
 
-    console.log("🚀 ~ file: auth.js:70 ~ jwt.verify ~ req:", req)
+    console.log("apres: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:", req.cookies)
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "35s",
@@ -77,7 +79,13 @@ export const refreshToken = (req, res, next) => {
       sameSite: "lax",
     });
 
-    req.id = user._id;
+    // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req._id:", req._id)
+    // // req.user._id = user._id;
+    // console.log("🚀 ~ file: auth.js:84 ~ jwt.verify ~ user._id:", user._id)
+    // console.log("🚀 ~ req.user._id:", req.user)
+    // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req:", req)
+    
+    console.log(req)
     next();
   });
 };
@@ -133,7 +141,7 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userdb = await User.findOne({ email: email });
-    console.log("🚀 ~ file: auth.js:97 ~ login ~ user:", userdb)
+    // console.log("🚀 ~ file: auth.js:97 ~ login ~ user:", userdb)
     
     if (!userdb) return res.status(400).json({ msg: "User does not exist. " });
 
@@ -149,7 +157,10 @@ export const login = async (req, res) => {
     // create token
     const token = createToken(user._id)
 
-
+    console.log("Generated token from login\n ", token)
+    if (req.cookies[`${user._id}`]) {
+      req.cookies[`${user._id}`] = "";
+    }
 
     res.cookie(String(user._id), token, {
       path: "/",
@@ -173,7 +184,7 @@ export const login = async (req, res) => {
 //for testing purposes
 export const getUser = async (req, res, next) => {
   const userId = req.user._id;
-  // console.log("🚀 ~ file: auth.js:176 ~ getUser ~ userId:", userId)
+  console.log("🚀 ~ file: auth.js:176 ~ getUser ~ userId:", userId)
   
   
   let user;
@@ -188,7 +199,7 @@ export const getUser = async (req, res, next) => {
   }
 
   if(!user) {
-    return res.status(404).json({message: "User not found"})
+    return res.status(404).json({message: "User not found hehiha"})
   }
 
   return res.status(200).json({user});
