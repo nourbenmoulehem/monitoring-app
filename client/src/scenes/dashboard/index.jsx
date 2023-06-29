@@ -21,6 +21,8 @@ import OverviewChart from "../../components/OverviewChart";
 import { useGetDashboardQuery } from "../../state/api";
 import StatBox from "../../components/StatBox";
 import axios from "axios";
+import { setLogin } from "../../state";
+import { useDispatch } from "react-redux";
 
 axios.defaults.withCredentials = true;
 let firstRender = true;
@@ -32,6 +34,8 @@ const Dashboard = () => {
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { data, isLoading } = useGetDashboardQuery();
   const [user, setUser] = useState();
+  const dispatch = useDispatch();
+  
   const columns = [
     {
       field: "_id",
@@ -88,7 +92,10 @@ const Dashboard = () => {
       sendRequest().then((data) => setUser(data.user));
     }
     let interval = setInterval(() => {
-      refreshToken().then((data) => setUser(data.user));
+      refreshToken().then((data) => dispatch(setLogin({
+        user: data.user,
+        token: data.token,
+      }))).then((data) => setUser(data.user));
     }, 1000 * 29);
     return () => clearInterval(interval);
    

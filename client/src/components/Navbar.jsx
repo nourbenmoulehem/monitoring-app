@@ -23,6 +23,8 @@ import {
   MenuItem,
   useTheme,
 } from "@mui/material";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -32,6 +34,20 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const sendLogoutReq = async () => {
+    const res = await axios.post("http://localhost:5001/auth/logout", null, {
+      withCredentials: true,
+    });
+    if (res.status === 200) {
+      return res;
+    }
+    return new Error("Unable TO Logout. Please try again");
+  };
+  const handleLogout = () => {
+    sendLogoutReq().then(() => dispatch(setLogout()));
+  };
+
 
   return (
     <AppBar
@@ -118,7 +134,8 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+              <MenuItem  onClick={handleLogout}
+                  to="/">Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

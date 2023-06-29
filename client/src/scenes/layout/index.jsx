@@ -10,10 +10,11 @@ const Layout = () => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const user = useSelector((state) => state.global.user);
-  console.log("🚀 ~ file: index.jsx:13 ~ Layout ~ user:", user)
-  const { data } = useGetUserQuery(user._id);
-  console.log("🚀 ~ file: index.jsx:15 ~ Layout ~ data:", data)
-  console.log(user._id)
+  
+  const { data } = useGetUserQuery(user?._id); // Unconditionally call the hook
+  console.log("🚀 ~ file: index.jsx:15 ~ Layout ~ user:", user)
+  
+  console.log("🚀 ~ file: index.jsx:15 ~ Layout ~ data:", data);
 
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
