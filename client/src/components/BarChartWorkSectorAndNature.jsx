@@ -2,15 +2,11 @@ import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
 import { useGetClientsStatYearlyQuery } from '../state/api';
-
+import { tokens } from "../theme";
 const BarChartWorkSectorAndNature = () => {
-  // const theme = useTheme();
-  // const colors = [
-  //   theme.palette.secondary[500],
-  //   theme.palette.secondary[300],
-  //   theme.palette.secondary[300],
-  //   theme.palette.secondary[500],
-  // ];
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:9 ~ BarChartWorkSectorAndNature ~ colors:", colors)
 
   const { data, isLoading } = useGetClientsStatYearlyQuery();
   console.log(
@@ -43,6 +39,35 @@ const BarChartWorkSectorAndNature = () => {
 
     <ResponsiveBar
         data={formattedData}
+        theme={{
+        // added
+        axis: {
+          domain: {
+            line: {
+              stroke: colors.grey[100],
+            },
+          },
+          legend: {
+            text: {
+              fill: colors.grey[100],
+            },
+          },
+          ticks: {
+            line: {
+              stroke: colors.grey[100],
+              strokeWidth: 1,
+            },
+            text: {
+              fill: colors.grey[100],
+            },
+          },
+        },
+        legends: {
+          text: {
+            fill: colors.grey[100],
+          },
+        },
+      }}
         keys={[
             'public',
             'private',
@@ -50,7 +75,6 @@ const BarChartWorkSectorAndNature = () => {
         indexBy="workSector"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
-        layout="horizontal"
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
         colors={{ scheme: 'nivo' }}
