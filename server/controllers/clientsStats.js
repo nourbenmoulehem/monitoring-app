@@ -7,7 +7,8 @@ import Client from "../models/Client.js"
 
     /* Overall Client Stats */
     const ClientStat = await OverallStatClient.find({ year: currentYear });
-
+    console.log("🚀 ~ file: clientsStats.js:10 ~ getClientsStatYearly ~ ClientStat:", ClientStat)
+    
     const {
       professionStats,
       workSectorStats,
