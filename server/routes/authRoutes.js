@@ -2,7 +2,7 @@ import express from "express";
 import { login, createNewUser, register } from "../controllers/auth.js";
 import { verifyToken } from "../middleware/auth.js";
 import { refreshToken } from "../controllers/auth.js";
-import { getUser } from "../controllers/auth.js";
+import { getUser, logout } from "../controllers/auth.js";
 
 const router = express.Router();
 
@@ -16,4 +16,6 @@ router.post("/signup", createNewUser)
 router.post("/register", register)
 
 router.get("/user", verifyToken, getUser)
+
+router.post('/logout', verifyToken, logout)
 export default router;

@@ -89,8 +89,8 @@ export const refreshToken = (req, res, next) => {
     // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req:", req)
 
     req._id = user._id
-    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ req._idid:", req._id)
-    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ user._id:", user._id)
+    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ req._idid:", req._id);
+    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ user._id:", user._id);
     
     next();
   });
@@ -192,7 +192,11 @@ export const getUser = async (req, res, next) => {
   const userId = req._id;
   console.log("🚀 ~ file: auth.js:176 ~ getUser ~ userId:", userId)
   
-  
+  const cookies = req.headers.cookie;
+  console.log("🚀 ~ file: auth.js:5 ~ verifyToken ~ cookies:", cookies)
+  const  token = cookies.split("=")[1];
+  console.log("🚀 ~ file: auth.js:198 ~ getUser ~ token:", token)
+
   let user;
 
   // console.log(req.cookies)
@@ -208,7 +212,7 @@ export const getUser = async (req, res, next) => {
     return res.status(404).json({message: "User not found hehiha"})
   }
 
-  return res.status(200).json({user});
+  return res.status(200).json({user, token});
 }
 
 /* Creating New user by the admin */
@@ -234,4 +238,20 @@ export const createNewUser = async (req, res) => {
   } 
   };
 
+  export const logout = (req, res, next) => {
+    const cookies = req.headers.cookie;
+    const prevToken = cookies.split("=")[1];
+    if (!prevToken) {
+      return res.status(400).json({ message: "Couldn't find token" });
+    }
+    jwt.verify(String(prevToken), process.env.JWT_SECRET, (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.status(403).json({ message: "Authentication failed" });
+      }
+      res.clearCookie(`${user._id}`);
+      req.cookies[`${user._id}`] = "";
+      return res.status(200).json({ message: "Successfully Logged Out" });
+    });
+  };
 
