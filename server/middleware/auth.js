@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const verifyToken = async (req, res, next) => {
   const cookies = req.headers.cookie;
-  console.log("🚀 ~ file: auth.js:5 ~ verifyToken ~ cookies:", cookies)
+  console.log("🚀 ~ file: auth.js:5 ~ verifyToken ~ cookies:", cookies);
   const  token = cookies.split("=")[1];
   // console.log(token);
   try {
