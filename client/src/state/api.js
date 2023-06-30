@@ -38,6 +38,12 @@ export const api = createApi({
       query: () => "agencies/getAllAgencies",
       providesTags: ["agencies"],
     }),
+
+    getProfessionPieChart: build.query({
+      query: () => "clients/professionStats",
+      providesTags: ["clients"],
+    }),
+    
   }),
 });
 
@@ -53,4 +59,5 @@ export const {
   useGetDashboardQuery,
   useGetClientsStatYearlyQuery,
   useGetAllAgenciesQuery,
+  useGetProfessionPieChartQuery
 } = api;

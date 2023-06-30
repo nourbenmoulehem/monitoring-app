@@ -6,13 +6,9 @@ import { tokens } from "../theme";
 const BarChartWorkSectorAndNature = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:9 ~ BarChartWorkSectorAndNature ~ colors:", colors)
-
+  
   const { data, isLoading } = useGetClientsStatYearlyQuery();
-  console.log(
-    '🚀 ~ file: BarChartWorkSectorAndNature.jsx:12 ~ BarChartWorkSectorAndNature ~ data:',
-    data
-  );
+  
 
   // Check if data is defined and has the necessary properties
   let formattedData = [];
@@ -31,8 +27,7 @@ const BarChartWorkSectorAndNature = () => {
       };
     });
   }
-  console.log('🚀 ~ BarChartWorkSectorAndNature ~ formattedData:', formattedData);
-  
+
   
 
   return (

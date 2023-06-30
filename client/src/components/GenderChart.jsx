@@ -21,16 +21,16 @@ const GenderChart = () => {
 
   const formattedData = [
     {
-      id: "femme",
-      label: "femme",
+      id: "F",
+      label: "Femme",
       value: femaleStat ? femaleStat.count : 0,
-      color: colors[0],
+      color: theme.palette.secondary[200],
     },
     {
-      id: "homme",
-      label: "homme",
+      id: "H",
+      label: "Homme",
       value: maleStat ? maleStat.count : 0,
-      color: colors[1],
+      color: theme.palette.secondary[200],
     },
   ];
   
@@ -39,10 +39,10 @@ const GenderChart = () => {
 
   return (
     <Box
-      height={"400px"}
-      width={undefined}
-      minHeight={"325px"}
-      minWidth={"325px"}
+      height={300} // Adjust the height as desired
+      width={250} // Adjust the width as desired
+      minHeight={300} // Set a minimum height to ensure visibility
+      minWidth={250} // Set a minimum width to ensure visibility
       position="relative"
     >
       <ResponsivePie
@@ -128,7 +128,7 @@ const GenderChart = () => {
           },
         ]}
       />
-      <Box
+      {/* <Box
         position="absolute"
         top="50%"
         left="50%"
@@ -143,7 +143,7 @@ const GenderChart = () => {
           Total: {femaleStat.count + maleStat.count}
         </Typography>
  
-      </Box>
+      </Box> */}
     </Box>
   );
 }
