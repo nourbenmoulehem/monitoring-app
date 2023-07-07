@@ -1,34 +1,48 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
-import { useGetClientsStatYearlyQuery } from '../state/api';
+import { useGetRevenueStatsQuery } from '../state/api';
 import { tokens } from "../theme";
-const BarChartWorkSectorAndNature = () => {
+
+
+const RevenueBarChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
-  const { data, isLoading } = useGetClientsStatYearlyQuery();
+  const { data, isLoading } = useGetRevenueStatsQuery();
+  console.log("🚀 ~ file: RevenueBarChart.jsx:13 ~ RevenueBarChart ~ data:", data)
   
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
 
   // Check if data is defined and has the necessary properties
   let formattedData = [];
 
-  if (data && data.workSectorStats) {
-    formattedData = data.workSectorStats.map((item) => {
-      const publicStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Public');
-      const privateStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Private');
-
+  if (data) {
+    formattedData = data.map((item) => {
+      const count = item.count;
+  
       return {
-        workSector: item.workSector,
-        public: publicStat ? publicStat.count : 0,
-        publicColor: 'hsl(99, 70%, 50%)', // Set the desired color for the 'public' bar
-        private: privateStat ? privateStat.count : 0,
-        privateColor: 'hsl(255, 70%, 50%)', // Set the desired color for the 'private' bar
+        revenue: item._id,
+        count: count,
+        color: 'hsl(99, 70%, 50%)', // Set the desired color for the bar
       };
+    });
+
+    formattedData.sort((a, b) => {
+      const order = {
+        '0-700': 0,
+        '700-1600': 1,
+        '1600-3500': 2,
+        '3500+': 3,
+      };
+  
+      return order[a.revenue] - order[b.revenue];
     });
   }
 
-  
+  console.log("formattedData in revnueihfduiosdhf", formattedData)
 
   return (
 
@@ -64,11 +78,10 @@ const BarChartWorkSectorAndNature = () => {
         },
       }}
         keys={[
-            'public',
-            'private'
             
+            "count"
         ]}
-        indexBy="workSector"
+        indexBy="revenue"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
@@ -110,7 +123,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Work Sector',
+            legend: 'Revenues',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -118,7 +131,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Work Nature',
+            legend: 'Number of Clients',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -163,5 +176,5 @@ const BarChartWorkSectorAndNature = () => {
     />
 
 )
-      }
-export default BarChartWorkSectorAndNature;
+}
+export default RevenueBarChart;

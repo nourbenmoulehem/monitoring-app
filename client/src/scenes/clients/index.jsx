@@ -11,15 +11,26 @@ import Header from "../../components/Header";
 // import LineChart from "../../components/LineChart";
 // import GeographyChart from "../../components/GeographyChart";
 import BarChartWorkSectorAndNature from "../../components/BarChartWorkSectorAndNature.jsx";
+import LineChartComparisionMembership from "../../components/LineChartComparisionMembership";
+import RevenueBarChart from "../../components/RevenueBarChart.jsx";
 import StatBoxClient from "../../components/StatBoxClient.jsx";
 // import ProgressCircle from "../../components/ProgressCircle";
 import BarChart from "../../components/BarChart.jsx";
 import GenderChart from "../../components/GenderChart.jsx";
 import ProfessionStats from "../../components/ProfessionStats.jsx"
+import {useGetAgregateTotalClientsQuery} from "../../state/api.js"
+import BreakdownChart from "../../components/BreakdownChart.jsx"
+
 const Clients = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const count = useGetAgregateTotalClientsQuery()
 
+  // console.log("🚀 ~ file: index.jsx:24 ~ Clients ~ count:")
+  // const totalClients = count.data.entryCount
+  // console.log("🚀 ~ file: index.jsx:27 ~ Clients ~ totalClients:", totalClients)
+  // const totalClientsString = totalClients.toString();
+  // console.log("🚀 ~ file: index.jsx:29 ~ Clients ~ totalClientsString:", totalClientsString)
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -36,7 +47,7 @@ const Clients = () => {
               padding: "10px 20px",
             }}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            <DownloadOutlinedIcon sx={{ mr: "15px" }} />
             Download Reports
           </Button>
         </Box>
@@ -59,8 +70,8 @@ const Clients = () => {
           justifyContent="center"
         >
           <StatBoxClient
-            title="1,325,134"
-            subtitle="Traffic Received"
+            title="20"
+            subtitle="Total Clients"
             progress="0.80"
             increase="+43%"
             icon={
@@ -110,17 +121,7 @@ const Clients = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBoxClient
-            title="32,441"
-            subtitle="New Clients"
-            progress="0.30"
-            increase="+5%"
-            icon={
-              <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
+          <iframe style={{background: "#21313C",border: "none",borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}  width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=dark&autoRefresh=true" />
         </Box>
         
 
@@ -174,49 +175,8 @@ const Clients = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {/* {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))} */}
+
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="400" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42f9a-ce21-4627-8186-fb28de2c50fb&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
         </Box>
 
         {/* ROW 3 */}
@@ -260,7 +220,7 @@ const Clients = () => {
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             {/* <BarChart isDashboard={true} /> */}
-            <BarChartWorkSectorAndNature isDashboard={true} />
+            <RevenueBarChart isDashboard={true} />
           </Box>
         </Box>
         <Box
@@ -355,7 +315,7 @@ const Clients = () => {
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             {/* <BarChart isDashboard={true} /> */}
-            <BarChartWorkSectorAndNature isDashboard={true} />
+            <LineChartComparisionMembership  />
           </Box>
         </Box>
         <Box
@@ -373,104 +333,71 @@ const Clients = () => {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Membership pie chart representation
             </Typography>
           </Box>
-          {/* {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))} */}
+          <BreakdownChart />
         </Box>
 
         {/* ROW 5 */}
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="30px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            {/* <ProgressCircle size="125" /> */}
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-            
-          </Box>
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}} width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42909-2d1e-470f-889d-62018e278c28&maxDataAge=3600&theme=dark&autoRefresh=true"/>
         </Box>
+
         <Box
-          gridColumn="span 5"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            {/* <BarChartWorkSectorAndNature isDashboard={true} /> */}
-            <BarChart isDashboard={true} />
-          </Box>
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a429db-7185-4c8a-8351-10f4ede54ee9&maxDataAge=3600&theme=dark&autoRefresh=true"/>
         </Box>
+
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          padding="30px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            5arita
-          </Box>
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a22-0ef2-4d13-8d50-2a911a664b43&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
         </Box>
+
+        <Box
+          gridColumn="span 3"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a45-0ef2-4aa9-899d-2a911a66599d&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
+        </Box>
+
+        <Box
+          gridColumn="span 3"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a62-bfd6-4959-864d-aed10ec9195b&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
+        </Box>
+
+        
+
+        
       </Box>
 
       

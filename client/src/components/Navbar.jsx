@@ -45,7 +45,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     return new Error("Unable TO Logout. Please try again");
   };
   const handleLogout = () => {
-    sendLogoutReq().then(() => dispatch(setLogout()));
+    sendLogoutReq().then(() =>  {dispatch(setLogout());  window.location.replace("/"); }  );
   };
 
 
@@ -134,8 +134,8 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem  onClick={handleLogout}
-                  to="/">Log Out</MenuItem>
+              <MenuItem  onClick={handleLogout} 
+                  >Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

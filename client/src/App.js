@@ -11,6 +11,8 @@ import LoginPage from "./scenes/loginPage";
 import Signup from "./scenes/signUp";
 import Clients from "./scenes/clients";
 import Admin from "./scenes/admin";
+import Virement from "./scenes/virement";
+import Chequier from "./scenes/chequier";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -28,14 +30,15 @@ function App() {
             {!isAuth && <Route path="/" element={<LoginPage />} />}
             {!isAuth && <Route path="/signup" element={<Signup />} />}
 
-            {isAuth && (
-              <Route element={<Layout />}>
+            {isAuth &&<Route element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/clients" element={<Clients />} />
+                <Route path="/virements" element={<Virement />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/chequier" element={<Chequier />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
               </Route>
-            )}
+            }
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
