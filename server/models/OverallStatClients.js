@@ -86,6 +86,31 @@ const OverallStatClientSchema = new mongoose.Schema(
       ],
       default: [],
     },
+
+    membershipTypeStats: {
+      type: [
+        {
+          membershipType: {
+            type: String,
+            required: true,
+          },
+          monthlyCounts: [
+            {
+              month: {
+                type: String,
+                required: true,
+              },
+              count: {
+                type: Number,
+                required: true,
+                default: 0,
+              },
+            },
+          ],
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );

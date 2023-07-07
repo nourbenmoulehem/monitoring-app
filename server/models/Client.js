@@ -2,13 +2,19 @@ import mongoose from "mongoose";
 
 const ClientSchema = new mongoose.Schema(
   {
-    prenom: {
-      type: String,
-      required: true,
-      min: 2,
-      max: 100,
-    },
-    nom: {
+    // prenom: {
+    //   type: String,
+    //   required: true,
+    //   min: 2,
+    //   max: 100,
+    // },
+    // nom: {
+    //   type: String,
+    //   required: true,
+    //   min: 2,
+    //   max: 100,
+    // },
+    name : {
       type: String,
       required: true,
       min: 2,
@@ -20,18 +26,22 @@ const ClientSchema = new mongoose.Schema(
       max: 100,
       unique: true
     },
-    cin: {
-      type: String,
-      required: true,
-      max: 100,
-      unique: true
-    },
+    // cin: {
+    //   type: String,
+    //   required: true,
+    //   max: 100,
+    //   unique: true
+    // },
     Birthday: {
       type: Date,
       required: true,
     },
     Adress: {
       type: String,
+      required: true,
+    },
+    age: {
+      type: Number,
       required: true,
     },
     Gouvernment: {
