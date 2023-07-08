@@ -36,7 +36,7 @@ const Clients = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="CLIENTS dashboard" />
-
+        
         <Box>
           <Button
             sx={{
@@ -64,7 +64,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -85,7 +85,7 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -95,7 +95,7 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -116,12 +116,12 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-          <iframe style={{background: "#21313C",border: "none",borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}  width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=dark&autoRefresh=true" />
+          <iframe style={{background: theme.palette.background.alt,border: "none",borderRadius: "2px"}}  width="290" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`} />
         </Box>
         
 
@@ -130,7 +130,7 @@ const Clients = () => {
         <Box
           gridColumn="span 11"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
         >
           <Box
             mt="25px"
@@ -172,11 +172,11 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           overflow="auto"
         >
 
-          <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="400" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42f9a-ce21-4627-8186-fb28de2c50fb&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
+          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="400" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42f9a-ce21-4627-8186-fb28de2c50fb&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe>
         </Box>
 
         {/* ROW 3 */}
@@ -184,7 +184,7 @@ const Clients = () => {
         <Box
           gridColumn="span 11"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
         >
           <Box
             mt="25px"
@@ -226,7 +226,7 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           overflow="auto"
         >
           <Box
@@ -279,7 +279,7 @@ const Clients = () => {
         <Box
           gridColumn="span 11"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
         >
           <Box
             mt="25px"
@@ -321,7 +321,7 @@ const Clients = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           overflow="auto"
         >
           <Box
@@ -343,7 +343,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -354,7 +354,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -365,7 +365,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -376,7 +376,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -387,7 +387,7 @@ const Clients = () => {
         <Box
           gridColumn="span 3"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"

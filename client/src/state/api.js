@@ -15,7 +15,10 @@ export const api = createApi({
     "Dashboard",
     "clients",
     "agencies",
-    "Chequiers"
+    "Chequiers",
+    "Credits",
+    "Virements",
+    "Users"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -69,6 +72,34 @@ export const api = createApi({
       providesTags: ["Chequiers"],
     }),
 
+    getCredits: build.query({
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "credits/getCredits",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
+      providesTags: ["Chequiers"],
+    }),
+
+    getVirements: build.query({
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "virements/getVirements",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
+      providesTags: ["Virements"],
+    }),
+
+    getAllUsers: build.query({
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "users/getUsers",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
+      providesTags: ["Users"],
+    }),
+
+
 
   })
 })
@@ -89,5 +120,8 @@ export const {
   useGetAgregateTotalClientsQuery,
   useGetRevenueStatsQuery,
   useGetMemberShipStatsQuery,
-  useGetChequiersQuery
+  useGetChequiersQuery,
+  useGetCreditsQuery,
+  useGetVirementsQuery,
+  useGetAllUsersQuery
 } = api;

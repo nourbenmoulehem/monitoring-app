@@ -13,6 +13,8 @@ import Clients from "./scenes/clients";
 import Admin from "./scenes/admin";
 import Virement from "./scenes/virement";
 import Chequier from "./scenes/chequier";
+import Credit from "./scenes/credits";
+
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -36,6 +38,7 @@ function App() {
                 <Route path="/virements" element={<Virement />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/chequier" element={<Chequier />} />
+                <Route path="/credits" element={<Credit />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
               </Route>
             }

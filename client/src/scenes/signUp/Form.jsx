@@ -12,13 +12,13 @@ import { useGetAllAgenciesQuery } from "../../state/api";
 import axios from "axios";
 
 const registerSchema = yup.object().shape({
-  firstName: yup.string(),
-  lastName: yup.string(),
-  email: yup.string().email("invalid email"),
-  password: yup.string(),
-  location: yup.string(),
-  occupation: yup.string(),
-  agency: yup.string(),
+  firstName: yup.string().required("required"),
+  lastName: yup.string().required("required"),
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+  location: yup.string().required("required"),
+  occupation: yup.string().required("required"),
+  agency: yup.string().required("required"),
 });
 
 const initialValuesRegister = {

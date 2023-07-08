@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetChequiersQuery } from "state/api";
+import { useGetCreditsQuery } from "state/api";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import PauseCircleFilledTwoToneIcon from '@mui/icons-material/PauseCircleFilledTwoTone';
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import RuleIcon from '@mui/icons-material/Rule';
 import StatBox from "components/StatBox";
 import FlexBetween from "components/FlexBetween";
 
-const Chequier = () => {
+const Credit = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   // values to be sent to the backend
@@ -19,20 +22,20 @@ const Chequier = () => {
   const [search, setSearch] = useState("");
 
   const [searchInput, setSearchInput] = useState("");
-  const { data, isLoading } = useGetChequiersQuery({
+  const { data, isLoading } = useGetCreditsQuery({
     page,
     pageSize,
     sort: JSON.stringify(sort),
     search,
   });
-  console.log("🚀 ~ file: index.jsx:28 ~ Chequier ~ data:", data)
+  console.log("🚀 ~ file: index.jsx:28 ~ Credit ~ data:", data)
 
   
 
 
   const columns = [
     {
-      field: "refDemande",
+      field: "ref_demande",
       headerName: "Reference demande",
       flex: 1,
     },
@@ -42,43 +45,55 @@ const Chequier = () => {
       flex: 1,
     },
     {
-      field: "dad",
-      headerName: "date of application submission",
+      field: "duree",
+      headerName: "duree",
       flex: 1,
-      renderCell: (params) => {
-        if (params.value) {
-
-          const date = new Date(params.value);
-          const formattedDate = date.toISOString().split("T")[0];
-          return formattedDate;
-        }
-        return "";
-      },
     },
     {
-      field: "dpe",
-      headerName: "date of status",
+      field: "montant_demande",
+      headerName: "montant",
       flex: 1,
-      renderCell: (params) => {
-        if (params.value) {
-          const date = new Date(params.value);
-          const formattedDate = date.toISOString().split("T")[0];
-          return formattedDate;
-        }
-        return "";
-      },
     },
     {
-      field: "etatDemande",
+      field: "revenu",
+      headerName: "revenue",
+      flex: 1,
+    },
+    {
+      field: "etat_demande",
       headerName: "state",
       flex: 1,
       sortable: true,
       renderCell: (params) => {
-        if (params.value === "validé") {
+        if (params.value === "Validated") {
           return (
             <Box display="flex" alignItems="center" gap={4}>
               <p>Validated</p>
               <CheckCircleOutlineIcon />
+            </Box>
+          );
+        }
+        if (params.value === "Pending") {
+          return (
+            <Box display="flex" alignItems="center" gap={4}>
+              <p>Pending</p>
+              <PauseCircleFilledTwoToneIcon />
+            </Box>
+          );
+        }
+        if (params.value === "Cancelled") {
+          return (
+            <Box display="flex" alignItems="center" gap={4}>
+              <p>Cancelled</p>
+              <DoDisturbIcon />
+            </Box>
+          );
+        }
+        if (params.value === "Missing Information") {
+          return (
+            <Box display="flex" alignItems="center" gap={4}>
+              <p>Missing Info</p>
+              <RuleIcon />
             </Box>
           );
         }
@@ -97,11 +112,11 @@ const Chequier = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="CHEQUIERS" subtitle="Entire list of chequiers" />
+      <Header title="CREDITS" subtitle="Entire list of CREDITS" />
 
         <FlexBetween>
         <StatBox
-            title="Total Chequiers"
+            title="Total CREDITS"
             value={data && data.total}
             increase="+14%"
             description="Since last month"
@@ -125,6 +140,33 @@ const Chequier = () => {
             description="Since last month"
             
           />
+
+        <StatBox
+          title="Total Cancelled"
+          
+          value={data && data.cancelledCount}
+          increase="+14%"
+          description="Since last month"
+          
+        />
+
+        <StatBox
+          title="Total missing information"
+          
+          value={data && data.missinInfoCount}
+          increase="+14%"
+          description="Since last month"
+          
+        />
+
+        <StatBox
+          title="Total in progress"
+          
+          value={data && data.inProgressCount}
+          increase="+14%"
+          description="Since last month"
+          
+        />
         </FlexBetween>
           
 
@@ -161,7 +203,7 @@ const Chequier = () => {
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
-          rows={(data && data.chequier) || []}
+          rows={(data && data.credit) || []}
           columns={columns}
           rowCount={(data && data.total) || 0}
           rowsPerPageOptions={[20, 50, 100]}
@@ -183,4 +225,4 @@ const Chequier = () => {
   );
 };
 
-export default Chequier;
+export default Credit;
