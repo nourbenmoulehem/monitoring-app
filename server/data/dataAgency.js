@@ -117,7 +117,7 @@ export const sampleVirements = [
     age: 'John Doe',
     ncpBeneficiaire: '9876543210',
     motifVirement: 'Payment for services',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR002',
@@ -127,7 +127,7 @@ export const sampleVirements = [
     age: 'Jane Smith',
     ncpBeneficiaire: '8765432109',
     motifVirement: 'Rent payment',
-    etatVirement: 'E' // Executed
+    etatVirement: 'Executed' // Executed
   },
   {
     refVirement: 'VR003',
@@ -137,7 +137,7 @@ export const sampleVirements = [
     age: 'Mike Johnson',
     ncpBeneficiaire: '7654321098',
     motifVirement: 'Utility bill',
-    etatVirement: 'R' // Rejected
+    etatVirement: 'Rejected' // Rejected
   },
   {
     refVirement: 'VR004',
@@ -147,7 +147,7 @@ export const sampleVirements = [
     age: 'Emily Davis',
     ncpBeneficiaire: '6543210987',
     motifVirement: 'Loan repayment',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR005',
@@ -157,7 +157,7 @@ export const sampleVirements = [
     age: 'David Wilson',
     ncpBeneficiaire: '5432109876',
     motifVirement: 'Salary deposit',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR006',
@@ -167,7 +167,7 @@ export const sampleVirements = [
     age: 'Sarah Thompson',
     ncpBeneficiaire: '4321098765',
     motifVirement: 'Insurance premium',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR007',
@@ -177,7 +177,7 @@ export const sampleVirements = [
     age: 'Michael Brown',
     ncpBeneficiaire: '3210987654',
     motifVirement: 'Investment fund',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR008',
@@ -187,7 +187,7 @@ export const sampleVirements = [
     age: 'Jessica Lee',
     ncpBeneficiaire: '2109876543',
     motifVirement: 'Credit card payment',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR009',
@@ -197,7 +197,7 @@ export const sampleVirements = [
     age: 'Daniel Miller',
     ncpBeneficiaire: '1098765432',
     motifVirement: 'Charity donation',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   },
   {
     refVirement: 'VR010',
@@ -207,7 +207,7 @@ export const sampleVirements = [
     age: 'Olivia Taylor',
     ncpBeneficiaire: '0987654321',
     motifVirement: 'Travel expenses',
-    etatVirement: 'G' // Generated (in progress)
+    etatVirement: 'Generated' // Generated (in progress)
   }
 ];
 
@@ -293,3 +293,196 @@ export const sampleChequiers = [
     dpe: new Date('2022-09-12')
   }
 ];
+
+export const dataCredits = [
+  {
+    ref_demande: "REF001",
+    clidig: "CL001",
+    age: "AGE001",
+    ncp: "NCP001",
+    duree: 12,
+    revenu: 5000,
+    autre_revenu: 1000,
+    nom_prenom_client: "John Doe",
+    etat_demande: "In Progress",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 10000,
+    etape_demande: "Step 1",
+    NAT_CREDIT: "Type A",
+    dgnom: "Code A"
+  },
+  {
+    ref_demande: "REF002",
+    clidig: "CL002",
+    age: "AGE002",
+    ncp: "NCP002",
+    duree: 24,
+    revenu: 8000,
+    autre_revenu: 2000,
+    nom_prenom_client: "Jane Smith",
+    etat_demande: "Pending",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 20000,
+    etape_demande: "Step 2",
+    NAT_CREDIT: "Type B",
+    dgnom: "Code B"
+  },
+  {
+    ref_demande: "REF003",
+    clidig: "CL003",
+    age: "AGE003",
+    ncp: "NCP003",
+    duree: 36,
+    revenu: 6000,
+    autre_revenu: 1500,
+    nom_prenom_client: "Michael Johnson",
+    etat_demande: "Validated",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: "MAT001",
+    date_ver: "2023-06-15",
+    montant_demande: 15000,
+    etape_demande: "Step 3",
+    NAT_CREDIT: "Type A",
+    dgnom: "Code A"
+  },
+  {
+    ref_demande: "REF004",
+    clidig: "CL004",
+    age: "AGE004",
+    ncp: "NCP004",
+    duree: 18,
+    revenu: 4500,
+    autre_revenu: 800,
+    nom_prenom_client: "Emily Wilson",
+    etat_demande: "Cancelled",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 12000,
+    etape_demande: "Step 1",
+    NAT_CREDIT: "Type B",
+    dgnom: "Code B"
+  },
+  {
+    ref_demande: "REF005",
+    clidig: "CL005",
+    age: "AGE005",
+    ncp: "NCP005",
+    duree: 24,
+    revenu: 7000,
+    autre_revenu: 1200,
+    nom_prenom_client: "David Brown",
+    etat_demande: "Missing Information",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 18000,
+    etape_demande: "Step 2",
+    NAT_CREDIT: "Type C",
+    dgnom: "Code C"
+  },
+  {
+    ref_demande: "REF006",
+    clidig: "CL006",
+    age: "AGE006",
+    ncp: "NCP006",
+    duree: 12,
+    revenu: 5500,
+    autre_revenu: 1000,
+    nom_prenom_client: "Sophia Davis",
+    etat_demande: "In Progress",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 10000,
+    etape_demande: "Step 1",
+    NAT_CREDIT: "Type A",
+    dgnom: "Code A"
+  },
+  {
+    ref_demande: "REF007",
+    clidig: "CL007",
+    age: "AGE007",
+    ncp: "NCP007",
+    duree: 36,
+    revenu: 9000,
+    autre_revenu: 2500,
+    nom_prenom_client: "Oliver Taylor",
+    etat_demande: "Pending",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 25000,
+    etape_demande: "Step 3",
+    NAT_CREDIT: "Type B",
+    dgnom: "Code B"
+  },
+  {
+    ref_demande: "REF008",
+    clidig: "CL008",
+    age: "AGE008",
+    ncp: "NCP008",
+    duree: 18,
+    revenu: 5000,
+    autre_revenu: 1000,
+    nom_prenom_client: "Emma Johnson",
+    etat_demande: "Validated",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: "MAT002",
+    date_ver: "2023-06-18",
+    montant_demande: 14000,
+    etape_demande: "Step 2",
+    NAT_CREDIT: "Type C",
+    dgnom: "Code C"
+  },
+  {
+    ref_demande: "REF009",
+    clidig: "CL009",
+    age: "AGE009",
+    ncp: "NCP009",
+    duree: 24,
+    revenu: 6500,
+    autre_revenu: 1100,
+    nom_prenom_client: "Noah Anderson",
+    etat_demande: "Cancelled",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 16000,
+    etape_demande: "Step 1",
+    NAT_CREDIT: "Type A",
+    dgnom: "Code A"
+  },
+  {
+    ref_demande: "REF010",
+    clidig: "CL010",
+    age: "AGE010",
+    ncp: "NCP010",
+    duree: 12,
+    revenu: 4000,
+    autre_revenu: 800,
+    nom_prenom_client: "Isabella Martinez",
+    etat_demande: "Missing Information",
+    motif_rej: null,
+    comp_info: null,
+    mat_ver: null,
+    date_ver: null,
+    montant_demande: 9000,
+    etape_demande: "Step 3",
+    NAT_CREDIT: "Type B",
+    dgnom: "Code B"
+  }
+]

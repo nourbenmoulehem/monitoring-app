@@ -1,6 +1,6 @@
-import Chequier from "../models/Chequier.js";
+import Virement from "../models/Virement.js";
 
-export const getChequiers = async (req, res) => {
+export const getVirements = async (req, res) => {
   try {
     // sort should look like this: { "field": "userId", "sort": "desc"}
     const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
@@ -16,7 +16,7 @@ export const getChequiers = async (req, res) => {
     };
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
-    const chequier = await Chequier.find({
+    const virement = await Virement.find({
       $or: [
         { ncp: { $regex: new RegExp(search, "i") } },
       ],
@@ -25,32 +25,35 @@ export const getChequiers = async (req, res) => {
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Chequier.countDocuments({
+    const total = await Virement.countDocuments({
       name: { $regex: search, $options: "i" },
     });
     
-    const chequierCountPromise = Chequier.aggregate([
+    const virementCountPromise = Virement.aggregate([
       {
         $group: {
-          _id: "$etatDemande",
+          _id: "$etatVirement",
           count: { $sum: 1 }
         }
       }
     ]).exec();
 
-    const [chequierCountResult] = await Promise.all([chequierCountPromise]);
+    const [virementCountResult] = await Promise.all([virementCountPromise]);
 
-    const valideCount = chequierCountResult.find(entry => entry._id === "validé")?.count || 0;
-    console.log("🚀 ~ file: chequier.js:44 ~ getChequiers ~ valideCount:", valideCount)
-    const enCoursCount = chequierCountResult.find(entry => entry._id === "en cours")?.count || 0;
-    console.log("🚀 ~ file: chequier.js:45 ~ getChequiers ~ enCoursCount:", enCoursCount)
+    const valideCount = virementCountResult.find(entry => entry._id === "Executed")?.count || 0;
+    const enCoursCount = virementCountResult.find(entry => entry._id === "In Progress")?.count || 0;
+    const rejectedCount = virementCountResult.find(entry => entry._id === "Rejected")?.count || 0;
+    const generatedCount = virementCountResult.find(entry => entry._id === "Generated")?.count || 0;
+
 
 
     res.status(200).json({
-      chequier,
+      virement,
       total,
       valideCount,
-      enCoursCount
+      enCoursCount,
+      rejectedCount,
+      generatedCount,
 
     });
   } catch (error) {
@@ -58,4 +61,4 @@ export const getChequiers = async (req, res) => {
   }
 };
 
-export default getChequiers;
+export default getVirements;

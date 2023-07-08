@@ -10,9 +10,12 @@ import generalRoutes from "./routes/general.js";
 import totalRoutes from "./routes/total.js";
 import authRoutes from "./routes/authRoutes.js";
 import clientStatRoutes from "./routes/ClientsStatRoutes.js";
-import agenceRoute from "./routes/agenceRoute.js"
+import agenceRoute from "./routes/agenceRoute.js";
 import cookieParser from 'cookie-parser';
-import chequierRoute from "./routes/chequierRoute.js"
+import chequierRoute from "./routes/chequierRoute.js";
+import creditRoute from "./routes/creditRoute.js";
+import virementRoute from "./routes/virementRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 
 // data imports
@@ -24,6 +27,7 @@ import OverallStatClient from "./models/OverallStatClients.js";
 import Agency from "./models/Agence.js";
 import Virement from "./models/Virement.js";
 import Chequier from "./models/Chequier.js";
+import Credit from "./models/Credit.js";
 import {
   dataUser,
   dataProduct,
@@ -34,7 +38,7 @@ import {
   dataClient,
   dataOverallStatClient
 } from "./data/index.js";
-import { agencies, sampleVirements, sampleChequiers } from "./data/dataAgency.js";
+import { agencies, sampleVirements, sampleChequiers, dataCredits } from "./data/dataAgency.js";
 
 /* CONFIGURATION */
 dotenv.config();
@@ -59,6 +63,9 @@ app.use("/auth", authRoutes); //any routes defined in authRoutes.js will be acce
 app.use("/clients", clientStatRoutes)
 app.use("/agencies", agenceRoute)
 app.use("/chequiers", chequierRoute)
+app.use("/credits", creditRoute)
+app.use("/virements", virementRoute)
+app.use("/users", userRoute)
 
 
 
@@ -91,6 +98,7 @@ mongoose
     // Agency.insertMany(agencies)
     // Virement.insertMany(sampleVirements)
     // Chequier.insertMany(sampleChequiers)
+    // Credit.insertMany(dataCredits)
     
   })
   .catch((error) => console.log(`${error} did not connect`));

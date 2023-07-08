@@ -19,12 +19,13 @@ const virementSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
-  motifVirement: String,
   etatVirement: {
     type: String,
-    enum: ['I', 'G', 'E', 'R'],
-    default: 'I'
-  }
+    enum: ['In Progress', 'Generated', 'Executed', 'Rejected'],
+    required: true,
+  },
+  motifVirement: String,
+  
 });
 
 const Virement = mongoose.model('Virement', virementSchema);
