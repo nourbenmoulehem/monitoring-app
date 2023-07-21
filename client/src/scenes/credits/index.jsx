@@ -115,112 +115,143 @@ const Credit = () => {
       <Header title="CREDITS" subtitle="Entire list of CREDITS" />
 
         <FlexBetween>
-        <StatBox
-            title="Total CREDITS"
-            value={data && data.total}
-            increase="+14%"
-            description="Since last month"
-            
-          />
-        
-        <StatBox
-          title="Total Ongoing"
-          
-          value={data && data.valideCount}
-          increase="+14%"
-          description="Since last month"
-          
-        />
 
-        
+        <Box display="flex" alignItems="center" gap={4} m="0.5rem">
           <StatBox
-            title="Total validated"
-            value={data && data.enCoursCount}
+              title="Total CREDITS"
+              value={data && data.total}
+              increase="+14%"
+              description="Since last month"
+              
+            />
+          
+          <StatBox
+            title="Total Ongoing"
+            
+            value={data && data.valideCount}
             increase="+14%"
             description="Since last month"
             
           />
 
-        <StatBox
-          title="Total Cancelled"
           
-          value={data && data.cancelledCount}
-          increase="+14%"
-          description="Since last month"
-          
-        />
+            <StatBox
+              title="Total validated"
+              value={data && data.enCoursCount}
+              increase="+14%"
+              description="Since last month"
+              
+            />
 
-        <StatBox
-          title="Total missing information"
-          
-          value={data && data.missinInfoCount}
-          increase="+14%"
-          description="Since last month"
-          
-        />
+          <StatBox
+            title="Total Cancelled"
+            
+            value={data && data.cancelledCount}
+            increase="+14%"
+            description="Since last month"
+            
+          />
 
-        <StatBox
-          title="Total in progress"
-          
-          value={data && data.inProgressCount}
-          increase="+14%"
-          description="Since last month"
-          
-        />
+          <StatBox
+            title="missing information"
+            
+            value={data && data.missinInfoCount}
+            increase="+14%"
+            description="Since last month"
+            
+          />
+
+          <StatBox
+            title="Total in progress"
+            
+            value={data && data.inProgressCount}
+            increase="+14%"
+            description="Since last month"
+            
+          />
+        </Box>
         </FlexBetween>
           
 
         
-
-
-      <Box
-        height="80vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.primary.light,
-          },
-          "& .MuiDataGrid-footerContainer": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderTop: "none",
-          },
-          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `${theme.palette.secondary[200]} !important`,
-          },
-        }}
+        <Box
+        display="grid"
+        gridTemplateColumns="repeat(8, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+        m="0.5rem"
+      > 
+        <Box
+        gridColumn="span 4"
+        gridRow="span 2"
+        backgroundColor={theme.palette.background.alt}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
       >
-        <DataGrid
-          loading={isLoading || !data}
-          getRowId={(row) => row._id}
-          rows={(data && data.credit) || []}
-          columns={columns}
-          rowCount={(data && data.total) || 0}
-          rowsPerPageOptions={[20, 50, 100]}
-          pagination
-          page={page}
-          pageSize={pageSize}
-          paginationMode="server"
-          sortingMode="server"
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{ Toolbar: DataGridCustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch },
-          }}
-        />
+          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={theme.palette.background.alt}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+        </Box>
       </Box>
+        <Box
+          height="80vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: theme.palette.primary.light,
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderTop: "none",
+            },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+              color: `${theme.palette.secondary[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data && data.credit) || []}
+            columns={columns}
+            rowCount={(data && data.total) || 0}
+            rowsPerPageOptions={[20, 50, 100]}
+            pagination
+            page={page}
+            pageSize={pageSize}
+            paginationMode="server"
+            sortingMode="server"
+            onPageChange={(newPage) => setPage(newPage)}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            onSortModelChange={(newSortModel) => setSort(...newSortModel)}
+            components={{ Toolbar: DataGridCustomToolbar }}
+            componentsProps={{
+              toolbar: { searchInput, setSearchInput, setSearch },
+            }}
+          />
+        </Box>
+        
     </Box>
   );
 };

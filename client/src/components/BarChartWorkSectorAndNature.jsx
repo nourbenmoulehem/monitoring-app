@@ -26,6 +26,7 @@ const BarChartWorkSectorAndNature = () => {
         privateColor: 'hsl(255, 70%, 50%)', // Set the desired color for the 'private' bar
       };
     });
+    console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:29 ~ formattedData=data.workSectorStats.map ~ formattedData:", formattedData)
   }
 
   

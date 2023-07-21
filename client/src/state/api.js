@@ -90,14 +90,15 @@ export const api = createApi({
       providesTags: ["Virements"],
     }),
 
-    getAllUsers: build.query({
-      query: ({ page, pageSize, sort, search }) => ({
-        url: "users/getUsers",
-        method: "GET",
-        params: { page, pageSize, sort, search },
-      }),
-      providesTags: ["Users"],
+    getUsers: build.query({
+      query: () => "users/getUsers",
+      providesTags: ["User"],
     }),
+
+    getCountFlagViso: build.query({
+      query: () => "clients/flagVisio",
+      providesTags: ["clients"],
+    })
 
 
 
@@ -106,9 +107,6 @@ export const api = createApi({
 
 export const {
   useGetUserQuery,
-  useGetProductsQuery,
-  useGetCustomersQuery,
-  useGetTransactionsQuery,
   useGetGeographyQuery,
   useGetTotalClientsQuery,
   useGetAdminsQuery,
@@ -123,5 +121,6 @@ export const {
   useGetChequiersQuery,
   useGetCreditsQuery,
   useGetVirementsQuery,
-  useGetAllUsersQuery
+  useGetUsersQuery,
+  useGetCountFlagVisoQuery
 } = api;

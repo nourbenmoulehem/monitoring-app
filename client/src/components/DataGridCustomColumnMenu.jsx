@@ -5,7 +5,8 @@ import {
 } from "@mui/x-data-grid";
 
 const CustomColumnMenu = (props) => {
-  const { hideMenu, currentColumn, open } = props;
+  const { hideMenu, currentColumn, open,  } = props;
+  
   return (
     <GridColumnMenuContainer
       hideMenu={hideMenu}

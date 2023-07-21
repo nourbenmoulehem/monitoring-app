@@ -100,36 +100,66 @@ const Chequier = () => {
       <Header title="CHEQUIERS" subtitle="Entire list of chequiers" />
 
         <FlexBetween>
-        <StatBox
-            title="Total Chequiers"
-            value={data && data.total}
-            increase="+14%"
-            description="Since last month"
-            
-          />
-        
-        <StatBox
-          title="Total Ongoing"
-          
-          value={data && data.valideCount}
-          increase="+14%"
-          description="Since last month"
-          
-        />
-
-        
+        <Box display="flex" alignItems="center" gap={25} m="0.5rem">
           <StatBox
-            title="Total validated"
-            value={data && data.enCoursCount}
+              title="Total Chequiers"
+              value={data && data.total}
+              increase="+14%"
+              description="Since last month"
+              
+            />
+          
+          <StatBox
+            title="Total Ongoing"
+            
+            value={data && data.valideCount}
             increase="+14%"
             description="Since last month"
             
           />
+
+          
+            <StatBox
+              title="Total validated"
+              value={data && data.enCoursCount}
+              increase="+14%"
+              description="Since last month"
+              
+            />
+            </Box>
         </FlexBetween>
           
 
         
+        <Box
+        display="grid"
+        gridTemplateColumns="repeat(8, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+        m="0.5rem"
+      > 
+        <Box
+        gridColumn="span 4"
+        gridRow="span 2"
+        backgroundColor={theme.palette.background.alt}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290"  src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+        </Box>
 
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={theme.palette.background.alt}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+        </Box>
+      </Box>
 
       <Box
         height="80vh"

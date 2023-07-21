@@ -31,7 +31,7 @@ const Form = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
-
+  
 
   const login = async (values, onSubmitProps) => {
     console.log(values)

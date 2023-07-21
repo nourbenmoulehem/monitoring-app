@@ -76,16 +76,15 @@ const Dashboard = () => {
 
   //refreshing the token
   const refreshToken = async () => {
-    const res = await axios
-      .get("http://localhost:5001/auth/refresh", {
-        withCredentials: true,
-      })
-      .catch((err) => console.log(err));
-
+    const res = await axios.get("http://localhost:5001/auth/refresh", {
+      withCredentials: true,
+    }).catch((err) => console.log(err));
     const data = await res.data;
     return data;
   };
+  
   console.log("🚀 ~ file: index.jsx:87 ~ useEffect ~ firstRender:", firstRender)
+
   useEffect(() => {
     if (firstRender) {
       firstRender = false;

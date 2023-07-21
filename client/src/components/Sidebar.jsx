@@ -31,66 +31,11 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
+import { useSelector } from "react-redux";
 
 
-const navItems = [
-  {
-    text: "Dashboard",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Client Facing",
-    icon: null,
-  },
-  {
-    text: "Clients",
-    icon: <Groups2Outlined />,
-  },
-  {
-    text: "Virements",
-    icon: <ShoppingCartOutlined />,
-  },
-  {
-    text: "Chequier",
-    icon: <ReceiptLongOutlined />,
-  },
-  {
-    text: "Credits",
-    icon: <PublicOutlined />,
-  },
-  {
-    text: "Geography",
-    icon: null,
-  },
-  {
-    text: "Overview",
-    icon: <PointOfSaleOutlined />,
-  },
-  {
-    text: "Daily",
-    icon: <TodayOutlined />,
-  },
-  {
-    text: "Monthly",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    text: "Breakdown",
-    icon: <PieChartOutlined />,
-  },
-  {
-    text: "Management",
-    icon: null,
-  },
-  {
-    text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-  {
-    text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
-];
+
+
 
 const Sidebar = ({
   user,
@@ -99,6 +44,68 @@ const Sidebar = ({
   setIsSidebarOpen,
   isNonMobile,
 }) => {
+  const navItems = [
+    {
+      text: "Dashboard",
+      icon: <HomeOutlined />,
+    },
+    {
+      text: "Client Facing",
+      icon: null,
+    },
+    {
+      text: "Clients",
+      icon: <Groups2Outlined />,
+    },
+    {
+      text: "Virements",
+      icon: <ShoppingCartOutlined />,
+    },
+    {
+      text: "Chequier",
+      icon: <ReceiptLongOutlined />,
+    },
+    {
+      text: "Credits",
+      icon: <PublicOutlined />,
+    },
+    {
+      text: "Geography",
+      icon: null,
+    },
+    {
+      text: "Overview",
+      icon: <PointOfSaleOutlined />,
+    },
+    {
+      text: "Daily",
+      icon: <TodayOutlined />,
+    },
+    {
+      text: "Monthly",
+      icon: <CalendarMonthOutlined />,
+    },
+    {
+      text: "Breakdown",
+      icon: <PieChartOutlined />,
+    },
+    {
+      text: "Management",
+      icon: null,
+    },
+    ...(user?.role === "user"
+    ? []
+    : [
+        {
+          text: "Admin",
+          icon: <AdminPanelSettingsOutlined />,
+        },
+      ]),,
+    {
+      text: "Performance",
+      icon: <TrendingUpOutlined />,
+    },
+  ];
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
@@ -108,6 +115,12 @@ const Sidebar = ({
     setActive(pathname.substring(1));
   }, [pathname]);
 
+  const role = user?.role;
+  console.log("🚀 ~ file: Sidebar.jsx:114 ~ role:", role);
+  
+  // Provide a default value for isAdmin if the user object is not available
+  const isAdmin = role?.includes("superadmin") || false;
+  console.log("🚀 ~ file: Sidebar.jsx:116 ~ isAdmin:", isAdmin);
   return (
     <Box component="nav">
       {isSidebarOpen && (
@@ -157,8 +170,15 @@ const Sidebar = ({
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        navigate(`/${lcText}`);
-                        setActive(lcText);
+                        // Add specific handler for "Admin" item navigation
+                        if (lcText === "admin" && !isAdmin) {
+                          // Redirect to some unauthorized page or show a message
+                          // if the user doesn't have the "superadmin" role.
+                          console.log("You don't have access to Admin!");
+                        } else {
+                          navigate(`/${lcText}`);
+                          setActive(lcText);
+                        }
                       }}
                       sx={{
                         backgroundColor:
