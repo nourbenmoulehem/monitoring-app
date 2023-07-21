@@ -1,5 +1,5 @@
 import OverallStatClient from "../models/OverallStatClients.js"
-import Client from "../models/Client.js"
+import Client from "../models/Client.js";
 
  export const getClientsStatYearly = async (req, res) =>{
   try {

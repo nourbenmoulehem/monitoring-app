@@ -7,15 +7,16 @@ import { getUser, logout } from "../controllers/auth.js";
 const router = express.Router();
 
 //attach different request for this router
-router.post('/', login)
+router.post('/', login);
 
-router.get('/refresh', refreshToken, verifyToken, getUser)
+router.get('/refresh', refreshToken, verifyToken, getUser);
 
-router.post("/signup", createNewUser)
+router.post("/signup", createNewUser);
 
-router.post("/register", register)
+router.post("/register", register);
 
-router.get("/user", verifyToken, getUser)
+router.get("/user", verifyToken, getUser);
 
-router.post('/logout', verifyToken, logout)
+router.post('/logout', verifyToken, logout);
+
 export default router;

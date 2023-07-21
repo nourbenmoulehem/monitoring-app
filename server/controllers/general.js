@@ -5,7 +5,7 @@ import Client from "../models/Client.js"
 export const getUser = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("🚀 ~ file: general.js:8 ~ getUser ~ id:", id)
+    console.log("🚀 ~ file: general.js:8 ~ getUser ~ id:", id);
     
     const user = await User.findById(id, "-password");
     res.status(200).json(user);

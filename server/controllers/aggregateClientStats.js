@@ -37,43 +37,48 @@ export const getProfessionPieChart = async (req, res) => {
   }
 };
 
-export const getRevenueStats = async(req, res) => {
+export const getRevenueStats = async (req, res) => {
   try {
     const pipeline = [
       {
         $match: {
-          revenue: { $exists: true } // Filter documents with the 'revenue' field
-        }
+          revenue: { $exists: true }, // Filter documents with the 'revenue' field
+        },
+      },
+      {
+        $addFields: {
+          revenueInt: { $toInt: "$revenue" }, // Convert 'revenue' to integer
+        },
       },
       {
         $group: {
           _id: {
             $switch: {
               branches: [
-                { case: { $and: [{ $gte: ["$revenue", 0] }, { $lt: ["$revenue", 700] }] }, then: "0-700" },
-                { case: { $and: [{ $gte: ["$revenue", 700] }, { $lt: ["$revenue", 1600] }] }, then: "700-1600" },
-                { case: { $and: [{ $gte: ["$revenue", 1600] }, { $lt: ["$revenue", 3500] }] }, then: "1600-3500" },
-                { case: { $gte: ["$revenue", 3500] }, then: "3500+" }
+                { case: { $and: [{ $gte: ["$revenueInt", 0] }, { $lt: ["$revenueInt", 700] }] }, then: "0-700" },
+                { case: { $and: [{ $gte: ["$revenueInt", 700] }, { $lt: ["$revenueInt", 1600] }] }, then: "700-1600" },
+                { case: { $and: [{ $gte: ["$revenueInt", 1600] }, { $lt: ["$revenueInt", 3500] }] }, then: "1600-3500" },
+                { case: { $gte: ["$revenueInt", 3500] }, then: "3500+" },
               ],
-              default: "Unknown"
-            }
+              default: "Unknown",
+            },
           },
-          count: { $sum: 1 }
-        }
-      }
-    ]
+          count: { $sum: 1 },
+        },
+      },
+    ];
 
     const result = await Client.collection.aggregate(pipeline).toArray();
+    console.log("🚀 ~ file: aggregateClientStats.js:67 ~ getRevenueStats ~ result:", result);
 
-    console.log(result)
+    console.log(result);
     res.status(200).json(result);
-
-    
   } catch (error) {
     console.error('Failed to execute the aggregation:', error);
     return res.status(500).json({ error: 'Failed to execute the aggregation' });
   }
-}
+};
+
 
 
 export const getAgePieChart = async (req, res) => {
@@ -131,3 +136,24 @@ export const getAgregateTotalClients = async (req, res) => {
  
 
 }
+
+export const getCountFlagViso = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $group: {
+          _id: "$flagViso",
+          count: { $sum: 1 },
+        },
+      },
+    ];
+
+    const result = await Client.collection.aggregate(pipeline).toArray();
+    console.log("🚀 ~ countFlagViso ~ result:", result);
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Failed to execute the aggregation:", error);
+    return res.status(500).json({ error: "Failed to execute the aggregation" });
+  }
+};

@@ -60,9 +60,10 @@ UserSchema.post('save', function (doc, next) {
 
 // fire a function before doc saved to db
 UserSchema.pre('save', async function (next) {
-  const salt = await bcrypt.genSalt();
-  // this refers to the user
-  this.password = await bcrypt.hash(this.password, salt);
+  if (this.password) {
+    const salt = await bcrypt.genSalt(); //13
+    this.password = await bcrypt.hash(this.password, salt);
+  }
   
   next();
 });

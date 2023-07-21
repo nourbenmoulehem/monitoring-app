@@ -14,11 +14,11 @@ export const verifyToken = async (req, res, next) => {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
     // req.user = verified;
     
-    console.log("🚀 ~ file: auth.js:18 ~ verifyToken ~ verified:", verified._id)
+    console.log("🚀 ~ file: auth.js:18 ~ verifyToken ~ verified:", verified._id);
 
     req._id = verified._id;
     console.log("🚀 ~ file: auth.js:20 ~ verifyToken ~ req:", req._id)
-    console.log("🚀 ~ file: auth.js:20 ~ verifyToken ~ verified:", verified)
+    console.log("🚀 ~ file: auth.js:20 ~ verifyToken ~ verified:", verified);
     next();
     
   } catch (err) {
@@ -29,3 +29,4 @@ export const verifyToken = async (req, res, next) => {
 };
 
 // refresh token
+  
