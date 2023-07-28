@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetCreditsQuery } from "state/api";
 import Header from "components/Header";
@@ -11,6 +11,8 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import RuleIcon from '@mui/icons-material/Rule';
 import StatBox from "components/StatBox";
 import FlexBetween from "components/FlexBetween";
+import MontantBarChart from "../../components/montantCreditsStatBarChart"
+import EtatCreditsPie from "../../components/etatCreditsPie"
 
 const Credit = () => {
   const theme = useTheme();
@@ -35,72 +37,82 @@ const Credit = () => {
 
   const columns = [
     {
-      field: "ref_demande",
+      field: "_id",
       headerName: "Reference demande",
       flex: 1,
     },
     {
-      field: "clidig",
-      headerName: "Client ID",
+      field: "compteEmprunteur",
+      headerName: "compte Emprunteur",
       flex: 1,
     },
     {
-      field: "duree",
-      headerName: "duree",
+      field: "compteBeneficiaire",
+      headerName: "compte Bénéficiaire",
       flex: 1,
     },
     {
-      field: "montant_demande",
+      field: "dureeMois",
+      headerName: "durée en mois",
+      flex: 1,
+    },
+    {
+      field: "montant",
       headerName: "montant",
       flex: 1,
     },
     {
-      field: "revenu",
-      headerName: "revenue",
+      field: "tauxInteret",
+      headerName: "Le taux d'intérêt",
       flex: 1,
     },
     {
-      field: "etat_demande",
-      headerName: "state",
+      field: "etat",
+      headerName: "Etat demande",
       flex: 1,
       sortable: true,
       renderCell: (params) => {
-        if (params.value === "Validated") {
+        if (params.value === "Validé") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Validated</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <CheckCircleOutlineIcon />
+              <p>Validé</p>
+              
             </Box>
           );
         }
-        if (params.value === "Pending") {
+        if (params.value === "En attente") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Pending</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <PauseCircleFilledTwoToneIcon />
+              <p>En attente</p>
+              
             </Box>
           );
         }
-        if (params.value === "Cancelled") {
+        if (params.value === "Annulé") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Cancelled</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <DoDisturbIcon />
+              <p>Annulé</p>
+              
             </Box>
           );
         }
-        if (params.value === "Missing Information") {
+        if (params.value === "Info manquantes") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Missing Info</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <RuleIcon />
+              <p>Info manquantes</p>
+              
             </Box>
           );
         }
         return (
-          <Box display="flex" alignItems="center" gap={4}>
-            <p>Ongoing</p>
+          <Box display="flex" alignItems="center" gap={2}>
             <AutorenewIcon />
+            <p>En cours</p>
+            
           </Box>
         );
       },
@@ -112,7 +124,7 @@ const Credit = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="CREDITS" subtitle="Entire list of CREDITS" />
+      <Header title="CREDITS" subtitle="" />
 
         <FlexBetween>
 
@@ -121,54 +133,47 @@ const Credit = () => {
               title="Total CREDITS"
               value={data && data.total}
               increase="+14%"
-              description="Since last month"
+              description="Depuis le mois dernier"
               
             />
           
           <StatBox
-            title="Total Ongoing"
+            title="Total en cours"
             
             value={data && data.valideCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
 
           
             <StatBox
-              title="Total validated"
+              title="Total validé"
               value={data && data.enCoursCount}
               increase="+14%"
-              description="Since last month"
+              description="Depuis le mois dernier"
               
             />
 
           <StatBox
-            title="Total Cancelled"
+            title="Total annulé"
             
             value={data && data.cancelledCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
 
           <StatBox
-            title="missing information"
+            title="info manquantes"
             
             value={data && data.missinInfoCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
 
-          <StatBox
-            title="Total in progress"
-            
-            value={data && data.inProgressCount}
-            increase="+14%"
-            description="Since last month"
-            
-          />
+
         </Box>
         </FlexBetween>
           
@@ -183,24 +188,41 @@ const Credit = () => {
       > 
         <Box
         gridColumn="span 4"
-        gridRow="span 2"
+        gridRow="span 4"
         backgroundColor={theme.palette.background.alt}
         display="flex"
         alignItems="center"
         justifyContent="center"
+        flexDirection="column"
       >
-          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+        <Typography
+            p="0.5 0.6rem"
+            fontSize="0.9rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Répartition des montants de crédit dans différentes tranches
+          </Typography>
+          <MontantBarChart />
         </Box>
 
         <Box
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 4"
           backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          flexDirection="column"
         >
-          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+          {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe> */}
+          <Typography
+            p="0.5 0.6rem"
+            fontSize="0.9rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Répartition des crédits par type de compte ou catégorie de crédit
+          </Typography>
+          <EtatCreditsPie />
         </Box>
       </Box>
         <Box

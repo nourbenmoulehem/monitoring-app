@@ -8,6 +8,7 @@ import {
   PersonAdd,
   Traffic,
 } from "@mui/icons-material";
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import {
   Box,
   Button,
@@ -23,6 +24,7 @@ import StatBox from "../../components/StatBox";
 import axios from "axios";
 import { setLogin } from "../../state";
 import { useDispatch } from "react-redux";
+import { tokens } from "../../theme.js";
 
 axios.defaults.withCredentials = true;
 let firstRender = true;
@@ -35,6 +37,7 @@ const Dashboard = () => {
   const { data, isLoading } = useGetDashboardQuery();
   const [user, setUser] = useState();
   const dispatch = useDispatch();
+  const colors = tokens(theme.palette.mode);
   
   const columns = [
     {
@@ -75,32 +78,32 @@ const Dashboard = () => {
 
 
   //refreshing the token
-  const refreshToken = async () => {
-    const res = await axios.get("http://localhost:5001/auth/refresh", {
-      withCredentials: true,
-    }).catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
-  };
+  // const refreshToken = async () => {
+  //   const res = await axios.get("http://localhost:5001/auth/refresh", {
+  //     withCredentials: true,
+  //   }).catch((err) => console.log(err));
+  //   const data = await res.data;
+  //   return data;
+  // };
   
-  console.log("🚀 ~ file: index.jsx:87 ~ useEffect ~ firstRender:", firstRender)
+  // console.log("🚀 ~ file: index.jsx:87 ~ useEffect ~ firstRender:", firstRender)
 
-  useEffect(() => {
-    if (firstRender) {
-      firstRender = false;
-      sendRequest().then((data) => setUser(data.user));
-    }
-    let interval = setInterval(() => {
-      refreshToken().then((data) => dispatch(setLogin({
-        user: data.user,
-        token: data.token,
-      }))).then((data) => setUser(data.user));
-    }, 1000 * 29);
-    return () => clearInterval(interval);
+  // useEffect(() => {
+  //   if (firstRender) {
+  //     firstRender = false;
+  //     sendRequest().then((data) => setUser(data.user));
+  //   }
+  //   let interval = setInterval(() => {
+  //     refreshToken().then((data) => dispatch(setLogin({
+  //       user: data.user,
+  //       token: data.token,
+  //     }))).then((data) => setUser(data.user));
+  //   }, 1000 * 29);
+  //   return () => clearInterval(interval);
    
-  }, []);
-  console.log(user)
-  console.log("🚀 ~ file: index.jsx:96 ~ Dashboard ~ user:", user)
+  // }, []);
+  // console.log(user)
+  // console.log("🚀 ~ file: index.jsx:96 ~ Dashboard ~ user:", user)
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -163,8 +166,27 @@ const Dashboard = () => {
             p="1rem"
             borderRadius="0.55rem"
             >
+              <Box
+                mt="10px"
+                p="0 30px"
+                display="flex "
+                justifyContent="space-between"
+                alignItems="center"
+              >
+              <Typography
+                variant="h7"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Évolution du nombre total de clients au cours des mois de 2021.
+              </Typography>
+              <Box>
+                <KeyboardDoubleArrowUpIcon />
+              </Box>
               
+            </Box>
             <OverviewChart view="sales" isDashboard={true} />
+
         </Box>
         <StatBox
           title="Active Clients"
@@ -242,7 +264,8 @@ const Dashboard = () => {
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
           >
-             Breakdown of the total number of clients for WeTrust and WeStart in the year of 2021
+             
+          Répartition du nombre total de clients pour WeTrust et WeStart en 2021.
           </Typography>
         </Box>
       </Box>

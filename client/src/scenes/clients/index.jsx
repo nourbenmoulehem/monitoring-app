@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme.js";
 // import { mockTransactions } from "../../data/mockData";
@@ -21,6 +21,13 @@ import ProfessionStats from "../../components/ProfessionStats.jsx"
 import {useGetAgregateTotalClientsQuery} from "../../state/api.js"
 import BreakdownChart from "../../components/BreakdownChart.jsx";
 import FlagVisioStat from "components/flagVisioChart.jsx";
+import AgePieChartClients from "components/AgePieChartClients";
+import { DataGrid } from "@mui/x-data-grid";
+import { useGetDashboardQuery, useGetAllClientsQuery } from "../../state/api";
+import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import FlagStatsBarChart from "components/FlagStatsBarChart.jsx";
+
+
 
 const Clients = () => {
 
@@ -28,6 +35,104 @@ const Clients = () => {
   const colors = tokens(theme.palette.mode);
   const count = useGetAgregateTotalClientsQuery()
   
+  
+   // values to be sent to the backend
+   const [page, setPage] = useState(0);
+   const [pageSize, setPageSize] = useState(20);
+   const [sort, setSort] = useState({});
+   const [search, setSearch] = useState("");
+
+   const [searchInput, setSearchInput] = useState("");
+
+   const { data, isLoading } = useGetAllClientsQuery({
+    page,
+    pageSize,
+    sort: JSON.stringify(sort),
+    search,
+  });
+
+  const columns = [
+    {
+      field: "name",
+      headerName: "nom & prénom",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "email",
+      flex: 1,
+    },
+    {
+      field: "age",
+      headerName: "âge",
+      flex: 0.3,
+    },
+    {
+      field: "Gouvernment", 
+      headerName: "Gouvernment",
+      flex: 0.5,
+    },
+    {
+      field: "Profession",
+      headerName: "Profession",
+      flex: 1,
+    },
+    {
+      field: "revenue",
+      headerName: "revenue",
+      flex: 1,
+      renderCell: (params) => (params.value ? `${Number(params.value).toFixed(2)}` : ''),
+    },
+    {
+      field: "ActivitySector",
+      headerName: "Secteur d'activité",
+      flex: 1,
+      
+    },
+    {
+      field: "MembershipType",
+      headerName: "Abonnement",
+      flex: 1,
+      
+    },
+    // {
+    //   field: "sexe",
+    //   headerName: "sexe",
+    //   flex: 1,
+      
+    // },
+    {
+      field: "flagViso", 
+      headerName: "flagVisio",
+      flex: 0.5,
+    },
+    {
+      field: "flagSignature", 
+      headerName: "flagSignature",
+      flex: 0.5,
+    },
+    {
+      field: "flagDigitgoEmail", 
+      headerName: "flagDigitgoEmail",
+      flex: 0.5,
+    },
+    {
+      field: "flagDigitgoSMS", 
+      headerName: "flagDigitgoSMS",
+      flex: 0.5,
+    },
+    {
+      field: "flagCertificat", 
+      headerName: "flagCertificat",
+      flex: 0.5,
+    },
+    {
+      field: "DAD", 
+      headerName: "date d'admission",
+      flex: 0.5,
+    },
+
+  ];
   // console.log("🚀 ~ file: index.jsx:24 ~ Clients ~ count:")
   // const totalClients = count.data.entryCount
   // console.log("🚀 ~ file: index.jsx:27 ~ Clients ~ totalClients:", totalClients)
@@ -123,7 +228,8 @@ const Clients = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <iframe style={{background: theme.palette.background.alt,border: "none",borderRadius: "2px"}}  width="290" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`} />
+          {/* <iframe style={{background: theme.palette.background.alt,border: "none",borderRadius: "2px"}}  width="290" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`} /> */}
+          <AgePieChartClients />
         </Box>
         
 
@@ -147,7 +253,7 @@ const Clients = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Bar chart representaion of Activity sector for each activity nature
+                Répartition des Activités par Secteur d'Emploi
               </Typography>
               {/* <Typography
                 variant="h3"
@@ -201,7 +307,7 @@ const Clients = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Bar chart representaion of Revenue
+                Représentation en graphique à barres des revenus
               </Typography>
               {/* <Typography
                 variant="h3"
@@ -296,7 +402,7 @@ const Clients = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Line chart camparison of membership
+                Graphique en courbes comparant les abonnement WeStart/WeTrust
               </Typography>
               {/* <Typography
                 variant="h3"
@@ -341,9 +447,81 @@ const Clients = () => {
           <BreakdownChart />
         </Box>
 
-        {/* ROW 5 */}
+        
         <Box
-          gridColumn="span 3"
+          gridColumn="span 15"
+          gridRow="span 3"
+          backgroundColor={theme.palette.background.alt}
+          >
+            <FlagStatsBarChart />
+          </Box>
+        {/* ROW 5' */}
+        <Box
+          gridColumn="span 15"
+          gridRow="span 5"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: theme.palette.primary.light,
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderTop: "none",
+            },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+              color: `${theme.palette.secondary[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data && data.client) || []}
+            columns={columns}
+            rowCount={(data && data.total) || 0}
+            rowsPerPageOptions={[20, 50, 100]}
+            pagination
+            page={page}
+            pageSize={pageSize}
+            paginationMode="server"
+            sortingMode="server"
+            onPageChange={(newPage) => setPage(newPage)}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            onSortModelChange={(newSortModel) => setSort(...newSortModel)}
+            components={{ Toolbar: DataGridCustomToolbar }}
+            componentsProps={{
+              toolbar: { searchInput, setSearchInput, setSearch },
+            }}
+          />
+        </Box>
+        {/* <Box
+          gridColumn="span 4"
+          gridRow="span 3"
+          backgroundColor={theme.palette.background.alt}
+          p="1.5rem"
+          borderRadius="0.55rem"
+        >
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+            FlagVisio
+          </Typography>
+          <FlagVisioStat />
+          
+        </Box>   */}
+
+        {/* ROW 5 */}
+        {/* <Box
+          gridColumn="span 5"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -351,7 +529,7 @@ const Clients = () => {
           justifyContent="center"
           flexDirection="column"
         >
-          {/* <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}} width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42909-2d1e-470f-889d-62018e278c28&maxDataAge=3600&theme=dark&autoRefresh=true"/> */}
+          
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             Flag Visio
           </Typography>
@@ -360,7 +538,7 @@ const Clients = () => {
         </Box>
 
         <Box
-          gridColumn="span 3"
+          gridColumn="span 5"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -371,12 +549,12 @@ const Clients = () => {
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             Flag Signature
           </Typography>
-          {/* <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a429db-7185-4c8a-8351-10f4ede54ee9&maxDataAge=3600&theme=dark&autoRefresh=true"/> */}
+          
           <FlagVisioStat />
         </Box>
 
         <Box
-          gridColumn="span 3"
+          gridColumn="span 5"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -387,12 +565,12 @@ const Clients = () => {
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             Flag Digigo Email
           </Typography>
-          {/* <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a22-0ef2-4d13-8d50-2a911a664b43&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe> */}
+           
           <FlagVisioStat />
         </Box>
 
         <Box
-          gridColumn="span 3"
+          gridColumn="span 5"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -400,7 +578,7 @@ const Clients = () => {
           justifyContent="center"
           flexDirection="column"
         >
-          {/* <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a45-0ef2-4aa9-899d-2a911a66599d&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe> */}
+          
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             flagdigigo SMS
           </Typography>
@@ -408,7 +586,7 @@ const Clients = () => {
         </Box>
 
         <Box
-          gridColumn="span 3"
+          gridColumn="span 5"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -416,20 +594,19 @@ const Clients = () => {
           justifyContent="center"
           flexDirection="column"
         >
-          {/* <iframe style={{background: "#21313C", border: "none", borderRadius: "2px", boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"}}width="290" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42a62-bfd6-4959-864d-aed10ec9195b&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe> */}
+          
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             flag certificat
           </Typography>
           <FlagVisioStat />
         </Box>
-
         
-
         
+        
+       */}
       </Box>
 
-      
-    </Box>
+      </Box>
 
     
   );

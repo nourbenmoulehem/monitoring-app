@@ -101,9 +101,7 @@ const OverviewChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard
-          ? ""
-          : `Total clients for Year`,
+        
         legendOffset: -60,
         legendPosition: "middle",
       }}
@@ -146,6 +144,7 @@ const OverviewChart = ({ isDashboard = false }) => {
           : undefined
       }
     />
+
     </>
   );
 };

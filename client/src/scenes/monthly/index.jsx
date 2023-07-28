@@ -1,19 +1,13 @@
 import { useState } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, List, ListItem, ListItemText, Typography, useTheme } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
+import { format } from "date-fns"; // Import the date-fns format function
 
 const Calendar = () => {
   const theme = useTheme();
@@ -21,7 +15,7 @@ const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
 
   const handleDateClick = (selected) => {
-    const title = prompt("Please enter a new title for your event");
+    const title = prompt("Please enter a new title for a meeting");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
@@ -39,7 +33,7 @@ const Calendar = () => {
   const handleEventClick = (selected) => {
     if (
       window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}'`
+        `Are you sure you want to delete the meeting '${selected.event.title}'`
       )
     ) {
       selected.event.remove();
@@ -48,7 +42,7 @@ const Calendar = () => {
 
   return (
     <Box m="20px">
-      <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
+      <Header title="Calendrier" subtitle="" />
 
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
@@ -73,11 +67,7 @@ const Calendar = () => {
                   primary={event.title}
                   secondary={
                     <Typography>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
+                      {format(new Date(event.start), "yyyy MMM dd")}
                     </Typography>
                   }
                 />
@@ -112,13 +102,13 @@ const Calendar = () => {
             initialEvents={[
               {
                 id: "12315",
-                title: "All-day event",
-                date: "2022-09-14",
+                title: "Événement sur toute la journée",
+                start: "2022-09-14",
               },
               {
                 id: "5123",
                 title: "Timed event",
-                date: "2022-09-28",
+                start: "2022-09-28",
               },
             ]}
           />

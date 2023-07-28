@@ -18,40 +18,38 @@ const ProfessionStats = ({ isDashboard = false }) => {
   }));
 
   return (
-    <Box
-      height={400}
-      width={undefined}
-      minHeight={325}
-      minWidth={325}
-      position="relative"
-    >
-      <ResponsivePie
+    <ResponsivePie
         data={formattedData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        startAngle={-115}
-        activeOuterRadiusOffset={16}
-        colors={{ scheme: 'category10' }}
+        activeOuterRadiusOffset={10}
+        colors={{ scheme: 'pastel1' }}
+        borderWidth={2}
         borderColor={{
             from: 'color',
             modifiers: [
                 [
                     'darker',
-                    '0.7'
+                    '0'
                 ]
             ]
         }}
-        arcLinkLabelsSkipAngle={45}
-        arcLinkLabelsTextOffset={20}
-        arcLinkLabelsTextColor={{ from: 'color', modifiers: [] }}
-        arcLinkLabelsOffset={-24}
-        arcLinkLabelsDiagonalLength={7}
-        arcLinkLabelsStraightLength={11}
-        arcLinkLabelsThickness={0}
-        arcLinkLabelsColor="#ff2929"
-        arcLabel={e=>e.id+" ("+e.value+")"}
+        arcLinkLabelsSkipAngle={4}
+        arcLinkLabelsTextOffset={4}
+        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsOffset={-1}
+        arcLinkLabelsStraightLength={22}
+        arcLinkLabelsThickness={2}
+        arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsRadiusOffset={0.65}
-        arcLabelsSkipAngle={4}
-        arcLabelsTextColor="#ffffff"
+        arcLabelsTextColor={{
+            from: 'color',
+            modifiers: [
+                [
+                    'darker',
+                    '1.8'
+                ]
+            ]
+        }}
         defs={[
             {
                 id: 'dots',
@@ -127,15 +125,15 @@ const ProfessionStats = ({ isDashboard = false }) => {
                 anchor: 'bottom',
                 direction: 'row',
                 justify: false,
-                translateX: 6,
-                translateY: 21,
+                translateX: 0,
+                translateY: 59,
                 itemsSpacing: 0,
-                itemWidth: 59,
-                itemHeight: 10,
+                itemWidth: 61,
+                itemHeight: 39,
                 itemTextColor: '#999',
                 itemDirection: 'left-to-right',
                 itemOpacity: 1,
-                symbolSize: 9,
+                symbolSize: 11,
                 symbolShape: 'circle',
                 effects: [
                     {
@@ -148,7 +146,6 @@ const ProfessionStats = ({ isDashboard = false }) => {
             }
         ]}
     />
-    </Box>
   );
 };
   

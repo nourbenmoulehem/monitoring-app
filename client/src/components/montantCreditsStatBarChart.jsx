@@ -1,38 +1,59 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
-import { useGetClientsStatYearlyQuery } from '../state/api';
+import { useGetMontantCreditStatsQuery } from '../state/api.js';
 import { tokens } from "../theme";
-const BarChartWorkSectorAndNature = () => {
+
+
+const MontantBarChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
-  const { data, isLoading } = useGetClientsStatYearlyQuery();
+  const { data, isLoading } = useGetMontantCreditStatsQuery();
+  console.log("🚀 ~ file: RevenueBarChart.jsx:13 ~ RevenueBarChart ~ data:", data)
   
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
 
   // Check if data is defined and has the necessary properties
   let formattedData = [];
 
-  if (data && data.workSectorStats) {
-    formattedData = data.workSectorStats.map((item) => {
-      const publicStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Public');
-      const privateStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Private');
-
+  if (data) {
+    formattedData = data.map((item) => {
+      const count = item.count;
+  
       return {
-        workSector: item.workSector,
-        public: publicStat ? publicStat.count : 0,
-        publicColor: 'hsl(99, 70%, 50%)', // Set the desired color for the 'public' bar
-        private: privateStat ? privateStat.count : 0,
-        privateColor: 'hsl(255, 70%, 50%)', // Set the desired color for the 'private' bar
+        revenue: item._id,
+        count: count,
+        color: 'hsl(99, 70%, 50%)', // Set the desired color for the bar
       };
     });
-    console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:29 ~ formattedData=data.workSectorStats.map ~ formattedData:", formattedData)
+
+    formattedData.sort((a, b) => {
+      const order = {
+        '0-5000': 0,
+        '5001-10000': 1,
+        '10001-20000': 2,
+        '20001-50000': 3,
+        '50001-100000': 4,
+        '100001+': 5,
+      };
+  
+      return order[a.revenue] - order[b.revenue];
+    });
   }
 
-  
+  console.log("formattedData in revnueihfduiosdhf", formattedData)
 
   return (
-
+    <Box
+      height={600}
+      width={undefined}
+      minHeight={600}
+      minWidth={650}
+      position="relative"
+    >
     <ResponsiveBar
         data={formattedData}
         theme={{
@@ -65,11 +86,10 @@ const BarChartWorkSectorAndNature = () => {
         },
       }}
         keys={[
-            'public',
-            'private'
             
+            "count"
         ]}
-        indexBy="workSector"
+        indexBy="revenue"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
@@ -111,7 +131,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Secteur d\'activité',
+            legend: 'Montants',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -119,7 +139,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Total',
+            legend: 'Nombre de Crédits',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -159,10 +179,11 @@ const BarChartWorkSectorAndNature = () => {
             }
         ]}
         role="application"
-        ariaLabel="Work sector barchart"
+        ariaLabel="Nivo bar chart demo"
         barAriaLabel={e=>e.id+": "+e.formattedValue+" in work sector: "+e.indexValue}
     />
+    </Box>
 
 )
-      }
-export default BarChartWorkSectorAndNature;
+}
+export default MontantBarChart;

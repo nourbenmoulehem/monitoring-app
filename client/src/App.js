@@ -14,7 +14,7 @@ import Admin from "./scenes/admin";
 import Virement from "./scenes/virement";
 import Chequier from "./scenes/chequier";
 import Credit from "./scenes/credits";
-// import Calendar from "./scenes/monthly";
+import Calendar from "./scenes/monthly";
 import axios from "axios";
 import { setLogin, setLogout } from "./state/index";
 axios.defaults.withCredentials = true;
@@ -24,7 +24,7 @@ function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   // const isAuth = Boolean(useSelector((state) => state.global.token));
-  const isAuth = Boolean(useSelector((state) => state.global.isLoggedIn));
+  const isAuth = Boolean(useSelector((state) => state.token));
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.user:", useSelector((state) => state.global.user))
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.token:", useSelector((state) => state.global.token))
   console.log("🚀 ~ file: App.js:19 ~ App ~ isAuth:", isAuth)
@@ -83,7 +83,7 @@ function App() {
                 <Route path="/chequier" element={<Chequier />} />
                 <Route path="/credits" element={<Credit />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                {/* <Route path="/calendar" element={<Calendar />} /> */}
+                <Route path="/calendar" element={<Calendar />} />
               </Route>
             }
           </Routes>

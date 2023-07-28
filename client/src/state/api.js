@@ -43,8 +43,23 @@ export const api = createApi({
       providesTags: ["agencies"],
     }),
 
+    getFlagStats: build.query({
+      query: () => "clients/flagStats",
+      providesTags: ["clients"],
+    }),
+
     getProfessionPieChart: build.query({
       query: () => "clients/professionStats",
+      providesTags: ["clients"],
+    }),
+
+
+    getAllClients: build.query({
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "client/getAllClients",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
       providesTags: ["clients"],
     }),
 
@@ -60,6 +75,11 @@ export const api = createApi({
 
     getMemberShipStats: build.query({
       query: () => "clients/membershipStats",
+      providesTags: ["clients"],
+    }),
+
+    getAggregateDataByAgeRanges: build.query({
+      query: () => "clients/getAggregateDataByAgeRanges",
       providesTags: ["clients"],
     }),
 
@@ -90,6 +110,26 @@ export const api = createApi({
       providesTags: ["Virements"],
     }),
 
+    getMonthlyTransactionCounts: build.query({
+      query: () => "virements/getMonthlyTransactionCounts",
+      providesTags: ["Virements"],
+    }),
+
+    getVirementCountByEtat: build.query({
+      query: () => "virements/getVirementCountByEtat",
+      providesTags: ["Virements"],
+    }),
+
+    getChequierCountByEtat: build.query({
+      query: () => "chequiers/getChequierCountByEtat",
+      providesTags: ["Chequiers"],
+    }),
+
+    getMonthlyChequierCounts: build.query({
+      query: () => "chequiers/getMonthlyChequierCounts",
+      providesTags: ["Chequiers"],
+    }),
+
     getUsers: build.query({
       query: () => "users/getUsers",
       providesTags: ["User"],
@@ -98,7 +138,16 @@ export const api = createApi({
     getCountFlagViso: build.query({
       query: () => "clients/flagVisio",
       providesTags: ["clients"],
-    })
+    }),
+
+    getMontantCreditStats: build.query({
+      query: () => "credits/getMontantCreditStats",
+      providesTags: ["Credits"],
+    }),
+    getCreditCountByEtat: build.query({
+      query: () => "credits/getCreditCountByEtat",
+      providesTags: ["Credits"],
+    }),
 
 
 
@@ -122,5 +171,14 @@ export const {
   useGetCreditsQuery,
   useGetVirementsQuery,
   useGetUsersQuery,
-  useGetCountFlagVisoQuery
+  useGetCountFlagVisoQuery,
+  useGetMontantCreditStatsQuery,
+  useGetCreditCountByEtatQuery,
+  useGetVirementCountByEtatQuery,
+  useGetMonthlyTransactionCountsQuery,
+  useGetAggregateDataByAgeRangesQuery,
+  useGetAllClientsQuery,
+  useGetChequierCountByEtatQuery,
+  useGetMonthlyChequierCountsQuery,
+  useGetFlagStatsQuery
 } = api;

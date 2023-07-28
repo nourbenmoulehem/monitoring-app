@@ -17,6 +17,8 @@ import FlexBetween from "components/FlexBetween";
 import Header from "../../components/Header";
 // import LineChart from "../../components/LineChart";
 // import GeographyChart from "../../components/GeographyChart";
+import EtatVirementPie from "../../components/etatVirementPie";
+import MonthlyVirementLineArea from "components/MonthlyVirementLineArea.jsx";
 
 const Virement = () => {
   const theme = useTheme();
@@ -40,12 +42,17 @@ const Virement = () => {
   const columns = [
     {
       field: "refVirement",
-      headerName: "Reference virmenet",
+      headerName: "ID virmenet",
       flex: 1,
     },
     {
       field: "clidig",
-      headerName: "Client ID",
+      headerName: "ID Client",
+      flex: 1,
+    },
+    {
+      field: "ncpBeneficiaire",
+      headerName: "compte Bénéficiaire",
       flex: 1,
     },
     {
@@ -55,53 +62,85 @@ const Virement = () => {
     },
     {
       field: "dad",
-      headerName: "date a d",
+      headerName: "date d'admission",
+      flex: 1,
+      renderCell: (params) => {
+        if (params.value) {
+
+          const date = new Date(params.value);
+          const formattedDate = date.toISOString().split("T")[0];
+          return formattedDate;
+        }
+        return "";
+      },
+    },
+    {
+      field: "montant",
+      headerName: "montant",
       flex: 1,
     },
     {
       field: "dpe",
       headerName: "dpe",
       flex: 1,
+      renderCell: (params) => {
+        if (params.value) {
+          const date = new Date(params.value);
+          const formattedDate = date.toISOString().split("T")[0];
+          return formattedDate;
+        }
+        return "";
+      },
     },
     {
-      field: "etatVirement",
-      headerName: "state",
+      field: "etat",
+      headerName: "etat virement",
       flex: 1,
       sortable: true,
       renderCell: (params) => {
-        if (params.value === "Generated") {
+        if (params.value === "Validé") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Generated</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <CheckCircleOutlineIcon />
+              <p>Validé</p>
+              
             </Box>
           );
         }
-        if (params.value === "In Progress") {
+        if (params.value === "En attente") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>In Progress</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <PauseCircleFilledTwoToneIcon />
+              <p>En attente</p>
+              
             </Box>
           );
         }
-        if (params.value === "Rejected") {
+        if (params.value === "Annulé") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Rejected</p>
+            <Box display="flex" alignItems="center" gap={2}>
               <DoDisturbIcon />
+              <p>Annulé</p>
+              
             </Box>
           );
         }
-        if (params.value === "Executed") {
+        if (params.value === "Info manquantes") {
           return (
-            <Box display="flex" alignItems="center" gap={4}>
-              <p>Executed</p>
-              <DoneAllIcon />
+            <Box display="flex" alignItems="center" gap={2}>
+              <RuleIcon />
+              <p>Info manquantes</p>
+              
             </Box>
           );
         }
-        
+        return (
+          <Box display="flex" alignItems="center" gap={2}>
+            <AutorenewIcon />
+            <p>En cours</p>
+            
+          </Box>
+        );
       },
       
     },
@@ -132,47 +171,51 @@ const Virement = () => {
         </Box>
       </Box>
       <Box display="flex" alignItems="center" gap={4} m="0.5rem">
-          <StatBox
+      <StatBox
               title="Total CREDITS"
               value={data && data.total}
               increase="+14%"
-              description="Since last month"
+              description="Depuis le mois dernier"
               
             />
           
           <StatBox
-            title="Total Ongoing"
+            title="Total en cours"
             
             value={data && data.valideCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
 
           
             <StatBox
-              title="Total validated"
+              title="Total validé"
               value={data && data.enCoursCount}
               increase="+14%"
-              description="Since last month"
+              description="Depuis le mois dernier"
               
             />
 
           <StatBox
-            title="Total Cancelled"
-            value={data && data.rejectedCount}
+            title="Total annulé"
+            
+            value={data && data.cancelledCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
 
           <StatBox
-            title="Total missing information"
-            value={data && data.generatedCount}
+            title="info manquantes"
+            
+            value={data && data.missinInfoCount}
             increase="+14%"
-            description="Since last month"
+            description="Depuis le mois dernier"
             
           />
+
+          
 
         
         </Box>
@@ -186,25 +229,37 @@ const Virement = () => {
       >
         {/* ROW 1 */}
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-            <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a43d50-0834-4793-8284-d7e659adb708&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe>
+            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a43d50-0834-4793-8284-d7e659adb708&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
+            <EtatVirementPie />
         </Box>
             
         <Box
-          gridColumn="span 4"
+          gridColumn="span 5"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          flexDirection="column"
         >
-            <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src = {`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a4416d-2d1e-4a99-8b41-62018e402139&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe>
+          
+            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src = {`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a4416d-2d1e-4a99-8b41-62018e402139&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
+            <MonthlyVirementLineArea />
+            <Typography
+            p="0.3 0.3rem"
+            fontSize="0.9rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Graphique des Transferts Cumulatifs
+          </Typography>
+
         </Box>
 
       </Box>

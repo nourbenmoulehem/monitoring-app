@@ -1,32 +1,32 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
-import { useGetClientsStatYearlyQuery } from '../state/api';
+import { useGetFlagStatsQuery } from '../state/api';
 import { tokens } from "../theme";
-const BarChartWorkSectorAndNature = () => {
+
+
+const FlagStatsBarChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
-  const { data, isLoading } = useGetClientsStatYearlyQuery();
+  const { data, isLoading } = useGetFlagStatsQuery();
   
 
   // Check if data is defined and has the necessary properties
   let formattedData = [];
 
-  if (data && data.workSectorStats) {
-    formattedData = data.workSectorStats.map((item) => {
-      const publicStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Public');
-      const privateStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Private');
+  if (data && data.ClientStat && data.ClientStat.length > 0) {
+    const flagStatsData = data.ClientStat[0].flagStats;
 
-      return {
-        workSector: item.workSector,
-        public: publicStat ? publicStat.count : 0,
-        publicColor: 'hsl(99, 70%, 50%)', // Set the desired color for the 'public' bar
-        private: privateStat ? privateStat.count : 0,
-        privateColor: 'hsl(255, 70%, 50%)', // Set the desired color for the 'private' bar
-      };
-    });
-    console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:29 ~ formattedData=data.workSectorStats.map ~ formattedData:", formattedData)
+    formattedData = flagStatsData.map((item) => ({
+      flag: item.flag,
+      complet: item.nature.find((nature) => nature.status === 'complet')?.count || 0,
+      completColor: 'hsl(99, 70%, 50%)',
+      incomplet: item.nature.find((nature) => nature.status === 'incomplet')?.count || 0,
+      incompletColor: 'hsl(255, 70%, 50%)',
+    }));
+    console.log("HELLLOOOOOOOOOOOOOOOOO §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
+    console.log("🚀 ~ file: FlagStatsBarChart.jsx:27 ~ formattedData=flagStatsData.map ~ formattedData:", formattedData)
   }
 
   
@@ -36,45 +36,43 @@ const BarChartWorkSectorAndNature = () => {
     <ResponsiveBar
         data={formattedData}
         theme={{
-        // added
-        axis: {
-          domain: {
-            line: {
-              stroke: colors.grey[100],
+          // added
+          axis: {
+            domain: {
+              line: {
+                stroke: colors.grey[100],
+              },
+            },
+            legend: {
+              text: {
+                fill: colors.grey[100],
+              },
+            },
+            ticks: {
+              line: {
+                stroke: colors.grey[100],
+                strokeWidth: 1,
+              },
+              text: {
+                fill: colors.grey[100],
+              },
             },
           },
-          legend: {
+          legends: {
             text: {
               fill: colors.grey[100],
             },
           },
-          ticks: {
-            line: {
-              stroke: colors.grey[100],
-              strokeWidth: 1,
-            },
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-        },
-        legends: {
-          text: {
-            fill: colors.grey[100],
-          },
-        },
-      }}
+        }}
         keys={[
-            'public',
-            'private'
-            
+          "complet", "incomplet",
         ]}
-        indexBy="workSector"
+        indexBy="flag"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'yellow_orange_red' }}
         defs={[
             {
                 id: 'dots',
@@ -95,7 +93,20 @@ const BarChartWorkSectorAndNature = () => {
                 spacing: 10
             }
         ]}
-        
+        fill={[
+            {
+                match: {
+                    id: 'fries'
+                },
+                id: 'dots'
+            },
+            {
+                match: {
+                    id: 'sandwich'
+                },
+                id: 'lines'
+            }
+        ]}
         borderColor={{
             from: 'color',
             modifiers: [
@@ -111,7 +122,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Secteur d\'activité',
+            legend: 'country',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -119,7 +130,7 @@ const BarChartWorkSectorAndNature = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Total',
+            legend: 'food',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -159,10 +170,10 @@ const BarChartWorkSectorAndNature = () => {
             }
         ]}
         role="application"
-        ariaLabel="Work sector barchart"
-        barAriaLabel={e=>e.id+": "+e.formattedValue+" in work sector: "+e.indexValue}
+        ariaLabel="Nivo bar chart demo"
+        barAriaLabel={e=>e.id+": "+e.formattedValue+" in country: "+e.indexValue}
     />
-
 )
-      }
-export default BarChartWorkSectorAndNature;
+}
+
+export default FlagStatsBarChart

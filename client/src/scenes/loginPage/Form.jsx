@@ -9,6 +9,8 @@ import { setLogin } from "../../state/index";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 import { useGetAllAgenciesQuery } from "../../state/api";
+import { tokens } from "../../theme.js";
+
 import axios from "axios";
 
 const loginSchema = yup.object().shape({
@@ -31,10 +33,12 @@ const Form = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
-  
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const login = async (values, onSubmitProps) => {
     console.log(values)
+    
     const res = await axios
       .post("http://localhost:5001/auth", {
         email: values.email,
@@ -120,19 +124,17 @@ const Form = () => {
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
             />
-          </Box>
 
-          {/* BUTTONS */}
-          <Box>
+<Box>
             <Button
               fullWidth
               type="submit"
               sx={{
-                m: "2rem 0",
-                p: "1rem",
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                backgroundColor: colors.blueAccent[700],
+                color: colors.grey[100],
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
@@ -142,20 +144,25 @@ const Form = () => {
                 setPageType(isLogin ? "register" : "login");
                 resetForm();
               }}
+              color={theme.palette.secondary.main}
               sx={{
                 textDecoration: "underline",
                 color: palette.primary.main,
                 "&:hover": {
                   cursor: "pointer",
-                  color: palette.primary.light,
                 },
               }}
+              
             >
               {isLogin
-                ? "Don't have an account? Sign Up here."
-                : "Already have an account? Login here."}
+                ? "Vous n'avez pas de compte ? Inscrivez-vous ici."
+                : "Vous avez déjà un compte ? Connectez-vous ici."}
             </Typography>
           </Box>
+          </Box>
+
+          {/* BUTTONS */}
+          
         </form>
       )}
     </Formik>

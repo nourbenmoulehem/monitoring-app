@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetChequiersQuery } from "state/api";
 import Header from "components/Header";
@@ -8,6 +8,8 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import StatBox from "components/StatBox";
 import FlexBetween from "components/FlexBetween";
+import EtatChequier from "components/EtatChequier";
+import MonthlyChequierCounts from "components/MonthlyChequierCounts";
 
 const Chequier = () => {
   const theme = useTheme();
@@ -43,7 +45,7 @@ const Chequier = () => {
     },
     {
       field: "dad",
-      headerName: "date of application submission",
+      headerName: "date d'admission",
       flex: 1,
       renderCell: (params) => {
         if (params.value) {
@@ -57,7 +59,7 @@ const Chequier = () => {
     },
     {
       field: "dpe",
-      headerName: "date of status",
+      headerName: "date d'état",
       flex: 1,
       renderCell: (params) => {
         if (params.value) {
@@ -70,22 +72,24 @@ const Chequier = () => {
     },
     {
       field: "etatDemande",
-      headerName: "state",
+      headerName: "etat",
       flex: 1,
       sortable: true,
       renderCell: (params) => {
         if (params.value === "validé") {
           return (
             <Box display="flex" alignItems="center" gap={4}>
-              <p>Validated</p>
               <CheckCircleOutlineIcon />
+              <p>validé</p>
+              
             </Box>
           );
         }
         return (
           <Box display="flex" alignItems="center" gap={4}>
-            <p>Ongoing</p>
             <AutorenewIcon />
+            <p>en cours</p>
+            
           </Box>
         );
       },
@@ -96,59 +100,66 @@ const Chequier = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="CHEQUIERS" subtitle="Entire list of chequiers" />
+    <Box m="20px">
+      {/* HEADER */}
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="CHEQUIERS dashboard" />
+      </Box>
 
-        <FlexBetween>
-        <Box display="flex" alignItems="center" gap={25} m="0.5rem">
-          <StatBox
-              title="Total Chequiers"
-              value={data && data.total}
-              increase="+14%"
-              description="Since last month"
-              
-            />
-          
-          <StatBox
-            title="Total Ongoing"
-            
-            value={data && data.valideCount}
-            increase="+14%"
-            description="Since last month"
-            
-          />
-
-          
-            <StatBox
-              title="Total validated"
-              value={data && data.enCoursCount}
-              increase="+14%"
-              description="Since last month"
-              
-            />
-            </Box>
-        </FlexBetween>
-          
-
-        
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(9, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+        m="0.5rem"
+      >
         <Box
+        gridColumn="span 3"
+        >
+          <StatBox
+                title="Total Chequiers"
+                value={data && data.total}
+                increase="+14%"
+                description="Since last month"
+                
+              />
+        </Box>
+      
+          <Box
+          gridColumn="span 3"
+          >
+            <StatBox
+              title="Total en cours
+              "
+              
+              value={data && data.valideCount}
+              increase="+14%"
+              description="Since last month"
+              
+            />
+          </Box>
+            
+          <Box
+          gridColumn="span 3"
+          >
+              <StatBox
+                title="Total validé"
+                value={data && data.enCoursCount}
+                increase="+14%"
+                description="Since last month"
+                
+              />
+            </Box>
+        </Box>
+      {/* GRID & CHARTS */}
+      <Box
         display="grid"
         gridTemplateColumns="repeat(8, 1fr)"
         gridAutoRows="140px"
         gap="20px"
         m="0.5rem"
-      > 
-        <Box
-        gridColumn="span 4"
-        gridRow="span 2"
-        backgroundColor={theme.palette.background.alt}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
       >
-          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290"  src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
-        </Box>
-
+        {/* ROW 1 */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
@@ -157,11 +168,37 @@ const Chequier = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src="https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64ba4f67-8453-4765-862e-e43e28ef9f96&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a43d50-0834-4793-8284-d7e659adb708&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
+            <EtatChequier />
         </Box>
-      </Box>
+            
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={theme.palette.background.alt}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
+        >
+          
+            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src = {`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a4416d-2d1e-4a99-8b41-62018e402139&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
+            <MonthlyChequierCounts />
+            <Typography
+            p="0.3 0.3rem"
+            fontSize="0.9rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Graphique des Transferts Cumulatifs
+          </Typography>
 
-      <Box
+        </Box>
+
+      </Box>
+      <Box m="0.5rem">
+      
+
+          <Box
         height="80vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -209,7 +246,11 @@ const Chequier = () => {
           }}
         />
       </Box>
+        </Box>
+
     </Box>
+
+    
   );
 };
 

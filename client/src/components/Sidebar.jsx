@@ -28,6 +28,8 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -59,7 +61,7 @@ const Sidebar = ({
     },
     {
       text: "Virements",
-      icon: <ShoppingCartOutlined />,
+      icon: <CurrencyExchangeIcon />,
     },
     {
       text: "Chequier",
@@ -67,44 +69,53 @@ const Sidebar = ({
     },
     {
       text: "Credits",
+      icon: <CreditCardIcon />,
+    },
+    {
+      text: "Geographie",
+      icon: null,
+    },
+    {
+      text: "Map",
       icon: <PublicOutlined />,
     },
     {
-      text: "Geography",
+      text: "Admin",
       icon: null,
     },
+    // {
+    //   text: "Overview",
+    //   icon: <PointOfSaleOutlined />,
+    // },
+    // {
+    //   text: "Daily",
+    //   icon: <TodayOutlined />,
+    // },
     {
-      text: "Overview",
-      icon: <PointOfSaleOutlined />,
-    },
-    {
-      text: "Daily",
-      icon: <TodayOutlined />,
-    },
-    {
-      text: "Monthly",
+      text: "Calendar",
       icon: <CalendarMonthOutlined />,
     },
-    {
-      text: "Breakdown",
-      icon: <PieChartOutlined />,
-    },
-    {
-      text: "Management",
-      icon: null,
-    },
+    // {
+    //   text: "Breakdown",
+    //   icon: <PieChartOutlined />,
+    // },
+    
     ...(user?.role === "user"
     ? []
     : [
+        {
+          text: "User Management",
+          icon: null,
+        },
         {
           text: "Admin",
           icon: <AdminPanelSettingsOutlined />,
         },
       ]),,
-    {
-      text: "Performance",
-      icon: <TrendingUpOutlined />,
-    },
+    // {
+    //   text: "Performance",
+    //   icon: <TrendingUpOutlined />,
+    // },
   ];
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
@@ -145,7 +156,7 @@ const Sidebar = ({
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
-                    Dashboard
+                  Tableau de bord pour We Bank 
                   </Typography>
                 </Box>
                 {!isNonMobile && (

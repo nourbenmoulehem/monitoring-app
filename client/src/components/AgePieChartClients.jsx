@@ -1,34 +1,32 @@
-import React from "react";
-import { ResponsivePie } from "@nivo/pie";
+import React from 'react';
+import {useGetAggregateDataByAgeRangesQuery} from "state/api";
 import { Box, Typography, useTheme } from "@mui/material";
-import { useGetCountFlagVisoQuery } from "../state/api.js";
+import { ResponsivePie } from "@nivo/pie";
 
 
-const FlagVisioStat = ({ isDashboard = false }) => {
-  const { data, isLoading } = useGetCountFlagVisoQuery();
-  console.log("🚀 ~ file: flagVisioChart.jsx:9 ~ FlagVisioStat ~ data:", data)
+const AgePieChartClients = () => {
+  const { data, isLoading } = useGetAggregateDataByAgeRangesQuery();
   const theme = useTheme();
 
   if (!data || isLoading) return "Loading...";
-
-  const formattedData = data.map((item) => ({
-    id: String(item._id), // Convert to string as the id should be a string
-    label: String(item._id), // Convert to string as the label should be a string
-    value: item.count,
-    color: item._id === true ? theme.palette.primary.main : theme.palette.secondary.main,
+  console.log("asslema o mar7be bik fi age pie chart !!!!!!!");
+  const formattedData = data.filter((ageRange) => ageRange.value > 0).map((ageRange) => ({
+    id: ageRange.label,
+    label: ageRange.label,
+    value: ageRange.value ? ageRange.value : 0,
+    color: theme.palette.secondary[200],
   }));
-  console.log("🚀 ~ file: flagVisioChart.jsx:19 ~ formattedData ~ formattedData:", formattedData)
+  console.log("🚀 ~ file: AgePieChartClients.jsx:19 ~ formattedData ~ formattedData:", formattedData)
 
   return (
-    
-      
-      <ResponsivePie
+    <ResponsivePie
         data={formattedData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
+        colors={{ scheme: 'pastel1' }}
         borderWidth={1}
         borderColor={{
             from: 'color',
@@ -41,6 +39,7 @@ const FlagVisioStat = ({ isDashboard = false }) => {
         }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsStraightLength={19}
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
@@ -128,15 +127,15 @@ const FlagVisioStat = ({ isDashboard = false }) => {
                 anchor: 'bottom',
                 direction: 'row',
                 justify: false,
-                translateX: 0,
-                translateY: 56,
+                translateX: 8,
+                translateY: 46,
                 itemsSpacing: 0,
-                itemWidth: 100,
-                itemHeight: 18,
+                itemWidth: 71,
+                itemHeight: 26,
                 itemTextColor: '#999',
                 itemDirection: 'left-to-right',
                 itemOpacity: 1,
-                symbolSize: 18,
+                symbolSize: 10,
                 symbolShape: 'circle',
                 effects: [
                     {
@@ -146,12 +145,22 @@ const FlagVisioStat = ({ isDashboard = false }) => {
                         }
                     }
                 ]
+            },
+            {
+                anchor: 'top-left',
+                direction: 'column',
+                justify: false,
+                translateX: -72,
+                translateY: 44,
+                itemWidth: 20,
+                itemHeight: 17,
+                itemsSpacing: 5,
+                symbolSize: 18,
+                itemDirection: 'left-to-right'
             }
         ]}
     />
-  );
-};
-  
-  
+  )
+}
 
-export default FlagVisioStat;
+export default AgePieChartClients
