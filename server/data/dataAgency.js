@@ -110,115 +110,627 @@ export const agencies = [
 
 export const sampleVirements = [
   {
-    refVirement: 'VR001',
-    clidig: '6123456789abcdef1234567', // ID of a client document in the "Client" collection
-    agence: '7123456789abcdef1234567', // ID of an agency document in the "Agency" collection
-    ncp: '1234567890',
-    age: 'John Doe',
-    ncpBeneficiaire: '9876543210',
-    motifVirement: 'Payment for services',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00001',
+    clidig: 'CL001',
+    agence: 'AG001',
+    ncp: 'NC001',
+    age: 'AG002',
+    ncpBeneficiaire: 'NCB001',
+    dad: '2023-07-15',
+    dpe: '2023-09-04',
+    etat: 'En cours',
+    montant: 1000,
+    motifVirement: 'Remboursement prêt',
   },
   {
-    refVirement: 'VR002',
-    clidig: '6123456789abcdef1234568',
-    agence: '7123456789abcdef1234567',
-    ncp: '2345678901',
-    age: 'Jane Smith',
-    ncpBeneficiaire: '8765432109',
-    motifVirement: 'Rent payment',
-    etatVirement: 'Executed' // Executed
+    refVirement: 'VRM00002',
+    clidig: 'CL002',
+    agence: 'AG003',
+    ncp: 'NC002',
+    age: 'AG004',
+    ncpBeneficiaire: 'NCB002',
+    dad: '2023-07-16',
+    dpe: '2023-07-17',
+    etat: 'Validé',
+    montant: 500,
+    motifVirement: 'Aide familiale',
   },
   {
-    refVirement: 'VR003',
-    clidig: '6123456789abcdef1234569',
-    agence: '8123456789abcdef1234567',
-    ncp: '3456789012',
-    age: 'Mike Johnson',
-    ncpBeneficiaire: '7654321098',
-    motifVirement: 'Utility bill',
-    etatVirement: 'Rejected' // Rejected
+    refVirement: 'VRM00003',
+    clidig: 'CL003',
+    agence: 'AG005',
+    ncp: 'NC003',
+    age: 'AG006',
+    ncpBeneficiaire: 'NCB003',
+    dad: '2023-07-18',
+    dpe: '2023-09-04',
+    etat: 'En attente',
+    montant: 2000,
+    motifVirement: 'Frais de voyage',
   },
   {
-    refVirement: 'VR004',
-    clidig: '6123456789abcdef1234570',
-    agence: '8123456789abcdef1234567',
-    ncp: '4567890123',
-    age: 'Emily Davis',
-    ncpBeneficiaire: '6543210987',
-    motifVirement: 'Loan repayment',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00004',
+    clidig: 'CL004',
+    agence: 'AG007',
+    ncp: 'NC004',
+    age: 'AG008',
+    ncpBeneficiaire: 'NCB004',
+    dad: '2023-07-19',
+    dpe: '2023-07-20',
+    etat: 'Annulé',
+    montant: 800,
+    motifVirement: 'Achat matériel',
   },
   {
-    refVirement: 'VR005',
-    clidig: '7123456789abcdef1234571',
-    agence: '9123456789abcdef1234567',
-    ncp: '5678901234',
-    age: 'David Wilson',
-    ncpBeneficiaire: '5432109876',
-    motifVirement: 'Salary deposit',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00005',
+    clidig: 'CL005',
+    agence: 'AG009',
+    ncp: 'NC005',
+    age: 'AG010',
+    ncpBeneficiaire: 'NCB005',
+    dad: '2023-07-21',
+    dpe: '2023-09-04',
+    etat: 'En cours',
+    montant: 1500,
+    motifVirement: 'Paiement facture',
   },
   {
-    refVirement: 'VR006',
-    clidig: '7123456789abcdef1234572',
-    agence: '9123456789abcdef1234567',
-    ncp: '6789012345',
-    age: 'Sarah Thompson',
-    ncpBeneficiaire: '4321098765',
-    motifVirement: 'Insurance premium',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00006',
+    clidig: 'CL006',
+    agence: 'AG011',
+    ncp: 'NC006',
+    age: 'AG012',
+    ncpBeneficiaire: 'NCB006',
+    dad: '2023-07-22',
+    dpe: '2023-07-23',
+    etat: 'Validé',
+    montant: 300,
+    motifVirement: 'Cadeau anniversaire',
   },
   {
-    refVirement: 'VR007',
-    clidig: '8123456789abcdef1234573',
-    agence: '7123456789abcdef1234567',
-    ncp: '7890123456',
-    age: 'Michael Brown',
-    ncpBeneficiaire: '3210987654',
-    motifVirement: 'Investment fund',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00007',
+    clidig: 'CL007',
+    agence: 'AG013',
+    ncp: 'NC007',
+    age: 'AG014',
+    ncpBeneficiaire: 'NCB007',
+    dad: '2023-07-24',
+    dpe: '2023-09-04',
+    etat: 'En attente',
+    montant: 1200,
+    motifVirement: 'Frais médicaux',
   },
   {
-    refVirement: 'VR008',
-    clidig: '8123456789abcdef1234574',
-    agence: '6123456789abcdef1234567',
-    ncp: '8901234567',
-    age: 'Jessica Lee',
-    ncpBeneficiaire: '2109876543',
-    motifVirement: 'Credit card payment',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00008',
+    clidig: 'CL008',
+    agence: 'AG015',
+    ncp: 'NC008',
+    age: 'AG016',
+    ncpBeneficiaire: 'NCB008',
+    dad: '2023-07-25',
+    dpe: '2023-07-26',
+    etat: 'Annulé',
+    montant: 200,
+    motifVirement: 'Courses alimentaires',
   },
   {
-    refVirement: 'VR009',
-    clidig: '9123456789abcdef1234575',
-    agence: '7123456789abcdef1234567',
-    ncp: '9012345678',
-    age: 'Daniel Miller',
-    ncpBeneficiaire: '1098765432',
-    motifVirement: 'Charity donation',
-    etatVirement: 'Generated' // Generated (in progress)
+    refVirement: 'VRM00009',
+    clidig: 'CL009',
+    agence: 'AG017',
+    ncp: 'NC009',
+    age: 'AG018',
+    ncpBeneficiaire: 'NCB009',
+    dad: '2023-07-27',
+    dpe: '2023-09-04',
+    etat: 'En cours',
+    montant: 700,
+    motifVirement: 'Factures impayées',
   },
   {
-    refVirement: 'VR010',
-    clidig: '9123456789abcdef1234576',
-    agence: '9123456789abcdef1234567',
-    ncp: '0123456789',
-    age: 'Olivia Taylor',
-    ncpBeneficiaire: '0987654321',
-    motifVirement: 'Travel expenses',
-    etatVirement: 'Generated' // Generated (in progress)
-  }
+    refVirement: 'VRM00010',
+    clidig: 'CL010',
+    agence: 'AG019',
+    ncp: 'NC010',
+    age: 'AG020',
+    ncpBeneficiaire: 'NCB010',
+    dad: '2023-07-28',
+    dpe: '2023-07-29',
+    etat: 'Validé',
+    montant: 1000,
+    motifVirement: 'Aide étudiante',
+  },
+  {
+    refVirement: 'VRM00011',
+    clidig: 'CL011',
+    agence: 'AG021',
+    ncp: 'NC011',
+    age: 'AG022',
+    ncpBeneficiaire: 'NCB011',
+    dad: '2023-07-30',
+    dpe: '2023-09-04',
+    etat: 'En attente',
+    montant: 900,
+    motifVirement: 'Achat vêtements',
+  },
+  {
+    refVirement: 'VRM00012',
+    clidig: 'CL012',
+    agence: 'AG023',
+    ncp: 'NC012',
+    age: 'AG024',
+    ncpBeneficiaire: 'NCB012',
+    dad: '2023-07-31',
+    dpe: '2023-08-01',
+    etat: 'Annulé',
+    montant: 1800,
+    motifVirement: 'Rénovation maison',
+  },
+  {
+    refVirement: 'VRM00013',
+    clidig: 'CL013',
+    agence: 'AG025',
+    ncp: 'NC013',
+    age: 'AG026',
+    ncpBeneficiaire: 'NCB013',
+    dad: '2023-08-02',
+    dpe: '2023-09-04',
+    etat: 'En cours',
+    montant: 600,
+    motifVirement: 'Achat livre',
+  },
+  {
+    refVirement: 'VRM00014',
+    clidig: 'CL014',
+    agence: 'AG027',
+    ncp: 'NC014',
+    age: 'AG028',
+    ncpBeneficiaire: 'NCB014',
+    dad: '2023-08-03',
+    dpe: '2023-08-04',
+    etat: 'Validé',
+    montant: 400,
+    motifVirement: 'Cadeau mariage',
+  },
+  {
+    refVirement: 'VRM00015',
+    clidig: 'CL015',
+    agence: 'AG029',
+    ncp: 'NC015',
+    age: 'AG030',
+    ncpBeneficiaire: 'NCB015',
+    dad: '2023-08-05',
+    dpe: '2023-01-07',
+    etat: 'En attente',
+    montant: 2500,
+    motifVirement: 'Voyage vacances',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00016',
+    clidig: 'CL016',
+    agence: 'AG031',
+    ncp: 'NC016',
+    age: 'AG032',
+    ncpBeneficiaire: 'NCB016',
+    dad: '2023-01-10',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 800,
+    motifVirement: 'Paiement loyer',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00017',
+    clidig: 'CL017',
+    agence: 'AG033',
+    ncp: 'NC017',
+    age: 'AG034',
+    ncpBeneficiaire: 'NCB017',
+    dad: '2023-02-22',
+    dpe: '2023-02-23',
+    etat: 'Validé',
+    montant: 1500,
+    motifVirement: 'Achat électroménager',
+  },
+  {
+    refVirement: 'VRM00018',
+    clidig: 'CL018',
+    agence: 'AG035',
+    ncp: 'NC018',
+    age: 'AG036',
+    ncpBeneficiaire: 'NCB018',
+    dad: '2023-03-15',
+    dpe: '2023-01-07',
+    etat: 'En attente',
+    montant: 2500,
+    motifVirement: 'Frais scolaires',
+  },
+  {
+    refVirement: 'VRM00018',
+    clidig: 'CL018',
+    agence: 'AG035',
+    ncp: 'NC018',
+    age: 'AG036',
+    ncpBeneficiaire: 'NCB018',
+    dad: '2023-03-15',
+    dpe: '2023-01-07',
+    etat: 'En attente',
+    montant: 2500,
+    motifVirement: 'Frais scolaires',
+  },
+  {
+    refVirement: 'VRM00018',
+    clidig: 'CL018',
+    agence: 'AG035',
+    ncp: 'NC018',
+    age: 'AG036',
+    ncpBeneficiaire: 'NCB018',
+    dad: '2023-03-15',
+    dpe: '2023-01-07',
+    etat: 'En attente',
+    montant: 2500,
+    motifVirement: 'Frais scolaires',
+  },
+  {
+    refVirement: 'VRM00018',
+    clidig: 'CL018',
+    agence: 'AG035',
+    ncp: 'NC018',
+    age: 'AG036',
+    ncpBeneficiaire: 'NCB018',
+    dad: '2023-03-15',
+    dpe: '2023-01-07',
+    etat: 'En attente',
+    montant: 2500,
+    motifVirement: 'Frais scolaires',
+  },
+  {
+    refVirement: 'VRM00019',
+    clidig: 'CL019',
+    agence: 'AG037',
+    ncp: 'NC019',
+    age: 'AG038',
+    ncpBeneficiaire: 'NCB019',
+    dad: '2023-04-05',
+    dpe: '2023-04-06',
+    etat: 'Annulé',
+    montant: 500,
+    motifVirement: 'Aide parentale',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00020',
+    clidig: 'CL020',
+    agence: 'AG039',
+    ncp: 'NC020',
+    age: 'AG040',
+    ncpBeneficiaire: 'NCB020',
+    dad: '2023-05-12',
+    dpe: '2023-01-07',
+    etat: 'En cours',
+    montant: 1200,
+    motifVirement: 'Frais dentaires',
+  },
+  {
+    refVirement: 'VRM00021',
+    clidig: 'CL021',
+    agence: 'AG041',
+    ncp: 'NC021',
+    age: 'AG042',
+    ncpBeneficiaire: 'NCB021',
+    dad: '2023-06-20',
+    dpe: '2023-06-21',
+    etat: 'Validé',
+    montant: 1800,
+    motifVirement: 'Achat vélo',
+  },
+  {
+    refVirement: 'VRM00021',
+    clidig: 'CL021',
+    agence: 'AG041',
+    ncp: 'NC021',
+    age: 'AG042',
+    ncpBeneficiaire: 'NCB021',
+    dad: '2023-06-20',
+    dpe: '2023-06-21',
+    etat: 'Validé',
+    montant: 1800,
+    motifVirement: 'Achat vélo',
+  },
+  {
+    refVirement: 'VRM00021',
+    clidig: 'CL021',
+    agence: 'AG041',
+    ncp: 'NC021',
+    age: 'AG042',
+    ncpBeneficiaire: 'NCB021',
+    dad: '2023-06-20',
+    dpe: '2023-06-21',
+    etat: 'Validé',
+    montant: 1800,
+    motifVirement: 'Achat vélo',
+  },
+  {
+    refVirement: 'VRM00021',
+    clidig: 'CL021',
+    agence: 'AG041',
+    ncp: 'NC021',
+    age: 'AG042',
+    ncpBeneficiaire: 'NCB021',
+    dad: '2023-06-20',
+    dpe: '2023-06-21',
+    etat: 'Validé',
+    montant: 1800,
+    motifVirement: 'Achat vélo',
+  },{
+    refVirement: 'VRM00021',
+    clidig: 'CL021',
+    agence: 'AG041',
+    ncp: 'NC021',
+    age: 'AG042',
+    ncpBeneficiaire: 'NCB021',
+    dad: '2023-06-20',
+    dpe: '2023-06-21',
+    etat: 'Validé',
+    montant: 1800,
+    motifVirement: 'Achat vélo',
+  },
 ];
 
+
 export const sampleChequiers = [
+  
   {
     refDemande: 'RD001',
     clidig: '64a427e9fd1cf4c0c6d7db88',  // John doe
     age: '64a427e9fd1cf4c0c6d7db89',  // Jane Smith
     ncp: '1234567890',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD002',
@@ -234,7 +746,7 @@ export const sampleChequiers = [
     age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
     ncp: '3456789012',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD004',
@@ -242,7 +754,7 @@ export const sampleChequiers = [
     age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
     ncp: '4567890123',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD005',
@@ -258,7 +770,7 @@ export const sampleChequiers = [
     age: '5a9427648b0beebeb6957a88',  // Thomas Morris
     ncp: '6789012345',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD007',
@@ -266,7 +778,7 @@ export const sampleChequiers = [
     age: '64a427e9fd1cf4c0c6d7db94',  // Yolanda Owen
     ncp: '7890123456',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD008',
@@ -282,7 +794,7 @@ export const sampleChequiers = [
     age: '64a427e9fd1cf4c0c6d7db96',  // Podrick Payne
     ncp: '9012345678',
     etatDemande: 'en cours',
-    dpe: null
+    dpe: '2023-09-04'
   },
   {
     refDemande: 'RD010',
@@ -291,198 +803,816 @@ export const sampleChequiers = [
     ncp: '0123456789',
     etatDemande: 'validé',
     dpe: new Date('2022-09-12')
-  }
+  },
+  {
+    refDemande: 'RD011',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2023-01-05'),
+  },
+  {
+    refDemande: 'RD012',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-01-12'),
+  },
+  {
+    refDemande: 'RD013',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2023-01-20'),
+  },
+  {
+    refDemande: 'RD014',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-01-25'),
+  },
+  {
+    refDemande: 'RD015',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2023-01-28'),
+  },
+  {
+    refDemande: 'RD016',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-02-10'),
+  },
+  {
+    refDemande: 'RD017',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2023-02-15'),
+  },
+  {
+    refDemande: 'RD018',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-02-22'),
+  },
+  {
+    refDemande: 'RD019',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2023-02-28'),
+  },
+  {
+    refDemande: 'RD020',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-02-28'),
+  },
+  // March
+  {
+    refDemande: 'RD021',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2023-03-10'),
+  },
+  {
+    refDemande: 'RD022',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-03-12'),
+  },
+  // ... (More entries for March)
+
+  // April
+  {
+    refDemande: 'RD023',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2023-04-05'),
+  },
+  {
+    refDemande: 'RD024',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-04-08'),
+  },
+  // ... (More entries for April)
+
+  // May
+  {
+    refDemande: 'RD025',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2023-05-02'),
+  },
+  {
+    refDemande: 'RD026',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-05-10'),
+  },
+  // ... (More entries for May)
+
+  // June
+  {
+    refDemande: 'RD027',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2023-06-05'),
+  },
+  {
+    refDemande: 'RD028',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-06-12'),
+  },
+  // ... (More entries for June)
+
+  // July
+  {
+    refDemande: 'RD029',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2023-07-05'),
+  },
+  {
+    refDemande: 'RD030',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-07-10'),
+  },
+  // ... (More entries for July)
+
+  // August
+  {
+    refDemande: 'RD031',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2023-08-05'),
+  },
+  {
+    refDemande: 'RD032',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-08-12'),
+  },
+  // ... (More entries for August)
+
+  // September
+  {
+    refDemande: 'RD033',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2023-09-05'),
+  },
+  {
+    refDemande: 'RD034',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-09-12'),
+  },
+  // ... (More entries for September)
+
+  // October
+  {
+    refDemande: 'RD035',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2023-10-05'),
+  },
+  {
+    refDemande: 'RD036',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-10-10'),
+  },
+  // ... (More entries for October)
+
+  // November
+  {
+    refDemande: 'RD037',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2023-11-05'),
+  },
+  {
+    refDemande: 'RD038',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-11-12'),
+  },
+  // ... (More entries for November)
+
+  // December
+  {
+    refDemande: 'RD039',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2023-12-05'),
+  },
+  {
+    refDemande: 'RD040',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2023-12-10'),
+  },
+  // January
+  {
+    refDemande: 'RD041',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2024-01-05'),
+  },
+  {
+    refDemande: 'RD042',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-01-12'),
+  },
+  // ... (More entries for January)
+
+  // February
+  {
+    refDemande: 'RD043',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2024-02-05'),
+  },
+  {
+    refDemande: 'RD044',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-02-12'),
+  },
+  // ... (More entries for February)
+
+  // April
+  {
+    refDemande: 'RD045',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2024-04-05'),
+  },
+  {
+    refDemande: 'RD046',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-04-12'),
+  },
+  // ... (More entries for April)
+
+  // May
+  {
+    refDemande: 'RD047',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2024-05-05'),
+  },
+  {
+    refDemande: 'RD048',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-05-12'),
+  },
+  // ... (More entries for May)
+
+  // July
+  {
+    refDemande: 'RD049',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2024-07-05'),
+  },
+  {
+    refDemande: 'RD050',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-07-12'),
+  },
+  // ... (More entries for July)
+
+  // August
+  {
+    refDemande: 'RD051',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2024-08-05'),
+  },
+  {
+    refDemande: 'RD052',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-08-12'),
+  },
+  // ... (More entries for August)
+
+  // September
+  {
+    refDemande: 'RD053',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2024-09-05'),
+  },
+  {
+    refDemande: 'RD054',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-09-12'),
+  },
+  // ... (More entries for September)
+
+  // October
+  {
+    refDemande: 'RD055',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2024-10-05'),
+  },
+  {
+    refDemande: 'RD056',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-10-12'),
+  },
+  // ... (More entries for October)
+
+  // November
+  {
+    refDemande: 'RD057',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2024-11-05'),
+  },
+  {
+    refDemande: 'RD058',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-11-12'),
+  },
+  // ... (More entries for November)
+
+  // December
+  {
+    refDemande: 'RD059',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2024-12-05'),
+  },
+  {
+    refDemande: 'RD060',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-12-12'),
+  },
+  // ... (More entries for December)
 ];
 
 export const dataCredits = [
   {
-    ref_demande: "REF001",
-    clidig: "CL001",
-    age: "AGE001",
-    ncp: "NCP001",
-    duree: 12,
-    revenu: 5000,
-    autre_revenu: 1000,
-    nom_prenom_client: "John Doe",
-    etat_demande: "In Progress",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 10000,
-    etape_demande: "Step 1",
-    NAT_CREDIT: "Type A",
-    dgnom: "Code A"
+    type: 'Prêt hypothécaire',
+    montant: 150000,
+    dateEmprunt: '2022-05-10',
+    dateRemboursement: '2032-05-10',
+    compteEmprunteur: 'ABC123456789',
+    compteBeneficiaire: 'XYZ987654321',
+    tauxInteret: 5.25,
+    dureeMois: 120,
+    etat: 'En cours',
   },
   {
-    ref_demande: "REF002",
-    clidig: "CL002",
-    age: "AGE002",
-    ncp: "NCP002",
-    duree: 24,
-    revenu: 8000,
-    autre_revenu: 2000,
-    nom_prenom_client: "Jane Smith",
-    etat_demande: "Pending",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 20000,
-    etape_demande: "Step 2",
-    NAT_CREDIT: "Type B",
-    dgnom: "Code B"
+    type: 'Prêt personnel',
+    montant: 10000,
+    dateEmprunt: '2023-01-15',
+    dateRemboursement: '2025-01-15',
+    compteEmprunteur: 'DEF456789123',
+    compteBeneficiaire: 'LMN321654987',
+    tauxInteret: 8.75,
+    dureeMois: 24,
+    etat: 'Validé',
   },
   {
-    ref_demande: "REF003",
-    clidig: "CL003",
-    age: "AGE003",
-    ncp: "NCP003",
-    duree: 36,
-    revenu: 6000,
-    autre_revenu: 1500,
-    nom_prenom_client: "Michael Johnson",
-    etat_demande: "Validated",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: "MAT001",
-    date_ver: "2023-06-15",
-    montant_demande: 15000,
-    etape_demande: "Step 3",
-    NAT_CREDIT: "Type A",
-    dgnom: "Code A"
+    type: 'Prêt automobile',
+    montant: 25000,
+    dateEmprunt: '2021-11-02',
+    dateRemboursement: '2024-11-02',
+    compteEmprunteur: 'PQR789456123',
+    tauxInteret: 6.5,
+    dureeMois: 36,
+    etat: 'En cours',
   },
   {
-    ref_demande: "REF004",
-    clidig: "CL004",
-    age: "AGE004",
-    ncp: "NCP004",
-    duree: 18,
-    revenu: 4500,
-    autre_revenu: 800,
-    nom_prenom_client: "Emily Wilson",
-    etat_demande: "Cancelled",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 12000,
-    etape_demande: "Step 1",
-    NAT_CREDIT: "Type B",
-    dgnom: "Code B"
+    type: 'Prêt étudiant',
+    montant: 8000,
+    dateEmprunt: '2023-03-20',
+    dateRemboursement: '2030-03-20',
+    compteEmprunteur: 'STU123456789',
+    tauxInteret: 4.5,
+    dureeMois: 84,
+    etat: 'Validé',
   },
   {
-    ref_demande: "REF005",
-    clidig: "CL005",
-    age: "AGE005",
-    ncp: "NCP005",
-    duree: 24,
-    revenu: 7000,
-    autre_revenu: 1200,
-    nom_prenom_client: "David Brown",
-    etat_demande: "Missing Information",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 18000,
-    etape_demande: "Step 2",
-    NAT_CREDIT: "Type C",
-    dgnom: "Code C"
+    type: 'Ligne de crédit',
+    montant: 30000,
+    dateEmprunt: '2022-09-18',
+    dateRemboursement: '2030-09-18',
+    compteEmprunteur: 'VWX456789123',
+    tauxInteret: 7.2,
+    dureeMois: 96,
+    etat: 'En cours',
   },
   {
-    ref_demande: "REF006",
-    clidig: "CL006",
-    age: "AGE006",
-    ncp: "NCP006",
-    duree: 12,
-    revenu: 5500,
-    autre_revenu: 1000,
-    nom_prenom_client: "Sophia Davis",
-    etat_demande: "In Progress",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 10000,
-    etape_demande: "Step 1",
-    NAT_CREDIT: "Type A",
-    dgnom: "Code A"
+    type: 'Crédit revolving',
+    montant: 5000,
+    dateEmprunt: '2023-06-25',
+    dateRemboursement: '2024-12-25',
+    compteEmprunteur: 'YZA789123456',
+    compteBeneficiaire: 'BCD987654321',
+    tauxInteret: 9.0,
+    dureeMois: 18,
+    etat: 'Validé',
   },
   {
-    ref_demande: "REF007",
-    clidig: "CL007",
-    age: "AGE007",
-    ncp: "NCP007",
-    duree: 36,
-    revenu: 9000,
-    autre_revenu: 2500,
-    nom_prenom_client: "Oliver Taylor",
-    etat_demande: "Pending",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 25000,
-    etape_demande: "Step 3",
-    NAT_CREDIT: "Type B",
-    dgnom: "Code B"
+    type: 'Crédit à la consommation',
+    montant: 12000,
+    dateEmprunt: '2022-07-08',
+    dateRemboursement: '2024-07-08',
+    compteEmprunteur: 'EFG123789456',
+    tauxInteret: 6.0,
+    dureeMois: 24,
+    etat: 'En cours',
   },
   {
-    ref_demande: "REF008",
-    clidig: "CL008",
-    age: "AGE008",
-    ncp: "NCP008",
-    duree: 18,
-    revenu: 5000,
-    autre_revenu: 1000,
-    nom_prenom_client: "Emma Johnson",
-    etat_demande: "Validated",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: "MAT002",
-    date_ver: "2023-06-18",
-    montant_demande: 14000,
-    etape_demande: "Step 2",
-    NAT_CREDIT: "Type C",
-    dgnom: "Code C"
+    type: 'Prêt aux entreprises',
+    montant: 100000,
+    dateEmprunt: '2021-12-12',
+    dateRemboursement: '2031-12-12',
+    compteEmprunteur: 'HIJ789456123',
+    tauxInteret: 5.8,
+    dureeMois: 120,
+    etat: 'Validé',
   },
   {
-    ref_demande: "REF009",
-    clidig: "CL009",
-    age: "AGE009",
-    ncp: "NCP009",
-    duree: 24,
-    revenu: 6500,
-    autre_revenu: 1100,
-    nom_prenom_client: "Noah Anderson",
-    etat_demande: "Cancelled",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 16000,
-    etape_demande: "Step 1",
-    NAT_CREDIT: "Type A",
-    dgnom: "Code A"
+    type: 'Crédit commercial',
+    montant: 75000,
+    dateEmprunt: '2023-04-30',
+    dateRemboursement: '2030-04-30',
+    compteEmprunteur: 'KLM456789123',
+    tauxInteret: 6.7,
+    dureeMois: 84,
+    etat: 'En cours',
   },
   {
-    ref_demande: "REF010",
-    clidig: "CL010",
-    age: "AGE010",
-    ncp: "NCP010",
-    duree: 12,
-    revenu: 4000,
-    autre_revenu: 800,
-    nom_prenom_client: "Isabella Martinez",
-    etat_demande: "Missing Information",
-    motif_rej: null,
-    comp_info: null,
-    mat_ver: null,
-    date_ver: null,
-    montant_demande: 9000,
-    etape_demande: "Step 3",
-    NAT_CREDIT: "Type B",
-    dgnom: "Code B"
-  }
-]
+    type: 'Prêt personnel',
+    montant: 15000,
+    dateEmprunt: '2022-03-15',
+    dateRemboursement: '2024-03-15',
+    compteEmprunteur: 'NOP123456789',
+    tauxInteret: 7.5,
+    dureeMois: 24,
+    etat: 'Validé',
+  },
+  {
+    type: 'Prêt personnel',
+    montant: 20000,
+    dateEmprunt: '2023-07-05',
+    dateRemboursement: '2025-07-05',
+    compteEmprunteur: 'QWE789123456',
+    tauxInteret: 7.0,
+    dureeMois: 24,
+    etat: 'En attente',
+  },
+  {
+    type: 'Prêt automobile',
+    montant: 18000,
+    dateEmprunt: '2022-11-30',
+    dateRemboursement: '2024-11-30',
+    compteEmprunteur: 'ASD456789123',
+    tauxInteret: 6.25,
+    dureeMois: 24,
+    etat: 'Info manquantes',
+  },
+  {
+    type: 'Crédit commercial',
+    montant: 50000,
+    dateEmprunt: '2023-02-20',
+    dateRemboursement: '2027-02-20',
+    compteEmprunteur: 'ZXC789123456',
+    tauxInteret: 6.9,
+    dureeMois: 48,
+    etat: 'Annulé',
+  },
+  {
+    type: 'Prêt étudiant',
+    montant: 12000,
+    dateEmprunt: '2022-09-10',
+    dateRemboursement: '2025-09-10',
+    compteEmprunteur: 'UIO123456789',
+    tauxInteret: 5.0,
+    dureeMois: 36,
+    etat: 'En attente',
+  },
+  {
+    refDemande: 'RD041',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2024-01-05'),
+  },
+  {
+    refDemande: 'RD042',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-01-12'),
+  },
+  // ... (More entries for January)
+
+  // February
+  {
+    refDemande: 'RD043',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2024-02-05'),
+  },
+  {
+    refDemande: 'RD044',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-02-12'),
+  },
+  // ... (More entries for February)
+
+  // April
+  {
+    refDemande: 'RD045',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2024-04-05'),
+  },
+  {
+    refDemande: 'RD046',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-04-12'),
+  },
+  // ... (More entries for April)
+
+  // May
+  {
+    refDemande: 'RD047',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2024-05-05'),
+  },
+  {
+    refDemande: 'RD048',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-05-12'),
+  },
+  // ... (More entries for May)
+
+  // July
+  {
+    refDemande: 'RD049',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2024-07-05'),
+  },
+  {
+    refDemande: 'RD050',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-07-12'),
+  },
+  // ... (More entries for July)
+
+  // August
+  {
+    refDemande: 'RD051',
+    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
+    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
+    ncp: '1234567890',
+    etatDemande: 'validé',
+    dpe: new Date('2024-08-05'),
+  },
+  {
+    refDemande: 'RD052',
+    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
+    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
+    ncp: '2345678901',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-08-12'),
+  },
+  // ... (More entries for August)
+
+  // September
+  {
+    refDemande: 'RD053',
+    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
+    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
+    ncp: '3456789012',
+    etatDemande: 'validé',
+    dpe: new Date('2024-09-05'),
+  },
+  {
+    refDemande: 'RD054',
+    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
+    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
+    ncp: '4567890123',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-09-12'),
+  },
+  // ... (More entries for September)
+
+  // October
+  {
+    refDemande: 'RD055',
+    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
+    age: '5a9427648b0beebeb6957be1',  // Olly
+    ncp: '5678901234',
+    etatDemande: 'validé',
+    dpe: new Date('2024-10-05'),
+  },
+  {
+    refDemande: 'RD056',
+    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
+    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
+    ncp: '6789012345',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-10-12'),
+  },
+  // ... (More entries for October)
+
+  // November
+  {
+    refDemande: 'RD057',
+    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
+    ncp: '7890123456',
+    etatDemande: 'validé',
+    dpe: new Date('2024-11-05'),
+  },
+  {
+    refDemande: 'RD058',
+    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
+    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
+    ncp: '8901234567',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-11-12'),
+  },
+  // ... (More entries for November)
+
+  // December
+  {
+    refDemande: 'RD059',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
+    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
+    ncp: '9012345678',
+    etatDemande: 'validé',
+    dpe: new Date('2024-12-05'),
+  },
+  {
+    refDemande: 'RD060',
+    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
+    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
+    ncp: '0123456789',
+    etatDemande: 'en cours',
+    dpe: new Date('2024-12-12'),
+  },
+  {
+    type: 'Crédit revolving',
+    montant: 7000,
+    dateEmprunt: '2023-04-02',
+    dateRemboursement: '2025-04-02',
+    compteEmprunteur: 'JKL789456123',
+    compteBeneficiaire: 'MNB987654321',
+    tauxInteret: 10.5,
+    dureeMois: 24,
+    etat: 'Info manquantes',
+  },
+  {
+    type: 'Ligne de crédit',
+    montant: 35000,
+    dateEmprunt: '2022-08-15',
+    dateRemboursement: '2024-08-15',
+    compteEmprunteur: 'POI456789123',
+    tauxInteret: 8.2,
+    dureeMois: 24,
+    etat: 'En attente',
+  },
+];

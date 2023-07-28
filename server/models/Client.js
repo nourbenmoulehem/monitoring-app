@@ -76,30 +76,29 @@ const ClientSchema = new mongoose.Schema(
       required: true,
     },
     flagViso: {
-      type: Boolean,
+      type: String,
       required: true
     },
     flagSignature: {
-      type: Boolean,
+      type: String,
       required: true
     },
     flagDigitgoEmail: {
-      type: Boolean,
+      type: String,
       required: true
     },
     flagDigitgoSMS: {
-      type: Boolean,
+      type: String,
       required: true
     },
     flagCertificat: {
-      type: Boolean,
+      type: String,
       required: true
     },
     DAD: {
       type: Date,
       required: true,
       default: null
-
     },
     
     

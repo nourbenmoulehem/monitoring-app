@@ -149,6 +149,7 @@ export const getCountFlagViso = async (req, res) => {
     ];
 
     const result = await Client.collection.aggregate(pipeline).toArray();
+    console.log("🚀 ~ file: aggregateClientStats.js:152 ~ getCountFlagViso ~ result:", result)
     console.log("🚀 ~ countFlagViso ~ result:", result);
 
     res.status(200).json(result);
@@ -157,3 +158,75 @@ export const getCountFlagViso = async (req, res) => {
     return res.status(500).json({ error: "Failed to execute the aggregation" });
   }
 };
+
+
+// Define the age ranges
+const ageRanges = [
+  { id: '0-20', minAge: 0, maxAge: 20 },
+  { id: '21-30', minAge: 21, maxAge: 30 },
+  { id: '31-40', minAge: 31, maxAge: 40 },
+  { id: '41-50', minAge: 41, maxAge: 50}
+  // Define more age ranges as needed
+];
+
+// Function to aggregate data by age ranges
+export const getAggregateDataByAgeRanges = async (req, res) => {
+  try {
+    // MongoDB aggregation pipeline
+    const pipeline = [
+      {
+        $group: {
+          _id: null,
+          ageCounts: { $push: "$age" },
+          totalCount: { $sum: 1 }
+        }
+      },
+      {
+        $unwind: "$ageCounts"
+      },
+      {
+        $group: {
+          _id: null,
+          ageCounts: { $push: "$ageCounts" },
+          totalCount: { $first: "$totalCount" }
+        }
+      },
+      {
+        $project: {
+          ageCounts: 1,
+          totalCount: 1,
+          _id: 0
+        }
+      }
+    ];
+
+    const result = await Client.collection.aggregate(pipeline).toArray();
+
+    // Create an object to store age counts for each range
+    const ageRangeCounts = ageRanges.reduce((acc, range) => {
+      acc[range.id] = 0;
+      return acc;
+    }, {});
+
+    // Count the clients in each age range
+    result[0]?.ageCounts.forEach((age) => {
+      for (const range of ageRanges) {
+        if (age >= range.minAge && age <= range.maxAge) {
+          ageRangeCounts[range.id]++;
+          break;
+        }
+      }
+    });
+
+    // Format data for the pie chart
+    const formattedData = Object.entries(ageRangeCounts).map(([label, value]) => ({
+      label,
+      value,
+    }));
+
+    res.status(200).json(formattedData);
+  } catch (error) {
+    console.error('Failed to execute the aggregation:', error);
+    return res.status(500).json({ error: 'Failed to execute the aggregation' });
+  }
+}

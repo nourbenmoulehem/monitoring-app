@@ -53,6 +53,37 @@ const OverallStatClientSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    flagStats: {
+      type: [
+        {
+          flag: {
+            type: String,
+            enum: ["flagVisio", "flagSignature", "flagDigitgoEmail", "flagDigitgoSMS", "flagCertificat"],
+            required: true,
+          },
+          count: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
+          nature: [
+            {
+              status: {
+                type: String,
+                enum: ["complet", "incomplet"],
+                required: true,
+              },
+              count: {
+                type: Number,
+                required: true,
+                default: 0,
+              },
+            },
+          ],
+        },
+      ],
+      default: [],
+    },
     revenueHistogram: {
       type: [
         {

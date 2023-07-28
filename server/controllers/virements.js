@@ -32,19 +32,19 @@ export const getVirements = async (req, res) => {
     const virementCountPromise = Virement.aggregate([
       {
         $group: {
-          _id: "$etatVirement",
+          _id: "$etat",
           count: { $sum: 1 }
         }
       }
     ]).exec();
 
     const [virementCountResult] = await Promise.all([virementCountPromise]);
+    console.log("🚀 ~ file: virements.js:42 ~ getVirements ~ virementCountResult:", virementCountResult)
 
-    const valideCount = virementCountResult.find(entry => entry._id === "Executed")?.count || 0;
-    const enCoursCount = virementCountResult.find(entry => entry._id === "In Progress")?.count || 0;
-    const rejectedCount = virementCountResult.find(entry => entry._id === "Rejected")?.count || 0;
-    const generatedCount = virementCountResult.find(entry => entry._id === "Generated")?.count || 0;
-
+    const valideCount = virementCountResult.find(entry => entry._id === "Validé")?.count || 0;
+    const enCoursCount = virementCountResult.find(entry => entry._id === "En cours")?.count || 0;
+    const cancelledCount = virementCountResult.find(entry => entry._id === "Annulé")?.count || 0;
+    const missinInfoCount = virementCountResult.find(entry => entry._id === "Info manquantes")?.count || 0;
 
 
     res.status(200).json({
@@ -52,8 +52,8 @@ export const getVirements = async (req, res) => {
       total,
       valideCount,
       enCoursCount,
-      rejectedCount,
-      generatedCount,
+      cancelledCount,
+      missinInfoCount,
 
     });
   } catch (error) {
@@ -61,4 +61,83 @@ export const getVirements = async (req, res) => {
   }
 };
 
-export default getVirements;
+export const getVirementCountByEtat = async (req, res) => {
+  try {
+    const virementCountPromise = Virement.aggregate([
+      {
+        $group: {
+          _id: "$etat",
+          count: { $sum: 1 }
+        }
+      }
+    ]).exec();
+
+    const virementCountResult = await virementCountPromise;
+
+    // Transform the VirementCountResult array into the desired format
+    const etatCounts = virementCountResult.map((entry) => ({
+      _id: entry._id,
+      count: entry.count,
+    }));
+
+    res.status(200).json(etatCounts);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getMonthlyTransactionCounts = async (req, res) => {
+  try {
+    // Fetch the virement data from the database
+    const virements = await Virement.find();
+
+    // Group the virements by month using the MongoDB aggregation pipeline
+    const aggregatedData = await Virement.aggregate([
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: "%Y-%m",
+              date: "$dad", // Group by the "dad" field (date of the virement)
+            },
+          },
+          count: { $sum: 1 }, // Calculate the count of transactions in each group
+        },
+      },
+      { $sort: { _id: 1 } }, // Sort the data by month in ascending order
+    ]);
+
+    // Format the data for the Bar Chart
+    const barChartData = aggregatedData.map((entry) => ({
+      month: formatDate(new Date(entry._id)), // Format the month as "Jan 2023" for display
+      count: entry.count,
+    }));
+    console.log("🚀 ~ file: virements.js:115 ~ barChartData ~ barChartData:", barChartData);
+
+    res.status(200).json(barChartData);
+  } catch (error) {
+    console.error("Error fetching virement data:", error);
+    return [];
+  }
+};
+
+// Helper function to format date as "MMM YYYY"
+const formatDate = (date) => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const year = date.getFullYear();
+  const month = months[date.getMonth()];
+  return `${month}`;
+};

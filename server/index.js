@@ -92,13 +92,12 @@ mongoose
     // ProductStat.insertMany(dataProductStat);
     // Transaction.insertMany(dataTransaction);
     // User.insertMany(dataUser);
-    // Client.insertMany(dataClient)
-
-    // OverallStatClient.insertMany(dataOverallStatClient)
-    // Agency.insertMany(agencies)
-    // Virement.insertMany(sampleVirements)
-    // Chequier.insertMany(sampleChequiers)
-    // Credit.insertMany(dataCredits)
+    // Client.insertMany(dataClient);
+    // OverallStatClient.insertMany(dataOverallStatClient);
+    // Agency.insertMany(agencies);
+    // Virement.insertMany(sampleVirements);
+    // Chequier.insertMany(sampleChequiers);
+    // Credit.insertMany(dataCredits);
     
   })
   .catch((error) => console.log(`${error} did not connect`));

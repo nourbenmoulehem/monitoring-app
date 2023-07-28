@@ -45,4 +45,20 @@ export const getMemberShipStats = async (req, res) => {
   }
 }
 
+export const getFlagStats = async (req, res) => {
+  try {
+    const currentYear = 2023;
+
+    /* Overall Client Stats */
+    const ClientStat = await OverallStatClient.find({ year: currentYear }).lean().select('flagStats').lean();
+
+    console.log("🚀 ~ file: clientsStats.js:38 ~ getMemberShipStats ~ ClientStat:", ClientStat)
+
+    res.status(200).json({ ClientStat });
+
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 

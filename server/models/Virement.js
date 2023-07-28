@@ -19,9 +19,13 @@ const virementSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
-  etatVirement: {
+  etat: {
     type: String,
-    enum: ['In Progress', 'Generated', 'Executed', 'Rejected'],
+    enum: ['En cours', 'En attente', 'Validé', 'Annulé', 'Info manquantes'],
+    default: 'En cours',
+  },
+  montant: {
+    type: Number,
     required: true,
   },
   motifVirement: String,

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   getProducts,
-  getCustomers,
+  getAllClients,
   getTransactions,
   getGeography,
 } from "../controllers/client.js";
@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/products", getProducts);
-router.get("/customers", getCustomers);
+router.get("/getAllClients", getAllClients);
 router.get("/transactions", getTransactions);
 router.get("/geography", getGeography);
 
