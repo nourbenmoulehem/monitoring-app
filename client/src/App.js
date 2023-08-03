@@ -24,7 +24,7 @@ function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   // const isAuth = Boolean(useSelector((state) => state.global.token));
-  const isAuth = Boolean(useSelector((state) => state.token));
+  const isAuth = Boolean(useSelector((state) => state.global.isLoggedIn));
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.user:", useSelector((state) => state.global.user))
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.token:", useSelector((state) => state.global.token))
   console.log("🚀 ~ file: App.js:19 ~ App ~ isAuth:", isAuth)

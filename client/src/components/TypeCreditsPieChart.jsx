@@ -1,54 +1,54 @@
-import React from "react";
+import React from 'react'
+import {useGetCreditCountByTypeQuery} from 'state/api';
 import { ResponsivePie } from "@nivo/pie";
 import { Box, Typography, useTheme } from "@mui/material";
-import { useGetProfessionPieChartQuery, useGetProfessionStatsQuery } from "../state/api.js";
 
-
-const ProfessionStats = (props) => {
-
-    const { year } = props; 
-  const { data, isLoading } = useGetProfessionStatsQuery(String(year));
+const TypeCreditsPieChart = () => {
   const theme = useTheme();
+  const { data, isLoading } = useGetCreditCountByTypeQuery();
+  console.log("🚀 ~ file: etatCreditsPie.jsx:9 ~ EtatCreditsPie ~ data:", data)
 
-  if (!data || isLoading) return "Loading...";
+  
+
+  if (!data || isLoading) return <div>Loading...</div>;
 
   const formattedData = data.map((item) => ({
-    id: item.profession,
-    label: item.profession,
+    id: String(item._id), // Convert to string as the id should be a string
+    label: String(item._id), // Convert to string as the label should be a string
     value: item.count,
-    color: "white",
+    color: item._id === true ? theme.palette.primary.main : theme.palette.secondary.main,
   }));
+  console.log("🚀 ~ file: flagVisioChart.jsx:19 ~ formattedData ~ formattedData:", formattedData)
 
   return (
     <ResponsivePie
         data={formattedData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        activeOuterRadiusOffset={10}
-        colors={{ scheme: 'pastel1' }}
-        borderWidth={2}
+        innerRadius={0.5}
+        padAngle={0.7}
+        cornerRadius={3}
+        activeOuterRadiusOffset={8}
+        borderWidth={1}
         borderColor={{
             from: 'color',
             modifiers: [
                 [
                     'darker',
-                    '0'
+                    0.2
                 ]
             ]
         }}
-        arcLinkLabelsSkipAngle={4}
-        arcLinkLabelsTextOffset={4}
+        arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
-        arcLinkLabelsOffset={-1}
-        arcLinkLabelsStraightLength={22}
-        arcLinkLabelsThickness={2}
+        arcLinkLabelsThickness={3}
         arcLinkLabelsColor={{ from: 'color' }}
-        arcLabelsRadiusOffset={0.65}
+        arcLabelsSkipAngle={10}
         arcLabelsTextColor={{
             from: 'color',
             modifiers: [
                 [
                     'darker',
-                    '1.8'
+                    2
                 ]
             ]
         }}
@@ -128,14 +128,14 @@ const ProfessionStats = (props) => {
                 direction: 'row',
                 justify: false,
                 translateX: 0,
-                translateY: 59,
-                itemsSpacing: 0,
-                itemWidth: 61,
-                itemHeight: 39,
+                translateY: 56,
+                itemsSpacing: 39,
+                itemWidth: 112,
+                itemHeight: 18,
                 itemTextColor: '#999',
                 itemDirection: 'left-to-right',
                 itemOpacity: 1,
-                symbolSize: 11,
+                symbolSize: 18,
                 symbolShape: 'circle',
                 effects: [
                     {
@@ -148,9 +148,7 @@ const ProfessionStats = (props) => {
             }
         ]}
     />
-  );
-};
-  
-  
+  )
+}
 
-export default ProfessionStats;
+export default TypeCreditsPieChart

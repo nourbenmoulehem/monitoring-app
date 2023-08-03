@@ -3,9 +3,12 @@ import { ResponsivePie } from "@nivo/pie";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useGetClientsStatYearlyQuery } from "../state/api";
 
-const GenderChart = () => {
-  const { data, isLoading } = useGetClientsStatYearlyQuery();
+const GenderChart = (props) => {
+  
   const theme = useTheme();
+  const { year } = props;
+
+  const { data, isLoading } = useGetClientsStatYearlyQuery(String(year));
 
   if (!data || isLoading) return "Loading...";
 

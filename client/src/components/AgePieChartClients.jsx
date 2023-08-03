@@ -1,21 +1,23 @@
 import React from 'react';
-import {useGetAggregateDataByAgeRangesQuery} from "state/api";
+import {useGetAggregateDataByAgeRangesQuery, useGetClientsStatYearlyQuery} from "state/api";
 import { Box, Typography, useTheme } from "@mui/material";
 import { ResponsivePie } from "@nivo/pie";
 
 
-const AgePieChartClients = () => {
-  const { data, isLoading } = useGetAggregateDataByAgeRangesQuery();
+const AgePieChartClients = (props) => {
+
+  const { year } = props;  
+  const { data, isLoading } = useGetClientsStatYearlyQuery(String(year));
   const theme = useTheme();
 
   if (!data || isLoading) return "Loading...";
-  console.log("asslema o mar7be bik fi age pie chart !!!!!!!");
-  const formattedData = data.filter((ageRange) => ageRange.value > 0).map((ageRange) => ({
-    id: ageRange.label,
-    label: ageRange.label,
-    value: ageRange.value ? ageRange.value : 0,
-    color: theme.palette.secondary[200],
+  
+  const formattedData = data.ageStats.map((age) => ({
+    id: age.ageRange,
+    label: age.ageRange,
+    value: age.count ? age.count : 0,
   }));
+  console.log("asslema o mar7be bik fi age pie chart !!!!!!!");
   console.log("🚀 ~ file: AgePieChartClients.jsx:19 ~ formattedData ~ formattedData:", formattedData)
 
   return (

@@ -35,7 +35,7 @@ const handleErr = (err) => {
   return errors;
 };
 
-const maxAge = "35s"; // lifetime of a jwt token
+const maxAge = "6h"; // lifetime of a jwt token
 
 //creating token
 const createToken = (_id) => {

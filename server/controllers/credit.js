@@ -129,3 +129,29 @@ export const getCreditCountByEtat = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getCreditCountByType = async (req, res) => {
+  try {
+    const creditCountPromise = Credit.aggregate([
+      {
+        $group: {
+          _id: "$type",
+          count: { $sum: 1 }
+        }
+      }
+    ]).exec();
+
+    const creditCountResult = await creditCountPromise;
+
+    // Transform the creditCountResult array into the desired format
+    const typeCounts = creditCountResult.map((entry) => ({
+      _id: entry._id,
+      count: entry.count,
+    }));
+
+    res.status(200).json(typeCounts);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+

@@ -1,10 +1,12 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { useGetMemberShipStatsQuery } from 'state/api';
+import { useGetClientsStatYearlyQuery } from 'state/api';
 
-const LineChartComparisionMembership = () => {
+const LineChartComparisionMembership = (props) => {
 
-  const { data, isLoading } = useGetMemberShipStatsQuery();
+  const {year} = props;
+  const { data, isLoading } = useGetMemberShipStatsQuery(String(year));
   console.log("🚀 ~ file: LineChartComparisionMembership.jsx:8 ~ LineChartComparisionMembership ~ data:", data)
 
   console.log("🚀 ~ file: LineChartComparisionMembership.jsx:8 ~ LineChartComparisionMembership ~ data:")
@@ -64,7 +66,7 @@ const LineChartComparisionMembership = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'month',
+            legend: 'mois',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
@@ -72,7 +74,7 @@ const LineChartComparisionMembership = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'total',
+            legend: 'totals',
             legendOffset: -40,
             legendPosition: 'middle'
         }}

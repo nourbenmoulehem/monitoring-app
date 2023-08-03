@@ -13,9 +13,13 @@ import StatBox from "components/StatBox";
 import FlexBetween from "components/FlexBetween";
 import MontantBarChart from "../../components/montantCreditsStatBarChart"
 import EtatCreditsPie from "../../components/etatCreditsPie"
+import TypeCreditsPieChart from "components/TypeCreditsPieChart";
+import { tokens } from "../../theme.js";
+
 
 const Credit = () => {
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   // values to be sent to the backend
   const [page, setPage] = useState(0);
@@ -126,7 +130,6 @@ const Credit = () => {
     <Box m="1.5rem 2.5rem">
       <Header title="CREDITS" subtitle="" />
 
-        <FlexBetween>
 
         <Box display="flex" alignItems="center" gap={4} m="0.5rem">
           <StatBox
@@ -175,7 +178,6 @@ const Credit = () => {
 
 
         </Box>
-        </FlexBetween>
           
 
         
@@ -198,6 +200,7 @@ const Credit = () => {
         <Typography
             p="0.5 0.6rem"
             fontSize="0.9rem"
+            fontWeight="600"
             sx={{ color: theme.palette.secondary[200] }}
           >
             Répartition des montants de crédit dans différentes tranches
@@ -218,11 +221,41 @@ const Credit = () => {
           <Typography
             p="0.5 0.6rem"
             fontSize="0.9rem"
+            fontWeight="600"
             sx={{ color: theme.palette.secondary[200] }}
           >
             Répartition des crédits par type de compte ou catégorie de crédit
           </Typography>
           <EtatCreditsPie />
+        </Box>
+        <Box
+           gridColumn="span 8"
+           gridRow="span 4"
+           backgroundColor={theme.palette.background.alt}
+        >
+          <Box
+            mt="25px"
+            p="0 30px"
+            display="flex "
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                sx={{ color: theme.palette.secondary[200] }}
+              >
+                Diagramme en secteurs des types de crédits
+              </Typography>
+              
+            </Box>
+            
+          </Box>
+          <Box height="90%">
+            <TypeCreditsPieChart/>
+          </Box>
+          
         </Box>
       </Box>
         <Box

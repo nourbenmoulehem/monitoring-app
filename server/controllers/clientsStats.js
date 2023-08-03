@@ -3,25 +3,35 @@ import Client from "../models/Client.js";
 
  export const getClientsStatYearly = async (req, res) =>{
   try {
-    const currentYear = 2023;
+     // Extract the year from the request query parameters
+     console.log(req.params);
+     const  { year }  = req.params; // Assuming the year is passed as a query parameter named 'year'
 
-    /* Overall Client Stats */
-    const ClientStat = await OverallStatClient.find({ year: currentYear });
-    console.log("🚀 ~ file: clientsStats.js:10 ~ getClientsStatYearly ~ ClientStat:", ClientStat)
+     console.log("🚀 ~ file: clientsStats.js:8 ~ getClientsStatYearly ~ year:", year)
+
+     // Check if the year is a valid number
+     if (isNaN(year)) {
+       return res.status(400).json({ message: "Invalid year provided." });
+     }
+ 
+     /* Overall Client Stats */
+     const clientStat = await OverallStatClient.find({ year: year });
     
     const {
       professionStats,
       workSectorStats,
       revenueHistogram,
-      genderStats
-    } = ClientStat[0]
+      genderStats,
+      ageStats
+    } = clientStat[0]
 
     console.log("hmm you freaked me out")
     res.status(200).json({
       professionStats,
       workSectorStats,
       revenueHistogram,
-      genderStats
+      genderStats,
+      ageStats
     });
 
   } catch (error) {
@@ -31,10 +41,11 @@ import Client from "../models/Client.js";
 
 export const getMemberShipStats = async (req, res) => {
   try {
-    const currentYear = 2023;
+    console.log(req.params);
+     const  { year }  = req.params;
 
     /* Overall Client Stats */
-    const ClientStat = await OverallStatClient.find({ year: currentYear }).lean().select('membershipTypeStats').lean();
+    const ClientStat = await OverallStatClient.find({ year: year }).lean().select('membershipTypeStats').lean();
 
     console.log("🚀 ~ file: clientsStats.js:38 ~ getMemberShipStats ~ ClientStat:", ClientStat)
 
@@ -45,12 +56,49 @@ export const getMemberShipStats = async (req, res) => {
   }
 }
 
-export const getFlagStats = async (req, res) => {
+export const getRevenueHistoStats = async (req, res) => {
   try {
-    const currentYear = 2023;
+    console.log(req.params);
+     const  { year }  = req.params;
 
     /* Overall Client Stats */
-    const ClientStat = await OverallStatClient.find({ year: currentYear }).lean().select('flagStats').lean();
+    const ClientStat = await OverallStatClient.find({ year: year }).lean().select('revenueHistogram').lean();
+
+    console.log("🚀 ~ file: clientsStats.js:38 ~ getMemberShipStats ~ ClientStat:", ClientStat[0].revenueHistogram)
+    const revenues = ClientStat[0].revenueHistogram;
+
+    res.status(200).json( revenues );
+
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+export const getProfessionStats = async (req, res) => {
+  try {
+    console.log(req.params);
+     const  { year }  = req.params;
+
+    /* Overall Client Stats */
+    const ClientStat = await OverallStatClient.find({ year: year }).lean().select('professionStats').lean();
+
+    console.log("🚀 ~ file: clientsStats.js:38 ~ getMemberShipStats ~ ClientStat:", ClientStat[0].revenueHistogram)
+    const profStats = ClientStat[0].professionStats;
+
+    res.status(200).json( profStats );
+
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+export const getFlagStats = async (req, res) => {
+  try {
+    console.log(req.params);
+     const  { year }  = req.params;
+
+    /* Overall Client Stats */
+    const ClientStat = await OverallStatClient.find({ year: year }).lean().select('flagStats').lean();
 
     console.log("🚀 ~ file: clientsStats.js:38 ~ getMemberShipStats ~ ClientStat:", ClientStat)
 

@@ -39,7 +39,7 @@ const OverallStatClientSchema = new mongoose.Schema(
             {
               activityNature: {
                 type: String,
-                enum: ["Public", "Private"],
+                enum: ["Publique", "Privé"],
                 required: true,
               },
               count: {
@@ -117,7 +117,22 @@ const OverallStatClientSchema = new mongoose.Schema(
       ],
       default: [],
     },
-
+    ageStats: {
+      type: [
+        {
+          ageRange: {
+            type: String,
+            required: true,
+          },
+          count: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
+        },
+      ],
+      default: [],
+    },
     membershipTypeStats: {
       type: [
         {

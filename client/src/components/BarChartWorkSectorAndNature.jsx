@@ -3,11 +3,15 @@ import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
 import { useGetClientsStatYearlyQuery } from '../state/api';
 import { tokens } from "../theme";
-const BarChartWorkSectorAndNature = () => {
+const BarChartWorkSectorAndNature = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { year } = props;
+  console.log("BARCHART WORK SECTOR AND NATURE ACTIVITY HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!!!!!!!!!!!!")
+  console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:10 ~ BarChartWorkSectorAndNature ~ year:", year)
   
-  const { data, isLoading } = useGetClientsStatYearlyQuery();
+  const { data, isLoading } = useGetClientsStatYearlyQuery(String(year));
+
   
 
   // Check if data is defined and has the necessary properties
@@ -15,17 +19,18 @@ const BarChartWorkSectorAndNature = () => {
 
   if (data && data.workSectorStats) {
     formattedData = data.workSectorStats.map((item) => {
-      const publicStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Public');
-      const privateStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Private');
+      const publicStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Publique');
+      const privateStat = item.activityNatureStats.find((stat) => stat.activityNature === 'Privé');
 
       return {
         workSector: item.workSector,
-        public: publicStat ? publicStat.count : 0,
+        Publique: publicStat ? publicStat.count : 0,
         publicColor: 'hsl(99, 70%, 50%)', // Set the desired color for the 'public' bar
-        private: privateStat ? privateStat.count : 0,
+        Privé: privateStat ? privateStat.count : 0,
         privateColor: 'hsl(255, 70%, 50%)', // Set the desired color for the 'private' bar
       };
     });
+    console.log("HELLLOOOOOOOOOOOOOOOOO §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
     console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:29 ~ formattedData=data.workSectorStats.map ~ formattedData:", formattedData)
   }
 
@@ -65,8 +70,8 @@ const BarChartWorkSectorAndNature = () => {
         },
       }}
         keys={[
-            'public',
-            'private'
+            'Publique',
+            'Privé'
             
         ]}
         indexBy="workSector"

@@ -25,6 +25,7 @@ export const api = createApi({
       query: (id) => `general/user/${id}`,
       providesTags: ["User"],
     }),
+
     getTotalClients: build.query({
       query: () => "total/totalClients",
       providesTags: ["Total"],
@@ -34,8 +35,9 @@ export const api = createApi({
       query: () => "general/dashboard",
       providesTags: ["Dashboard"],
     }),
+
     getClientsStatYearly: build.query({
-      query: () => "clients/clientStats",
+      query: (year) => `clients/clientStats/${year}`,
       providesTags: ["clients"],
     }),
     getAllAgencies: build.query({
@@ -44,7 +46,7 @@ export const api = createApi({
     }),
 
     getFlagStats: build.query({
-      query: () => "clients/flagStats",
+      query: (year) => `clients/flagStats/${year}`,
       providesTags: ["clients"],
     }),
 
@@ -74,7 +76,19 @@ export const api = createApi({
     }),
 
     getMemberShipStats: build.query({
-      query: () => "clients/membershipStats",
+      query: (year) => `clients/membershipStats/${year}`,
+      providesTags: ["clients"],
+    }),
+
+
+
+    getRevenueHistoStats: build.query({
+      query: (year) => `clients/getRevenueHistoStats/${year}`,
+      providesTags: ["clients"],
+    }),
+
+    getProfessionStats: build.query({
+      query: (year) => `clients/getProfessionStats/${year}`,
       providesTags: ["clients"],
     }),
 
@@ -144,6 +158,12 @@ export const api = createApi({
       query: () => "credits/getMontantCreditStats",
       providesTags: ["Credits"],
     }),
+
+    getCreditCountByType: build.query({
+      query: () => "credits/getCreditCountByType",
+      providesTags: ["Credits"],
+    }),
+
     getCreditCountByEtat: build.query({
       query: () => "credits/getCreditCountByEtat",
       providesTags: ["Credits"],
@@ -180,5 +200,8 @@ export const {
   useGetAllClientsQuery,
   useGetChequierCountByEtatQuery,
   useGetMonthlyChequierCountsQuery,
-  useGetFlagStatsQuery
+  useGetFlagStatsQuery,
+  useGetCreditCountByTypeQuery,
+  useGetRevenueHistoStatsQuery,
+  useGetProfessionStatsQuery
 } = api;

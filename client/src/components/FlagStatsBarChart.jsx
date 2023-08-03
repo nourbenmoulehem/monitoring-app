@@ -5,11 +5,12 @@ import { useGetFlagStatsQuery } from '../state/api';
 import { tokens } from "../theme";
 
 
-const FlagStatsBarChart = () => {
+const FlagStatsBarChart = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const {year} = props;
   
-  const { data, isLoading } = useGetFlagStatsQuery();
+  const { data, isLoading } = useGetFlagStatsQuery(String(year));
   
 
   // Check if data is defined and has the necessary properties
@@ -122,7 +123,7 @@ const FlagStatsBarChart = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'country',
+            legend: 'flags',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -130,7 +131,7 @@ const FlagStatsBarChart = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'totalité',
             legendPosition: 'middle',
             legendOffset: -40
         }}

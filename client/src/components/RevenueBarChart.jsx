@@ -1,16 +1,20 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { Box, Typography, useTheme } from '@mui/material';
-import { useGetRevenueStatsQuery } from '../state/api';
+import { useGetRevenueStatsQuery, useGetClientsStatYearlyQuery, useGetRevenueHistoStatsQuery } from '../state/api';
 import { tokens } from "../theme";
 
 
-const RevenueBarChart = () => {
+const RevenueBarChart = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
-  const { data, isLoading } = useGetRevenueStatsQuery();
-  console.log("🚀 ~ file: RevenueBarChart.jsx:13 ~ RevenueBarChart ~ data:", data)
+  const { year } = props;
+  const { data, isLoading } = useGetRevenueHistoStatsQuery(String(year));
+  console.log("🚀 ~ file: RevenueBarChart.jsx:14 ~ RevenueBarChart ~ data:", data)
+  console.log("🚀 ~ file: RevenueBarChart.jsx:15 ~ RevenueBarChart ~ data:", data)
+  console.log("HELLO FEL REVENUE HISTOµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ");
+
   
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -24,7 +28,7 @@ const RevenueBarChart = () => {
       const count = item.count;
   
       return {
-        revenue: item._id,
+        revenue: item.range,
         count: count,
         color: 'hsl(99, 70%, 50%)', // Set the desired color for the bar
       };

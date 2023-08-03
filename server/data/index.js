@@ -17307,7 +17307,7 @@ export const dataClient = [
     Adress: "123 Main Street",
     Gouvernment: "Ben Arous",
     ActivitySector: "commerce",
-    ActivityNature: "public",
+    ActivityNature: "Publique",
     Profession: "etudiant",
     revenue: 500,
     MembershipType: "WeTrust",
@@ -17327,7 +17327,7 @@ export const dataClient = [
     Adress: "456 Elm Street",
     Gouvernment: "Nabeul",
     ActivitySector: "hotel",
-    ActivityNature: "private",
+    ActivityNature: "Privé",
     Profession: "salarie",
     revenue: 2500,
     MembershipType: "WeStart",
@@ -17347,7 +17347,7 @@ export const dataClient = [
     Adress: "789 Oak Street",
     Gouvernment: "Tunis",
     ActivitySector: "restaurant",
-    ActivityNature: "public",
+    ActivityNature: "Publique",
     Profession: "retraite",
     revenue: 1500,
     MembershipType: "WeTrust",
@@ -17809,8 +17809,8 @@ export const dataOverallStatClient = [{
   year: 2023,
   professionStats: [
     { profession: "Etudiant", count: 50 },
-    { profession: "Salarie", count: 30 },
-    { profession: "Retraite", count: 20 },
+    { profession: "Salarié", count: 30 },
+    { profession: "Retraité", count: 20 },
     { profession: "Autre", count: 15 },
   ],
   workSectorStats: [
@@ -17818,72 +17818,72 @@ export const dataOverallStatClient = [{
       workSector: "Education",
       count: 75,
       activityNatureStats: [
-        { activityNature: "Public", count: 35 },
-        { activityNature: "Private", count: 40 },
+        { activityNature: "Publique", count: 35 },
+        { activityNature: "Privé", count: 40 },
       ],
     },
     {
       workSector: "Sante",
       count: 45,
       activityNatureStats: [
-        { activityNature: "Public", count: 25 },
-        { activityNature: "Private", count: 20 },
+        { activityNature: "Publique", count: 25 },
+        { activityNature: "Privé", count: 20 },
       ],
     },
     {
       workSector: "Agriculture",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 15 },
-        { activityNature: "Private", count: 15 },
+        { activityNature: "Publique", count: 15 },
+        { activityNature: "Privé", count: 15 },
       ],
     },
     {
       workSector: "Transport et Logistique",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 20 },
-        { activityNature: "Private", count: 15 },
+        { activityNature: "Publique", count: 20 },
+        { activityNature: "Privé", count: 15 },
       ],
     },
     {
       workSector: "IT",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 50 },
-        { activityNature: "Private", count: 88 },
+        { activityNature: "Publique", count: 50 },
+        { activityNature: "Privé", count: 88 },
       ],
     },
     {
       workSector: "Immobilier",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 30 },
-        { activityNature: "Private", count: 20 },
+        { activityNature: "Publique", count: 30 },
+        { activityNature: "Privé", count: 20 },
       ],
     },
     {
       workSector: "Tourisme",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 14 },
-        { activityNature: "Private", count: 20 },
+        { activityNature: "Publique", count: 14 },
+        { activityNature: "Privé", count: 20 },
       ],
     },
     {
       workSector: "Finance/Banque",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 14 },
-        { activityNature: "Private", count: 20 },
+        { activityNature: "Publique", count: 14 },
+        { activityNature: "Privé", count: 20 },
       ],
     },
     {
       workSector: "Médias",
       count: 30,
       activityNatureStats: [
-        { activityNature: "Public", count: 60 },
-        { activityNature: "Private", count: 20 },
+        { activityNature: "Publique", count: 60 },
+        { activityNature: "Privé", count: 20 },
       ],
     },
   ],
@@ -17965,7 +17965,7 @@ export const dataOverallStatClient = [{
     { gender: "F", count: 50 },
   ],
   revenueHistogram: [
-    { range: "0-700", count: 25 },
+    { range: "0-700", count: 40 },
     { range: "700-1600", count: 40 },
     { range: "1600-3500", count: 20 },
     { range: "3500+", count: 15 },
@@ -18006,7 +18006,193 @@ export const dataOverallStatClient = [{
       ],
     },
   ],
+  ageStats: [
+    { ageRange: "20-30", count: 100 },
+    { ageRange: "31-40", count: 80 },
+    { ageRange: "41-50", count: 60 },
+    { ageRange: "51-60", count: 40 },
+    { ageRange: "61+", count: 30 },
+  ],
 
-}];
+},
+{
+  year: 2022,
+  professionStats: [
+    { profession: "Etudiant", count: 45 },
+    { profession: "Salarié", count: 25 },
+    { profession: "Retraité", count: 15 },
+    { profession: "Autre", count: 20 },
+  ],
+  workSectorStats: [
+    {
+      workSector: "Education",
+      count: 70,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 30 },
+        { activityNature: "Privé", count: 40 },
+      ],
+    },
+    {
+      workSector: "Sante",
+      count: 40,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 20 },
+        { activityNature: "Privé", count: 20 },
+      ],
+    },
+    {
+      workSector: "Agriculture",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 12 },
+        { activityNature: "Privé", count: 13 },
+      ],
+    },
+    {
+      workSector: "Transport et Logistique",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 15 },
+        { activityNature: "Privé", count: 10 },
+      ],
+    },
+    {
+      workSector: "IT",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 45 },
+        { activityNature: "Privé", count: 55 },
+      ],
+    },
+    {
+      workSector: "Immobilier",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 25 },
+        { activityNature: "Privé", count: 15 },
+      ],
+    },
+    {
+      workSector: "Tourisme",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 12 },
+        { activityNature: "Privé", count: 13 },
+      ],
+    },
+    {
+      workSector: "Finance/Banque",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 13 },
+        { activityNature: "Privé", count: 12 },
+      ],
+    },
+    {
+      workSector: "Médias",
+      count: 25,
+      activityNatureStats: [
+        { activityNature: "Publique", count: 50 },
+        { activityNature: "Privé", count: 30 },
+      ],
+    },
+  ],
+  flagStats: [
+    {
+      flag: "flagVisio",
+      count: 8,
+      nature: [
+        { status: "complet", count: 5 },
+        { status: "incomplet", count: 3 },
+      ],
+    },
+    {
+      flag: "flagSignature",
+      count: 8,
+      nature: [
+        { status: "complet", count: 4 },
+        { status: "incomplet", count: 4 },
+      ],
+    },
+    {
+      flag: "flagDigitgoEmail",
+      count: 8,
+      nature: [
+        { status: "complet", count: 2 },
+        { status: "incomplet", count: 6 },
+      ],
+    },
+    {
+      flag: "flagDigitgoSMS",
+      count: 8,
+      nature: [
+        { status: "complet", count: 3 },
+        { status: "incomplet", count: 5 },
+      ],
+    },
+    {
+      flag: "flagCertificat",
+      count: 8,
+      nature: [
+        { status: "complet", count: 7 },
+        { status: "incomplet", count: 1 },
+      ],
+    },
+  ],
+  genderStats: [
+    { gender: "M", count: 30 },
+    { gender: "F", count: 40 },
+  ],
+  revenueHistogram: [
+    { range: "0-700", count: 22 },
+    { range: "700-1600", count: 38 },
+    { range: "1600-3500", count: 18 },
+    { range: "3500+", count: 20 },
+  ],
+  membershipTypeStats: [
+    {
+      membershipType: "WeTrust",
+      monthlyCounts: [
+        { month: "Janvier", count: 9 },
+        { month: "Février", count: 14 },
+        { month: "Mars", count: 10 },
+        { month: "Avril", count: 16 },
+        { month: "Mai", count: 12 },
+        { month: "Juin", count: 18 },
+        { month: "Juillet", count: 14 },
+        { month: "Août", count: 20 },
+        { month: "Septembre", count: 17 },
+        { month: "Octobre", count: 15 },
+        { month: "Novembre", count: 11 },
+        { month: "Décembre", count: 9 },
+      ],
+    },
+    {
+      membershipType: "WeStart",
+      monthlyCounts: [
+        { month: "Janvier", count: 7 },
+        { month: "Février", count: 9 },
+        { month: "Mars", count: 5 },
+        { month: "Avril", count: 8 },
+        { month: "Mai", count: 6 },
+        { month: "Juin", count: 10 },
+        { month: "Juillet", count: 8 },
+        { month: "Août", count: 11 },
+        { month: "Septembre", count: 9 },
+        { month: "Octobre", count: 8 },
+        { month: "Novembre", count: 6 },
+        { month: "Décembre", count: 5 },
+      ],
+    },
+  ],
+  ageStats: [
+    { ageRange: "20-30", count: 80 },
+    { ageRange: "31-40", count: 50 },
+    { ageRange: "41-50", count: 30 },
+    { ageRange: "51-60", count: 10 },
+    { ageRange: "61+", count: 5 },
+  ],
+},
+];
 
 

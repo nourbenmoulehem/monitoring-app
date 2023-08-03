@@ -35,6 +35,13 @@ const Clients = () => {
   const colors = tokens(theme.palette.mode);
   const count = useGetAgregateTotalClientsQuery()
   
+  const [selectedYear, setSelectedYear] = useState(2023); // Default year is 2023
+  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!!!");
+  console.log("🚀 ~ file: index.jsx:40 ~ selectedYear:", selectedYear)
+
+  const handleChangeYear = (event) => {
+    setSelectedYear(parseInt(event.target.value));
+  };
   
    // values to be sent to the backend
    const [page, setPage] = useState(0);
@@ -133,17 +140,19 @@ const Clients = () => {
     },
 
   ];
-  // console.log("🚀 ~ file: index.jsx:24 ~ Clients ~ count:")
-  // const totalClients = count.data.entryCount
-  // console.log("🚀 ~ file: index.jsx:27 ~ Clients ~ totalClients:", totalClients)
-  // const totalClientsString = totalClients.toString();
-  // console.log("🚀 ~ file: index.jsx:29 ~ Clients ~ totalClientsString:", totalClientsString)
+  
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="CLIENTS dashboard" />
-        
+        <div>
+        <label htmlFor="yearSelect">Sélectionnez l'année: </label>
+        <select id="yearSelect" value={selectedYear} onChange={handleChangeYear}>
+          <option value={2022}>2022</option>
+          <option value={2023}>2023</option>
+        </select>
+      </div>
         <Box>
           <Button
             sx={{
@@ -169,7 +178,7 @@ const Clients = () => {
       >
         {/* ROW 1 */}
         <Box
-          gridColumn="span 3"
+          gridColumn="span 2"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
@@ -194,49 +203,59 @@ const Clients = () => {
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
+          flexDirection="column"
           alignItems="center"
-          justifyContent="center"
         >
-            <GenderChart />
+          <Typography
+          variant="h7"
+          fontWeight="600"
+          color={colors.grey[100]}
+          >
+            Diagramme circulaire de répartition par sexe
+          </Typography>
+          
+            <GenderChart year={selectedYear}/>
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
+          flexDirection="column"
           alignItems="center"
-          justifyContent="center"
         >
-          {/* <StatBoxClient
-            title="431,225"
-            subtitle="Sales Obtained"
-            progress="0.50"
-            increase="+21%"
-            icon={
-              <PointOfSaleIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          /> */}
-          <ProfessionStats />
+          <Typography
+          variant="h7"
+          fontWeight="600"
+          color={colors.grey[100]}
+          >
+            Camembert de répartition par profession
+          </Typography>
+          <ProfessionStats year={selectedYear} />
         </Box>
         <Box
-          gridColumn="span 4"
+          gridColumn="span 5"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
+          flexDirection="column"
           alignItems="center"
-          justifyContent="center"
         >
-          {/* <iframe style={{background: theme.palette.background.alt,border: "none",borderRadius: "2px"}}  width="290" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=649f657b-66f3-4fe8-89ba-9a860baf6947&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`} /> */}
-          <AgePieChartClients />
+          <Typography
+          variant="h7"
+          fontWeight="600"
+          color={colors.grey[100]}
+          >
+            Diagramme circulaire de répartition par âge
+          </Typography>
+          <AgePieChartClients year={selectedYear} />
         </Box>
         
 
         {/* ROW 2 */}
         { /* work sector stats */ }
         <Box
-          gridColumn="span 11"
+          gridColumn="span 15"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
         >
@@ -274,18 +293,18 @@ const Clients = () => {
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             {/* <BarChart isDashboard={true} /> */}
-            <BarChartWorkSectorAndNature isDashboard={true} />
+            <BarChartWorkSectorAndNature isDashboard={true} year={selectedYear}/>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           overflow="auto"
         >
 
-          <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="400" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42f9a-ce21-4627-8186-fb28de2c50fb&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe>
-        </Box>
+          {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="400" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a42f9a-ce21-4627-8186-fb28de2c50fb&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> 
+        </Box> */}
 
         {/* ROW 3 */}
         { /* Revenue stats */ }
@@ -328,7 +347,7 @@ const Clients = () => {
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             {/* <BarChart isDashboard={true} /> */}
-            <RevenueBarChart isDashboard={true} />
+            <RevenueBarChart year={selectedYear}/>
           </Box>
         </Box>
         {/* <Box
@@ -423,7 +442,7 @@ const Clients = () => {
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             {/* <BarChart isDashboard={true} /> */}
-            <LineChartComparisionMembership  />
+            <LineChartComparisionMembership year={selectedYear} />
           </Box>
         </Box>
         <Box
@@ -453,7 +472,7 @@ const Clients = () => {
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
           >
-            <FlagStatsBarChart />
+            <FlagStatsBarChart year={selectedYear} />
           </Box>
         {/* ROW 5' */}
         <Box
