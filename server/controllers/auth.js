@@ -85,7 +85,7 @@ export const refreshToken = (req, res, next) => {
 
     res.cookie(String(user._id), token, {
       path: "/",
-      expires: new Date(Date.now() + 1000 * 30), // 30 seconds
+      expires: new Date(Date.now() + 6 * 60 * 60 * 1000), // 30 seconds
       httpOnly: true,
       sameSite: "lax",
     });
@@ -157,30 +157,29 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userdb = await User.findOne({ email: email });
-    // console.log("🚀 ~ file: auth.js:97 ~ login ~ user:", userdb)
 
     if (!userdb) return res.status(400).json({ msg: "User does not exist. " });
 
     const match = await bcrypt.compare(password, userdb.password);
     if (!match) {
-      res.status(400).json({ msg: "Invalid credentials. just to make sure" });
+      return res.status(400).json({ msg: "Invalid credentials." });
     }
 
-    const user = userdb.toObject(); // Convert Mongoose document to plain object
-    delete user.password; // Delete the password property from the object
-    // console.log("🚀 ~ file: auth.js:128 ~ login ~ userObj:", user)
+    const user = userdb.toObject();
+    delete user.password;
 
-    // create token
     const token = createToken(user._id);
 
-    console.log("Generated token from login\n ", token);
-    if (req.cookies[`${user._id}`]) {
-      req.cookies[`${user._id}`] = "";
-    }
+    console.log("Generated token from login\n", token);
 
+    // Clear existing cookie (if any)
+    res.clearCookie(String(user._id));
+
+    // Set the new cookie with a 6-hour expiration
+    const sixHours = 6 * 60 * 60 * 1000;
     res.cookie(String(user._id), token, {
       path: "/",
-      expires: new Date(Date.now() + 1000 * 30), // 30 seconds
+      expires: new Date(Date.now() + sixHours),
       httpOnly: true,
       sameSite: "lax",
     });
@@ -190,6 +189,7 @@ export const login = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 //for testing purposes
 export const getUser = async (req, res, next) => {
