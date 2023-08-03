@@ -233,11 +233,17 @@ const Virement = () => {
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
+          flexDirection="column"
           alignItems="center"
-          justifyContent="center"
         >
-            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a43d50-0834-4793-8284-d7e659adb708&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
-            <EtatVirementPie />
+          <Typography
+          variant="h8"
+          fontWeight="600"
+          sx={{ color: theme.palette.secondary[200] }}
+          >
+            Répartition de type de virement
+          </Typography>
+          <EtatVirementPie />
         </Box>
             
         <Box
@@ -246,19 +252,18 @@ const Virement = () => {
           backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
-          justifyContent="center"
           flexDirection="column"
         >
-          
-            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src = {`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a4416d-2d1e-4a99-8b41-62018e402139&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
-            <MonthlyVirementLineArea />
-            <Typography
-            p="0.3 0.3rem"
-            fontSize="0.9rem"
-            sx={{ color: theme.palette.secondary[200] }}
+          <Typography
+          variant="h7"
+          fontWeight="600"
+          sx={{ color: theme.palette.secondary[200] }}
           >
-            Graphique des Transferts Cumulatifs
+            Graphique mensuel des virements
           </Typography>
+            
+            <MonthlyVirementLineArea />
+            
 
         </Box>
 

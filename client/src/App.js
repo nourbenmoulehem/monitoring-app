@@ -33,6 +33,8 @@ function App() {
   console.log("🚀 ~ file: App.js:32 ~ App ~ userRoles:", userRoles)
   const isAdmin = userRoles.includes("superadmin");
   console.log("🚀 ~ file: App.js:34 ~ App ~ isAdmin:", isAdmin)
+  const isToken = Boolean(useSelector((state) => state.global.token));
+  console.log("🚀 ~ file: App.js:37 ~ App ~ isToken:", isToken)
   const dispatch = useDispatch();
 
   useEffect(() => {

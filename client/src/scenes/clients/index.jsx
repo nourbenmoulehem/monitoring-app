@@ -209,7 +209,7 @@ const Clients = () => {
           <Typography
           variant="h7"
           fontWeight="600"
-          color={colors.grey[100]}
+          sx={{ color: theme.palette.secondary[200] }}
           >
             Diagramme circulaire de répartition par sexe
           </Typography>
@@ -227,7 +227,7 @@ const Clients = () => {
           <Typography
           variant="h7"
           fontWeight="600"
-          color={colors.grey[100]}
+          sx={{ color: theme.palette.secondary[200] }}
           >
             Camembert de répartition par profession
           </Typography>
@@ -244,7 +244,7 @@ const Clients = () => {
           <Typography
           variant="h7"
           fontWeight="600"
-          color={colors.grey[100]}
+          sx={{ color: theme.palette.secondary[200] }}
           >
             Diagramme circulaire de répartition par âge
           </Typography>
@@ -270,7 +270,7 @@ const Clients = () => {
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                sx={{ color: theme.palette.secondary[200] }}
               >
                 Répartition des Activités par Secteur d'Emploi
               </Typography>
@@ -324,7 +324,7 @@ const Clients = () => {
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                sx={{ color: theme.palette.secondary[200] }}
               >
                 Représentation en graphique à barres des revenus
               </Typography>
@@ -364,7 +364,7 @@ const Clients = () => {
             colors={colors.grey[100]}
             p="15px"
           >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+            <Typography sx={{ color: theme.palette.secondary[200] }} variant="h5" fontWeight="600">
               Recent Transactions
             </Typography>
           </Box> */}
@@ -385,11 +385,11 @@ const Clients = () => {
                 >
                   {transaction.txId}
                 </Typography>
-                <Typography color={colors.grey[100]}>
+                <Typography sx={{ color: theme.palette.secondary[200] }}>
                   {transaction.user}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box sx={{ color: theme.palette.secondary[200] }}>{transaction.date}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
@@ -419,7 +419,7 @@ const Clients = () => {
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                sx={{ color: theme.palette.secondary[200] }}
               >
                 Graphique en courbes comparant les abonnement WeStart/WeTrust
               </Typography>
@@ -459,7 +459,7 @@ const Clients = () => {
             colors={colors.grey[100]}
             p="15px"
           >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+            <Typography sx={{ color: theme.palette.secondary[200] }} variant="h5" fontWeight="600">
               Membership pie chart representation
             </Typography>
           </Box>

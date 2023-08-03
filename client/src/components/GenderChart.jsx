@@ -38,7 +38,6 @@ const GenderChart = (props) => {
   ];
   
 
-  console.log(formattedData)
 
   return (
     <ResponsivePie
@@ -48,7 +47,7 @@ const GenderChart = (props) => {
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
-        colors={{ scheme: 'pink_yellowGreen' }}
+        colors={{ scheme: 'pastel1' }}
         borderWidth={1}
         borderColor={{
             from: 'color',
@@ -69,7 +68,7 @@ const GenderChart = (props) => {
             modifiers: [
                 [
                     'darker',
-                    2
+                    '2.1'
                 ]
             ]
         }}
@@ -148,15 +147,15 @@ const GenderChart = (props) => {
                 anchor: 'bottom',
                 direction: 'row',
                 justify: false,
-                translateX: 0,
-                translateY: 56,
-                itemsSpacing: 0,
-                itemWidth: 100,
-                itemHeight: 18,
+                translateX: 27,
+                translateY: 40,
+                itemsSpacing: 35,
+                itemWidth: 70,
+                itemHeight: 10,
                 itemTextColor: '#999',
                 itemDirection: 'left-to-right',
                 itemOpacity: 1,
-                symbolSize: 18,
+                symbolSize: 15,
                 symbolShape: 'circle',
                 effects: [
                     {

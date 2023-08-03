@@ -10,9 +10,12 @@ import StatBox from "components/StatBox";
 import FlexBetween from "components/FlexBetween";
 import EtatChequier from "components/EtatChequier";
 import MonthlyChequierCounts from "components/MonthlyChequierCounts";
+import { tokens } from "../../theme.js";
+
 
 const Chequier = () => {
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   // values to be sent to the backend
   const [page, setPage] = useState(0);
@@ -165,10 +168,17 @@ const Chequier = () => {
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           display="flex"
+          flexDirection="column"
           alignItems="center"
-          justifyContent="center"
         >
-            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src={`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a43d50-0834-4793-8284-d7e659adb708&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
+          <Typography
+          variant="h8"
+          fontWeight="600"
+          sx={{ color: theme.palette.secondary[200] }}
+          >
+            Répartition de etat de chequier
+          </Typography>
+            
             <EtatChequier />
         </Box>
             
@@ -178,19 +188,17 @@ const Chequier = () => {
           backgroundColor={theme.palette.background.alt}
           display="flex"
           alignItems="center"
-          justifyContent="center"
           flexDirection="column"
         >
-          
-            {/* <iframe style={{background: theme.palette.background.alt, border: "none", borderRadius: "2px"}} width="600" height="290" src = {`https://charts.mongodb.com/charts-dashboard-webank-dcahr/embed/charts?id=64a4416d-2d1e-4a99-8b41-62018e402139&maxDataAge=3600&theme=${theme.palette.mode}&autoRefresh=true`}></iframe> */}
-            <MonthlyChequierCounts />
-            <Typography
-            p="0.3 0.3rem"
-            fontSize="0.9rem"
+          <Typography
+            fontWeight="600"
             sx={{ color: theme.palette.secondary[200] }}
           >
             Graphique des Transferts Cumulatifs
           </Typography>
+
+            <MonthlyChequierCounts />
+            
 
         </Box>
 

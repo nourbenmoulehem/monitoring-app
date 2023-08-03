@@ -25,135 +25,133 @@ const EtatVirementPie = () => {
     //   position="relative"
     // >
     <ResponsivePie
-    data={formattedData}
-    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-    innerRadius={0.5}
-    padAngle={0.7}
-    cornerRadius={3}
-    borderWidth={1}
-    borderColor={{
-        from: 'color',
-        modifiers: [
-            [
-                'darker',
-                0.2
+        data={formattedData}
+        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        innerRadius={0.5}
+        padAngle={0.7}
+        cornerRadius={3}
+        activeOuterRadiusOffset={8}
+        colors={{ scheme: 'pastel1' }}
+        borderWidth={1}
+        borderColor={{
+            from: 'color',
+            modifiers: [
+                [
+                    'darker',
+                    0.2
+                ]
             ]
-        ]
-    }}
-    arcLinkLabelsSkipAngle={9}
-    arcLinkLabelsTextOffset={0}
-    arcLinkLabelsTextColor="#333333"
-    arcLinkLabelsOffset={-8}
-    arcLinkLabelsDiagonalLength={0}
-    arcLinkLabelsStraightLength={0}
-    arcLinkLabelsThickness={0}
-    arcLinkLabelsColor={{ from: 'color' }}
-    arcLabelsSkipAngle={10}
-    arcLabelsTextColor={{
-        from: 'color',
-        modifiers: [
-            [
-                'darker',
-                2
+        }}
+        arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsThickness={2}
+        arcLinkLabelsColor={{ from: 'color' }}
+        arcLabelsSkipAngle={10}
+        arcLabelsTextColor={{
+            from: 'color',
+            modifiers: [
+                [
+                    'darker',
+                    '2.1'
+                ]
             ]
-        ]
-    }}
-    defs={[
-        {
-            id: 'dots',
-            type: 'patternDots',
-            background: 'inherit',
-            color: 'rgba(255, 255, 255, 0.3)',
-            size: 4,
-            padding: 1,
-            stagger: true
-        },
-        {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: 'rgba(255, 255, 255, 0.3)',
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10
-        }
-    ]}
-    fill={[
-        {
-            match: {
-                id: 'ruby'
+        }}
+        defs={[
+            {
+                id: 'dots',
+                type: 'patternDots',
+                background: 'inherit',
+                color: 'rgba(255, 255, 255, 0.3)',
+                size: 4,
+                padding: 1,
+                stagger: true
             },
-            id: 'dots'
-        },
-        {
-            match: {
-                id: 'c'
+            {
+                id: 'lines',
+                type: 'patternLines',
+                background: 'inherit',
+                color: 'rgba(255, 255, 255, 0.3)',
+                rotation: -45,
+                lineWidth: 6,
+                spacing: 10
+            }
+        ]}
+        fill={[
+            {
+                match: {
+                    id: 'ruby'
+                },
+                id: 'dots'
             },
-            id: 'dots'
-        },
-        {
-            match: {
-                id: 'go'
+            {
+                match: {
+                    id: 'c'
+                },
+                id: 'dots'
             },
-            id: 'dots'
-        },
-        {
-            match: {
-                id: 'python'
+            {
+                match: {
+                    id: 'go'
+                },
+                id: 'dots'
             },
-            id: 'dots'
-        },
-        {
-            match: {
-                id: 'scala'
+            {
+                match: {
+                    id: 'python'
+                },
+                id: 'dots'
             },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'lisp'
+            {
+                match: {
+                    id: 'scala'
+                },
+                id: 'lines'
             },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'elixir'
+            {
+                match: {
+                    id: 'lisp'
+                },
+                id: 'lines'
             },
-            id: 'lines'
-        },
-        {
-            match: {
-                id: 'javascript'
+            {
+                match: {
+                    id: 'elixir'
+                },
+                id: 'lines'
             },
-            id: 'lines'
-        }
-    ]}
-    legends={[
-        {
-            anchor: 'bottom',
-            direction: 'row',
-            justify: false,
-            translateX: 32,
-            translateY: 61,
-            itemsSpacing: 0,
-            itemWidth: 109,
-            itemHeight: 18,
-            itemTextColor: '#999',
-            itemDirection: 'left-to-right',
-            itemOpacity: 1,
-            symbolSize: 18,
-            symbolShape: 'circle',
-            effects: [
-                {
-                    on: 'hover',
-                    style: {
-                        itemTextColor: '#000'
+            {
+                match: {
+                    id: 'javascript'
+                },
+                id: 'lines'
+            }
+        ]}
+        legends={[
+            {
+                anchor: 'bottom',
+                direction: 'row',
+                justify: false,
+                translateX: -2,
+                translateY: 48,
+                itemsSpacing: 35,
+                itemWidth: 70,
+                itemHeight: 10,
+                itemTextColor: '#999',
+                itemDirection: 'left-to-right',
+                itemOpacity: 1,
+                symbolSize: 15,
+                symbolShape: 'circle',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemTextColor: '#000'
+                        }
                     }
-                }
-            ]
-        }
-    ]}
-  />
+                ]
+            }
+        ]}
+    />
     // </Box>
   )
 }
