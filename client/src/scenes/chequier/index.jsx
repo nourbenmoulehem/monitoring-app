@@ -120,7 +120,7 @@ const Chequier = () => {
         gridColumn="span 3"
         >
           <StatBox
-                title="Total Chequiers"
+                title="Total des CHEQUIERS"
                 value={data && data.total}
                 increase="+14%"
                 description="Since last month"

@@ -99,7 +99,7 @@ const DataGridCustomToolbar = ({ searchInput, setSearchInput, setSearch, isAdmin
           }}
         />
         <Popup
-        title="Update User Form"
+        title="Edit Users List"
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >

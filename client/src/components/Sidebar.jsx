@@ -28,6 +28,8 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import AddCardIcon from '@mui/icons-material/AddCard';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { useEffect, useState } from "react";
@@ -69,20 +71,21 @@ const Sidebar = ({
     },
     {
       text: "Credits",
+      icon: <AddBusinessIcon />,
+    },
+    {
+      text: "Cards",
       icon: <CreditCardIcon />,
     },
     {
-      text: "Geographie",
+      text: "Calendrier",
       icon: null,
     },
-    {
-      text: "Map",
-      icon: <PublicOutlined />,
-    },
-    {
-      text: "Admin",
-      icon: null,
-    },
+    
+    // {
+    //   text: "Admin",
+    //   icon: null,
+    // },
     // {
     //   text: "Overview",
     //   icon: <PointOfSaleOutlined />,

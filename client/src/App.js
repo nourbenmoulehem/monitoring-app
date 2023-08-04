@@ -15,6 +15,7 @@ import Virement from "./scenes/virement";
 import Chequier from "./scenes/chequier";
 import Credit from "./scenes/credits";
 import Calendar from "./scenes/monthly";
+import Cards from "scenes/Cards";
 import axios from "axios";
 import { setLogin, setLogout } from "./state/index";
 axios.defaults.withCredentials = true;
@@ -84,6 +85,7 @@ function App() {
                 {isAdmin && <Route path="/admin" element={<Admin />} />}
                 <Route path="/chequier" element={<Chequier />} />
                 <Route path="/credits" element={<Credit />} />
+                <Route path="/cards" element={<Cards />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/calendar" element={<Calendar />} />
               </Route>

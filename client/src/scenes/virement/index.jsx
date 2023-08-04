@@ -172,7 +172,7 @@ const Virement = () => {
       </Box>
       <Box display="flex" alignItems="center" gap={4} m="0.5rem">
       <StatBox
-              title="Total VIREMENTS"
+              title="Total des VIREMENTS"
               value={data && data.total}
               increase="+14%"
               description="Depuis le mois dernier"

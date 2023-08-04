@@ -153,7 +153,7 @@ const Clients = () => {
           <option value={2023}>2023</option>
         </select>
       </div>
-        <Box>
+        {/* <Box>
           <Button
             sx={{
               backgroundColor: colors.blueAccent[700],
@@ -166,7 +166,7 @@ const Clients = () => {
             <DownloadOutlinedIcon sx={{ mr: "15px" }} />
             Download Reports
           </Button>
-        </Box>
+        </Box> */}
       </Box>
 
       {/* GRID & CHARTS */}

@@ -41,27 +41,35 @@ const Dashboard = () => {
   
   const columns = [
     {
-      field: "_id",
-      headerName: "ID",
+      field: "name",
+      headerName: "Name",
       flex: 1,
+      
     },
     {
       field: "createdAt",
-      headerName: "CreatedAt",
-      flex: 1,
+      headerName: "Date d'adhésion",
+      flex: 1,renderCell: (params) => {
+        if (params.value) {
+
+          const date = new Date(params.value);
+          const formattedDate = date.toISOString().split("T")[0];
+          return formattedDate;
+        }
+        return "";
+      },
+      
     },
     {
       field: "Gouvernment", 
       headerName: "Gouvernment",
       flex: 0.5,
-      sortable: false,
-      renderCell: (params) => (params.value ? params.value.length : 0),
     },
     {
       field: "revenue",
-      headerName: "revenue",
+      headerName: "revenu",
       flex: 1,
-      renderCell: (params) => (params.value ? `$${Number(params.value).toFixed(2)}` : ''),
+      renderCell: (params) => (params.value ? `${Number(params.value).toFixed(2)}` : ''),
     },
   ];
   
@@ -107,9 +115,10 @@ const Dashboard = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <div><Header title="DASHBOARD" subtitle="Welcome to your dashboard "/></div>
+        <div><Header title="DASHBOARD" subtitle="
+Bienvenue dans le tableau de bord WeBank."/></div>
         <div>{user && <p>{user.fName}</p>}</div>
-        <Box>
+        {/* <Box>
           <Button
             sx={{
               backgroundColor: theme.palette.secondary.light,
@@ -122,7 +131,7 @@ const Dashboard = () => {
             <DownloadOutlined sx={{ mr: "10px" }} />
             Download Reports
           </Button>
-        </Box>
+        </Box> */}
       </FlexBetween>
 
       <Box
@@ -137,10 +146,10 @@ const Dashboard = () => {
       >
         {/* ROW 1 */}
         <StatBox
-          title="Total Clients"
+          title="Total des Clients"
           value={data && data.yearlyTotalClients}
           increase="+14%"
-          description="Since last month"
+          description="Depuis le mois dernier"
           icon={
             <Email
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
@@ -148,11 +157,11 @@ const Dashboard = () => {
           }
         />
         <StatBox
-          title="Total new accounts"
+          title="Total nouveaux comptes"
           value={data && data.yearlyTotalNewAccounts}
           
           increase="+21%"
-          description="Since last month"
+          description="Depuis le mois dernier"
           icon={
             <PointOfSale
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
@@ -189,10 +198,10 @@ const Dashboard = () => {
 
         </Box>
         <StatBox
-          title="Active Clients"
+          title="Clients actifs"
           value={data && data.yearlyTotalActiveClients}
           increase="+5%"
-          description="Since last month"
+          description="Depuis le mois dernier"
           icon={
             <PersonAdd
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
@@ -200,10 +209,10 @@ const Dashboard = () => {
           }
         />
         <StatBox
-          title="Inactive Clients"
+          title="Clients inactifs"
           value={data && data.yearlyTotalInactiveClients}
           increase="+43%"
-          description="Since last month"
+          description="Depuis le mois dernier"
           icon={
             <Traffic
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
@@ -213,7 +222,7 @@ const Dashboard = () => {
 
         {/* ROW 2 */}
         <Box
-          gridColumn="span 8"
+          gridColumn="span 12"
           gridRow="span 3"
           sx={{
             "& .MuiDataGrid-root": {
@@ -248,7 +257,7 @@ const Dashboard = () => {
             columns={columns}
           />
         </Box>
-        <Box
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
@@ -267,7 +276,7 @@ const Dashboard = () => {
              
           Répartition du nombre total de clients pour WeTrust et WeStart en 2021.
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
