@@ -1265,7 +1265,7 @@ export const sampleChequiers = [
 
 export const dataCredits = [
   {
-    type: 'Prêt hypothécaire',
+    type: 'Mon mariage',
     montant: 150000,
     dateEmprunt: '2022-05-10',
     dateRemboursement: '2032-05-10',
@@ -1276,7 +1276,7 @@ export const dataCredits = [
     etat: 'En cours',
   },
   {
-    type: 'Prêt personnel',
+    type: 'Des vacances',
     montant: 10000,
     dateEmprunt: '2023-01-15',
     dateRemboursement: '2025-01-15',
@@ -1287,7 +1287,7 @@ export const dataCredits = [
     etat: 'Validé',
   },
   {
-    type: 'Prêt automobile',
+    type: 'véhicule neuf',
     montant: 25000,
     dateEmprunt: '2021-11-02',
     dateRemboursement: '2024-11-02',
@@ -1297,7 +1297,7 @@ export const dataCredits = [
     etat: 'En cours',
   },
   {
-    type: 'Prêt étudiant',
+    type: 'Naissance',
     montant: 8000,
     dateEmprunt: '2023-03-20',
     dateRemboursement: '2030-03-20',
@@ -1307,7 +1307,7 @@ export const dataCredits = [
     etat: 'Validé',
   },
   {
-    type: 'Ligne de crédit',
+    type: 'Aménagement',
     montant: 30000,
     dateEmprunt: '2022-09-18',
     dateRemboursement: '2030-09-18',
@@ -1317,7 +1317,7 @@ export const dataCredits = [
     etat: 'En cours',
   },
   {
-    type: 'Crédit revolving',
+    type: 'Acheter de l\'électronique',
     montant: 5000,
     dateEmprunt: '2023-06-25',
     dateRemboursement: '2024-12-25',
@@ -1328,7 +1328,7 @@ export const dataCredits = [
     etat: 'Validé',
   },
   {
-    type: 'Crédit à la consommation',
+    type: 'Déménager',
     montant: 12000,
     dateEmprunt: '2022-07-08',
     dateRemboursement: '2024-07-08',
@@ -1338,7 +1338,7 @@ export const dataCredits = [
     etat: 'En cours',
   },
   {
-    type: 'Prêt aux entreprises',
+    type: 'véhicule d\'occasion',
     montant: 100000,
     dateEmprunt: '2021-12-12',
     dateRemboursement: '2031-12-12',
@@ -1348,7 +1348,7 @@ export const dataCredits = [
     etat: 'Validé',
   },
   {
-    type: 'Crédit commercial',
+    type: 'appareil d\'occasion',
     montant: 75000,
     dateEmprunt: '2023-04-30',
     dateRemboursement: '2030-04-30',
@@ -1358,7 +1358,7 @@ export const dataCredits = [
     etat: 'En cours',
   },
   {
-    type: 'Prêt personnel',
+    type: 'Des vacances',
     montant: 15000,
     dateEmprunt: '2022-03-15',
     dateRemboursement: '2024-03-15',
@@ -1368,7 +1368,7 @@ export const dataCredits = [
     etat: 'Validé',
   },
   {
-    type: 'Prêt personnel',
+    type: 'Des vacances',
     montant: 20000,
     dateEmprunt: '2023-07-05',
     dateRemboursement: '2025-07-05',
@@ -1378,7 +1378,7 @@ export const dataCredits = [
     etat: 'En attente',
   },
   {
-    type: 'Prêt automobile',
+    type: 'véhicule neuf',
     montant: 18000,
     dateEmprunt: '2022-11-30',
     dateRemboursement: '2024-11-30',
@@ -1388,7 +1388,7 @@ export const dataCredits = [
     etat: 'Info manquantes',
   },
   {
-    type: 'Crédit commercial',
+    type: 'Naissance',
     montant: 50000,
     dateEmprunt: '2023-02-20',
     dateRemboursement: '2027-02-20',
@@ -1398,7 +1398,7 @@ export const dataCredits = [
     etat: 'Annulé',
   },
   {
-    type: 'Prêt étudiant',
+    type: 'Naissance',
     montant: 12000,
     dateEmprunt: '2022-09-10',
     dateRemboursement: '2025-09-10',
@@ -1408,194 +1408,7 @@ export const dataCredits = [
     etat: 'En attente',
   },
   {
-    refDemande: 'RD041',
-    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
-    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
-    ncp: '1234567890',
-    etatDemande: 'validé',
-    dpe: new Date('2024-01-05'),
-  },
-  {
-    refDemande: 'RD042',
-    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
-    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
-    ncp: '2345678901',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-01-12'),
-  },
-  // ... (More entries for January)
-
-  // February
-  {
-    refDemande: 'RD043',
-    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
-    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
-    ncp: '3456789012',
-    etatDemande: 'validé',
-    dpe: new Date('2024-02-05'),
-  },
-  {
-    refDemande: 'RD044',
-    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
-    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
-    ncp: '4567890123',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-02-12'),
-  },
-  // ... (More entries for February)
-
-  // April
-  {
-    refDemande: 'RD045',
-    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
-    age: '5a9427648b0beebeb6957be1',  // Olly
-    ncp: '5678901234',
-    etatDemande: 'validé',
-    dpe: new Date('2024-04-05'),
-  },
-  {
-    refDemande: 'RD046',
-    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
-    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
-    ncp: '6789012345',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-04-12'),
-  },
-  // ... (More entries for April)
-
-  // May
-  {
-    refDemande: 'RD047',
-    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
-    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
-    ncp: '7890123456',
-    etatDemande: 'validé',
-    dpe: new Date('2024-05-05'),
-  },
-  {
-    refDemande: 'RD048',
-    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
-    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
-    ncp: '8901234567',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-05-12'),
-  },
-  // ... (More entries for May)
-
-  // July
-  {
-    refDemande: 'RD049',
-    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
-    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
-    ncp: '9012345678',
-    etatDemande: 'validé',
-    dpe: new Date('2024-07-05'),
-  },
-  {
-    refDemande: 'RD050',
-    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
-    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
-    ncp: '0123456789',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-07-12'),
-  },
-  // ... (More entries for July)
-
-  // August
-  {
-    refDemande: 'RD051',
-    clidig: '64a427e9fd1cf4c0c6d7db98',  // John Doe
-    age: '64a427e9fd1cf4c0c6d7db99',  // Jane Smith
-    ncp: '1234567890',
-    etatDemande: 'validé',
-    dpe: new Date('2024-08-05'),
-  },
-  {
-    refDemande: 'RD052',
-    clidig: '64a427e9fd1cf4c0c6d7db9a',  // Michael Johnson
-    age: '64a427e9fd1cf4c0c6d7db9b',  // Emily Davis
-    ncp: '2345678901',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-08-12'),
-  },
-  // ... (More entries for August)
-
-  // September
-  {
-    refDemande: 'RD053',
-    clidig: '64a427e9fd1cf4c0c6d7db8c',  // Gregor Clegane
-    age: '64a427e9fd1cf4c0c6d7db8d',  // Doreah
-    ncp: '3456789012',
-    etatDemande: 'validé',
-    dpe: new Date('2024-09-05'),
-  },
-  {
-    refDemande: 'RD054',
-    clidig: '64a427e9fd1cf4c0c6d7db8e',  // Meera Reed
-    age: '64a427e9fd1cf4c0c6d7db90',  // Kelsey Smith
-    ncp: '4567890123',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-09-12'),
-  },
-  // ... (More entries for September)
-
-  // October
-  {
-    refDemande: 'RD055',
-    clidig: '64a427e9fd1cf4c0c6d7db91',  // Sansa Stark
-    age: '5a9427648b0beebeb6957be1',  // Olly
-    ncp: '5678901234',
-    etatDemande: 'validé',
-    dpe: new Date('2024-10-05'),
-  },
-  {
-    refDemande: 'RD056',
-    clidig: '64a427e9fd1cf4c0c6d7dba1',  // Daenerys Targaryen
-    age: '5a9427648b0beebeb6957a88',  // Thomas Morris
-    ncp: '6789012345',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-10-12'),
-  },
-  // ... (More entries for October)
-
-  // November
-  {
-    refDemande: 'RD057',
-    clidig: '5a9427648b0beebeb6957c7c',  // Christian Williams
-    age: '64a427e9fd1cf4c0c6d7dba3',  // Yolanda Owen
-    ncp: '7890123456',
-    etatDemande: 'validé',
-    dpe: new Date('2024-11-05'),
-  },
-  {
-    refDemande: 'RD058',
-    clidig: '64a427e9fd1cf4c0c6d7dba2',  // Joffrey Baratheon
-    age: '64a427e9fd1cf4c0c6d7dba3',  // Stannis Baratheon
-    ncp: '8901234567',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-11-12'),
-  },
-  // ... (More entries for November)
-
-  // December
-  {
-    refDemande: 'RD059',
-    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Olenna Tyrell
-    age: '64a427e9fd1cf4c0c6d7dba5',  // Podrick Payne
-    ncp: '9012345678',
-    etatDemande: 'validé',
-    dpe: new Date('2024-12-05'),
-  },
-  {
-    refDemande: 'RD060',
-    clidig: '64a427e9fd1cf4c0c6d7dba4',  // Doreah
-    age: '64a427e9fd1cf4c0c6d7dba6',  // Christopher Robinson
-    ncp: '0123456789',
-    etatDemande: 'en cours',
-    dpe: new Date('2024-12-12'),
-  },
-  {
-    type: 'Crédit revolving',
+    type: 'Mon mariage',
     montant: 7000,
     dateEmprunt: '2023-04-02',
     dateRemboursement: '2025-04-02',
@@ -1606,7 +1419,7 @@ export const dataCredits = [
     etat: 'Info manquantes',
   },
   {
-    type: 'Ligne de crédit',
+    type: 'Aménagement',
     montant: 35000,
     dateEmprunt: '2022-08-15',
     dateRemboursement: '2024-08-15',

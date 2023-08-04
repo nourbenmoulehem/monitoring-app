@@ -4,7 +4,7 @@ const creditSchema = new mongoose.Schema({
     type: {
       type: String,
       required: true,
-      enum: ['Prêt hypothécaire', 'Prêt personnel', 'Prêt automobile', 'Prêt étudiant', 'Prêt aux entreprises', 'Ligne de crédit', 'Crédit revolving', 'Crédit à la consommation', 'Crédit commercial'],
+      enum: ['Mon mariage', 'Des vacances', 'véhicule neuf', 'Naissance', 'Aménagement', 'Acheter de l\'électronique', 'Déménager', 'véhicule d\'occasion', 'appareil d\'occasion'],
     },
     montant: {
       type: Number,

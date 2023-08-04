@@ -20,6 +20,7 @@ const ClientSchema = new mongoose.Schema(
       min: 2,
       max: 100,
     },
+    phoneNumber: String,
     email: {
       type: String,
       required: true,
@@ -61,7 +62,6 @@ const ClientSchema = new mongoose.Schema(
       type: String,
       required: true,
       max: 100,
-      unique: true
     },
     revenue: {
       type: String,
