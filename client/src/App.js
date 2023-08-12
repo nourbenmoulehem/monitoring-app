@@ -45,6 +45,7 @@ function App() {
         console.log("hi");
         const response = await axios.get("http://localhost:5001/auth/user");
         const { token, user } = response.data;
+        console.log("🚀 ~ file: App.js:48 ~ validateToken ~ user:", user)
         
         if (token) {
           // Refresh the token if it exists

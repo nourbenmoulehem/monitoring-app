@@ -1,7 +1,7 @@
 import React from 'react'
 import {useGetCreditCountByTypeQuery} from 'state/api';
 import { ResponsivePie } from "@nivo/pie";
-import { Box, Typography, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 const TypeCreditsPieChart = () => {
   const theme = useTheme();

@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 export default function ActionButton(props) {
 
-    const { color, children, onClick } = props;
+    const {  children, onClick } = props;
 
 
     return (

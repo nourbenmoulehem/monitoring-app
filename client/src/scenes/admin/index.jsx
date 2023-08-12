@@ -26,6 +26,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import EditUserForm from "components/EditUserForm";
 
 
 
@@ -34,8 +35,10 @@ const Admin = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
   const handleSelectionModelChange = (newSelection) => {
     setSelectedRows(newSelection);
     
@@ -105,10 +108,62 @@ const Admin = () => {
         );
       },
     },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      sortable: false,
+      renderCell: ({ row }) => (
+        <Box>
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{
+              backgroundColor: theme.palette.secondary.light,
+              color: theme.palette.background.alt,
+              marginRight: 3,
+            }}
+            onClick={() => {
+              setOpenPopup(true);
+              setRecordForEdit(null);
+              setIsUpdate(true);
+              setFormTitle("Edit User")
+              setSelectedRow(row);
+              setIsUpdate(true)
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{
+              backgroundColor:  theme.palette.background.alt,
+              color: theme.palette.secondary.light,
+              
+            }}
+            onClick={() => {
+              setOpenPopup(true);
+              setRecordForEdit(null);
+              setIsUpdate(false);
+              setFormTitle("Delete User")
+              setSelectedRow(row);
+              setIsUpdate(false)
+            }}
+            
+          >
+            Delete
+          </Button>
+        </Box>
+      ),
+    },
   ];
+  console.log(selectedRow)
+  console.log("🚀 ~ file: index.jsx:161 ~ Admin ~ selectedRow:", selectedRow)
   
   const [openPopup, setOpenPopup] = useState(false)
+  const [openEditPopup, setOpenEditPopup] = useState(false);
   const [recordForEdit, setRecordForEdit] = useState(null)
+  const [formTitle, setFormTitle] = useState("");
   const { data, isLoading } = useGetUsersQuery();
   console.log("🚀 ~ file: index.jsx:45 ~ Form ~ data:", data)
   
@@ -160,6 +215,7 @@ const Admin = () => {
                 padding: "10px 20px",
               }}
               onClick={() => {
+                setIsUpdate(false)
                 setOpenPopup(true);
                 setRecordForEdit(null);
               }}
@@ -170,11 +226,13 @@ const Admin = () => {
         </Box>
       </Box>
       <Popup
-        title="Add User Form"
+        title={formTitle}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
+        
       >
-        <FormAddUser recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+        {/* <FormAddUser recordForEdit={recordForEdit} addOrEdit={addOrEdit} title={formTitle} selectedRows={selectedRows}/> */}
+        <EditUserForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} title={formTitle} selectedRows={selectedRow}  isUpdate={isUpdate}/>
       </Popup>
 
       {data ? (
@@ -207,14 +265,7 @@ const Admin = () => {
                 },
               }}
             >
-              <DataGrid checkboxSelection rows={formattedData} columns={columns} onSelectionModelChange={handleSelectionModelChange}
-            selectionModel={selectedRows} 
-            components={{ Toolbar: DataGridCustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch, isAdmin: isAdmin, selectedRows },
-
-           
-          }}/>
+              <DataGrid checkboxSelection rows={formattedData} columns={columns} />
             </Box>
           ) : (
             <Typography>Loading...</Typography>

@@ -19,12 +19,13 @@ const SelectedRowsTable = ({ selectedRows }) => {
   const [userDetails, setUserDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const datadb = useGetUserQuery(selectedRows[0]);
+  const datadb = useGetUserQuery(selectedRows._id);
+  console.log("🚀 ~ file: selectedRows.jsx:23 ~ SelectedRowsTable ~ selectedRows:", selectedRows)
   const user = datadb.data;
   console.log("🚀 ~ file: selectedRows.jsx:20 ~ SelectedRowsTable ~ user:", user)
 
   useEffect(() => {
-    if (selectedRows.length > 0) {
+    if (selectedRows) {
       setIsLoading(true);
       setUserDetails(user);
       setIsLoading(false);

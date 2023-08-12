@@ -118,7 +118,7 @@ const Dashboard = () => {
         <div><Header title="DASHBOARD" subtitle="
 Bienvenue dans le tableau de bord WeBank."/></div>
         <div>{user && <p>{user.fName}</p>}</div>
-        {/* <Box>
+        <Box>
           <Button
             sx={{
               backgroundColor: theme.palette.secondary.light,
@@ -131,7 +131,7 @@ Bienvenue dans le tableau de bord WeBank."/></div>
             <DownloadOutlined sx={{ mr: "10px" }} />
             Download Reports
           </Button>
-        </Box> */}
+        </Box>
       </FlexBetween>
 
       <Box

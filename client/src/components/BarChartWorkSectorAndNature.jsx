@@ -10,7 +10,7 @@ const BarChartWorkSectorAndNature = (props) => {
   console.log("BARCHART WORK SECTOR AND NATURE ACTIVITY HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!!!!!!!!!!!!")
   console.log("🚀 ~ file: BarChartWorkSectorAndNature.jsx:10 ~ BarChartWorkSectorAndNature ~ year:", year)
   
-  const { data, isLoading } = useGetClientsStatYearlyQuery(String(year));
+  const { data } = useGetClientsStatYearlyQuery(String(year));
 
   
 

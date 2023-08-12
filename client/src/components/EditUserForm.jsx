@@ -2,40 +2,40 @@
   import FlexBetween from "./FlexBetween";
   import { Formik } from "formik";
   import * as yup from "yup";
-  import Header from "./Header";
-  import {
-    DownloadOutlined,
-    Email,
-    PointOfSale,
-    PersonAdd,
-    Traffic,
-  } from "@mui/icons-material";
+  // import Header from "./Header";
+  // import {
+  //   DownloadOutlined,
+  //   Email,
+  //   PointOfSale,
+  //   PersonAdd,
+  //   Traffic,
+  // } from "@mui/icons-material";
   import {
     Box,
     TextField,
     Button,
     Typography,
-    useTheme,
     useMediaQuery,
     Select,
     MenuItem,
   } from "@mui/material";
-  import { tokens } from "../theme.js";
+  // import { tokens } from "../theme.js";
   import { useGetAllAgenciesQuery } from "../state/api.js";
   import { useGetUserQuery } from "../state/api.js";
   import axios from "axios";
   import SelectedRowsTable from "./selectedRows";
 
   const EditUserForm = (props) => {
-    const { addOrEdit, recordForEdit, selectedRows, isUpdate } = props;
+    const {  selectedRows, isUpdate } = props;
     console.log("🚀 ~ file: EditUserForm.jsx:30 ~ EditUserForm ~ isUpdate:", isUpdate)
     console.log(
-      "🚀 ~ file: editUserForm.jsx:27 ~ EditUserForm ~ selectedRows:",
-      selectedRows
-    );
-    const [userRecords, setUserRecords] = useState([]);
+      "🚀 ~ file: editUserForm.jsx:27 ~ EditUserForm ~ selectedRows._id:",
+      selectedRows._id)
+      console.log("🚀 ~ file: EditUserForm.jsx:34 ~ EditUserForm ~ selectedRows:", selectedRows)
+  
+    // const [userRecords, setUserRecords] = useState([]);
 
-    const { data } = useGetUserQuery(selectedRows[0]);
+    const { data } = useGetUserQuery(selectedRows._id);
     console.log("🚀 ~ file: editUserForm.jsx:31 ~ EditUserForm ~ data:", data);
 
     const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -66,8 +66,7 @@
           phoneNumber: values.phoneNumber
         })
         .catch((err) => console.log(err));
-      const data = await res.data;
-      console.log("🚀 ~ file: Form.jsx:67 ~ register ~ data:")
+      // const data = await res.data;
       
     //   const savedUserResponse = await fetch("http://localhost:5001/auth/register", {
     //   method: "POST",

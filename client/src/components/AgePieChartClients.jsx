@@ -1,6 +1,6 @@
 import React from 'react';
-import {useGetAggregateDataByAgeRangesQuery, useGetClientsStatYearlyQuery} from "state/api";
-import { Box, Typography, useTheme } from "@mui/material";
+import { useGetClientsStatYearlyQuery} from "state/api";
+import {  useTheme } from "@mui/material";
 import { ResponsivePie } from "@nivo/pie";
 
 
