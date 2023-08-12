@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 export const verifyToken = async (req, res, next) => {
   const cookies = req.headers.cookie;
 
-  // if (!cookies) {
-  //   return res.status(403).send("Access Denied");
-  // }
+  if (!cookies) {
+    return res.status(403).send("Access Denied");
+  }
   
   console.log("🚀 ~ file: auth.js:5 ~ verifyToken ~ cookies:", cookies);
   const  token = cookies.split("=")[1];

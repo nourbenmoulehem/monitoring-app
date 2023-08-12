@@ -79,7 +79,7 @@ export const refreshToken = (req, res, next) => {
     );
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "35s",
+      expiresIn: "6h",
     });
     console.log("Regenerated Token\n", token);
 
@@ -90,11 +90,6 @@ export const refreshToken = (req, res, next) => {
       sameSite: "lax",
     });
 
-    // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req._id:", req._id)
-    // // req.user._id = user._id;
-    // console.log("🚀 ~ file: auth.js:84 ~ jwt.verify ~ user._id:", user._id)
-    // console.log("🚀 ~ req.user._id:", req.user)
-    // // console.log("🚀 ~ file: auth.js:80 ~ jwt.verify ~ req:", req)
 
     req._id = user._id;
     console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ req._id:", req._id);
@@ -203,8 +198,6 @@ export const getUser = async (req, res, next) => {
 
   let user;
 
-  // console.log(req.cookies)
-  // console.log("🚀 ~ file: auth.js:181 ~ getUser ~ req.cookies:", req.cookies)
 
   try {
     user = await User.findById(userId, "-password");
@@ -238,11 +231,6 @@ export const createNewUser = async (req, res) => {
 
     res.status(201).json(user);
   } catch (err) {
-    // console.log("opsi")
-    // console.log(err);
-    // console.log("🚀 ~ file: auth.js:63 ~ createNewUser ~ err:", err)
-    // const errors = handleErr(err)
-    // res.status(400).json({ errors });
     res.status(400).json(err);
     console.log("🚀 ~ file: auth.js:78 ~ createNewUser ~ err:", err);
   }
