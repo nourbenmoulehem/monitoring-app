@@ -10,6 +10,7 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 import { useGetAllAgenciesQuery } from "../../state/api";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -40,16 +41,11 @@ const Form = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isRegister = pageType === "register";
+  const [showAlert, setShowAlert] = useState(false); 
+  const [registrationError, setRegistrationError] = useState(null);
+
 
   const register = async (values, onSubmitProps) => {
-    
-    // const formData = new FormData();
-    console.log("values in register")
-    console.log(values)
-    console.log("hello register!")
-    // for (let value in values) {
-    //   formData.append(value, values[value]);
-    // }
 
     const res = await axios
       .post("http://localhost:5001/auth/register", {
@@ -62,38 +58,38 @@ const Form = () => {
         password: values.password,
         occupation: values.occupation
       })
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    console.log("🚀 ~ file: Form.jsx:67 ~ register ~ data:")
-    
-  //   const savedUserResponse = await fetch("http://localhost:5001/auth/register", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(values),
-  // });
+      .catch((err) => {
+        const serverError = err.response.data.errors;
+        console.log("🚀 ~ file: Form.jsx:71 ~ register ~ err:", err)
+        console.log("🚀 ~ file: Form.jsx:71 ~ register ~ serverError:", serverError)
+        setRegistrationError(serverError);
+        setShowAlert(true)
+      });
 
-    
-    // const savedUser = await savedUserResponse.json();
-    // console.log("🚀 ~ file: Form.jsx:58 ~ register ~ savedUser:", savedUser);
+      if (res && res.data) {
+        // Handle successful response here
+        const data = res.data;
+        console.log("Registration successful:", data);
+        return res
+      }
     
 
-    onSubmitProps.resetForm();
-    
+
   };
 
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     console.log("🚀 ~ file: Form.jsx:87 ~ handleFormSubmit ~ values:", values)
-    // // console.log("hiiii")
-    // // values.agency = selectedAgency
-    // // console.log("🚀 ~ file: Form.jsx:89 ~ handleFormSubmit ~ selectedAgency:", selectedAgency)
-    register(values, onSubmitProps).then(() => navigate("/"));
-    // // console.log("🚀 ~ file: Form.jsx:67 ~ handleFormSubmit ~ values:", values);
-    // console.log("selectedAgency:", selectedAgency);
     
-    // console.log(values)
+    try {
+      const res = await register(values, onSubmitProps);
+      // Registration successful, navigate to the desired route
+      if (res) navigate("/")
+    } catch (error) {
+      // Registration failed, you can handle the error here
+      console.error("Registration error:", error);
+    }
+    
   };
     
   const handleChange = (event) => {
@@ -101,7 +97,7 @@ const Form = () => {
   };
 
   const curr = useGetAllAgenciesQuery();
-  const agencies = curr.data;
+   const agencies = curr.data ? curr.data : [];
   console.log("🚀 ~ file: Form.jsx:99 ~ Form ~ agencies:", agencies)
 
   return (
@@ -243,6 +239,16 @@ const Form = () => {
                 Create New User
               </Button>
             </Box>
+            {showAlert && (
+            <Alert severity="error">
+            {registrationError
+              ? Object.keys(registrationError).map((key) => (
+                  <div key={key}>{registrationError[key]}</div>
+                ))
+              : "An error occurred while registering. Please check your inputs and try again."}
+          </Alert>
+          
+          )}
           </form>
         )}
       </Formik>
@@ -250,18 +256,33 @@ const Form = () => {
 }
 const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
+const allowedDomains = ['gmail.com', 'example.com'];
 
 const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
+  email: yup
+    .string()
+    .email("invalid email")
+    .test('is-corporate-email', 'Invalid email domain. Please use your corporate email address.', function (value) {
+      if (!value) return true; // If email is not provided, it's considered valid
+
+      const domain = value.substring(value.lastIndexOf('@') + 1); // Extract domain part
+      return allowedDomains.includes(domain);
+    })
+    .required("required"),
   contact: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
   occupation: yup.string().required("required"),
   location: yup.string().required("required"),
-  password: yup.string().required("required"),
+  password: yup
+    .string()
+    .matches(passwordRegExp, "Password must contain at least 5 characters, one uppercase letter, one lowercase letter, one number, and one special character")
+    .min(5, "Password must be exactly 5 characters long")
+    .required("required"),
   agency: yup.string().required("required"),
 });
 const initialValues = {

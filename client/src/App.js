@@ -16,8 +16,11 @@ import Chequier from "./scenes/chequier";
 import Credit from "./scenes/credits";
 import Calendar from "./scenes/monthly";
 import Cards from "scenes/Cards";
+import ActivationPage from "components/ActivationPage";
 import axios from "axios";
 import { setLogin, setLogout } from "./state/index";
+import PasswordReset from "components/PasswordReset";
+import ForgetPasswored from "components/ForgetPassword";
 axios.defaults.withCredentials = true;
 
 
@@ -78,6 +81,9 @@ function App() {
           <Routes>
             {!isAuth && <Route path="/" element={<LoginPage />} />}
             {!isAuth && <Route path="/signup" element={<Signup />} />}
+            <Route path="/confirm/:activationCode" element={<ActivationPage />} />
+            <Route path="/forgot-password" element={<ForgetPasswored />} />
+            <Route path="/reset-password/:id/:token" element={<PasswordReset />} />
 
             {isAuth &&<Route element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -89,6 +95,7 @@ function App() {
                 <Route path="/cards" element={<Cards />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/calendar" element={<Calendar />} />
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Route>
             }
           </Routes>

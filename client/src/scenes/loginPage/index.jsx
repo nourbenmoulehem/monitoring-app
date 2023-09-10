@@ -2,11 +2,15 @@ import React from 'react';
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
 import { setMode } from "../../state/index";
+import { tokens } from "../../theme.js";
+import { Link } from 'react-router-dom';
+
 
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   setMode('dark');
+  const colors = tokens(theme.palette.mode);
 
   return (
     <Box>
@@ -19,7 +23,7 @@ const LoginPage = () => {
         }}
       >
         <Typography fontWeight="bold" fontSize="32px" color={theme.palette.secondary.main}>
-          Tableau de bord pour We Bank
+          Tableau de bord pour WeBank
         </Typography>
       </Box>
       <Box
@@ -36,6 +40,17 @@ const LoginPage = () => {
           Connectez-vous avec votre compte!
         </Typography>
         <Form />
+        <Typography fontWeight="500" variant="h5" color={colors.blueAccent[700]} sx={{ mt: "1.5rem" }}>
+          <Link to="/forgot-password" style={{ textDecoration: 'none', color: 'inherit' }}>
+            Mot de passe oublié?
+          </Link>
+        </Typography>
+        <Typography fontWeight="500" variant="h5" color={colors.blueAccent[700]} sx={{ mt: "1.5rem" }}>
+          <Link to="/signup" style={{ textDecoration: 'none',   color: 'inherit' }}>
+            Vous n'avez pas un compte? S'inscrire ici!
+          </Link>
+        </Typography>
+
       </Box>
     </Box>
   );

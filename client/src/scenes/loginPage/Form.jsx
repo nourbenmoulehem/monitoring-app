@@ -10,7 +10,7 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 import { useGetAllAgenciesQuery } from "../../state/api";
 import { tokens } from "../../theme.js";
-
+import Alert from "@mui/material/Alert";
 import axios from "axios";
 
 const loginSchema = yup.object().shape({
@@ -35,6 +35,8 @@ const Form = () => {
   const isLogin = pageType === "login";
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [showAlert, setShowAlert] = useState(false);
+  const [registrationError, setRegistrationError] = useState(null);
 
   const login = async (values, onSubmitProps) => {
     console.log(values)
@@ -44,19 +46,18 @@ const Form = () => {
         email: values.email,
         password: values.password
       })
-      .catch((err) => console.log(err));
-    // const loggedInResponse = await fetch("http://localhost:5001/auth", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(values),
-    // });
+      .catch((err) => {
+        const serverError = err.response.data.msg;
+        console.log("🚀 ~ file: Form.jsx:71 ~ register ~ err:", err)
+        console.log("🚀 ~ file: Form.jsx:71 ~ register ~ serverError:", serverError)
+        setRegistrationError(serverError);
+        setShowAlert(true)
+      });
+
+    
     const loggedIn = await res.data;
     console.log("🚀 ~ file: Form.jsx:49 ~ login ~ loggedIn:", loggedIn);
-    // if (loggedInResponse.ok) {
-    //   localStorage.setItem('user', JSON.stringify(loggedIn));
-    // } else {
-    //   console.log(loggedIn.error);
-    // }
+    
     
       
     onSubmitProps.resetForm();
@@ -135,33 +136,24 @@ const Form = () => {
                 fontSize: "14px",
                 fontWeight: "bold",
                 padding: "10px 20px",
-              }}
-            >
-              {isLogin ? "LOGIN" : "REGISTER"}
-            </Button>
-            <Typography
-              onClick={() => {
-                setPageType(isLogin ? "register" : "login");
-                resetForm();
-              }}
-              color={theme.palette.secondary.main}
-              sx={{
-                textDecoration: "underline",
-                color: palette.primary.main,
-                "&:hover": {
-                  cursor: "pointer",
-                },
+                mb: "1rem"
               }}
               
             >
-              {isLogin
-                ? "Vous n'avez pas de compte ? Inscrivez-vous ici."
-                : "Vous avez déjà un compte ? Connectez-vous ici."}
-            </Typography>
+              {isLogin ? "LOGIN" : "REGISTER"}
+            </Button>
+            
           </Box>
           </Box>
 
-          {/* BUTTONS */}
+          {showAlert && (
+            <Alert severity="error">
+            {registrationError
+              ? registrationError
+              : "An error occurred while registering. Please check your inputs and try again."}
+          </Alert>
+          
+          )}
           
         </form>
       )}
