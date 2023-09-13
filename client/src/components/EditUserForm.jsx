@@ -93,7 +93,10 @@
       occupation: data?.occupation || "",
       location: data?.location || "",
       agency: data?.agency || "",
+      role: data?.role || "",
     };
+    console.log("🚀 ~ file: EditUserForm.jsx:98 ~ EditUserForm ~ initialValues:", initialValues)
+    console.log("🚀 ~ file: EditUserForm.jsx:98 ~ EditUserForm ~ data:", data)
 
     const agenciesdb = useGetAllAgenciesQuery();
     const agencies = agenciesdb.data;
@@ -211,6 +214,19 @@
                 helperText={touched.location && errors.location}
                 sx={{ gridColumn: "span 4" }}
               />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="role"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.role} // Bind to values.occupation instead of data.occupation
+                name="role"
+                error={!!touched.role && !!errors.role}
+                helperText={touched.role && errors.role}
+                sx={{ gridColumn: "span 4" }}
+              />
               {agencies && (
                 <Select
                   fullWidth
@@ -232,10 +248,13 @@
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Edit User
               </Button>
             </Box>
+
+            
           </form>
+
         )}
       </Formik>) : (
         

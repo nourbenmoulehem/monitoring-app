@@ -21,6 +21,7 @@ import axios from "axios";
 import { setLogin, setLogout } from "./state/index";
 import PasswordReset from "components/PasswordReset";
 import ForgetPasswored from "components/ForgetPassword";
+import Chat from "scenes/Chat";
 axios.defaults.withCredentials = true;
 
 
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/cards" element={<Cards />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/calendar" element={<Calendar />} />
+                <Route path="/chat" element={<Chat />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Route>
             }

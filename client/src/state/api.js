@@ -18,7 +18,8 @@ export const api = createApi({
     "Chequiers",
     "Credits",
     "Virements",
-    "Users"
+    "Users",
+    "Events"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -169,6 +170,11 @@ export const api = createApi({
       providesTags: ["Credits"],
     }),
 
+    getAllEvents: build.query({
+      query: () => "events/get-events",
+      providesTags: ["Events"],
+    }),
+
 
 
   })
@@ -203,5 +209,6 @@ export const {
   useGetFlagStatsQuery,
   useGetCreditCountByTypeQuery,
   useGetRevenueHistoStatsQuery,
-  useGetProfessionStatsQuery
+  useGetProfessionStatsQuery,
+  useGetAllEventsQuery
 } = api;
