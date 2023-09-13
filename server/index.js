@@ -16,7 +16,7 @@ import chequierRoute from "./routes/chequierRoute.js";
 import creditRoute from "./routes/creditRoute.js";
 import virementRoute from "./routes/virementRoute.js";
 import userRoute from "./routes/userRoute.js";
-
+import eventsRouter from "./routes/eventsRouter.js";
 
 // data imports
 import User from "./models/User.js";
@@ -66,6 +66,7 @@ app.use("/chequiers", chequierRoute)
 app.use("/credits", creditRoute)
 app.use("/virements", virementRoute)
 app.use("/users", userRoute)
+app.use("/events", eventsRouter)
 
 
 

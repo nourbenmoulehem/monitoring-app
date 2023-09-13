@@ -309,32 +309,38 @@ export const forgetPassword = async (req, res) => {
       subject: "Reset Your Password",
       html: `
       <html>
-      <head>
-        <style>
-          /* Add your custom styles here */
-          body {
+
+<head>
+    <style>
+        /* Add your custom styles here */
+        body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
             padding: 20px;
-          }
-          .container {
+        }
+
+        .container {
             max-width: 500px;
             margin: 0 auto;
             background-color: #ffffff;
             padding: 30px;
             border-radius: 5px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-          }
-          h1 {
+        }
+
+        h1 {
             color: #333333;
-          }
-          p {
+        }
+
+        p {
             color: #555555;
-          }
-          h2 {
+        }
+
+        h2 {
             color: #0000FF;
-          }
-          .button {
+        }
+
+        .button {
             display: inline-block;
             background-color: #007bff;
             color: #ffffff;
@@ -342,21 +348,23 @@ export const forgetPassword = async (req, res) => {
             padding: 10px 20px;
             border-radius: 4px;
             margin-top: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>You have requested to reset your password</h1>
-           <h2> hello,</h2>
-          
-          <p>Please click on this link so It will lead you to reset your password :</p>
-          <a href=http://localhost:3000/reset-password/${userdb._id}/${token}>Cliquez ici: http://localhost:3000/reset-password/${userdb._id}/${token}
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vous avez demandé à réinitialiser votre mot de passe</h1>
+        <h2>Bonjour,</h2>
+
+        <p>Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe :</p>
+        <a href=http://localhost:3000/reset-password/${userdb._id}/${token}>Cliquez ici : http://localhost:3000/reset-password/${userdb._id}/${token}
         </a>
-          <p>Cordialement,<br>L'équipe du site</p>
-        </div>
-      </body>
-    </html>
+        <p>Cordialement,<br>L'équipe du site</p>
+    </div>
+</body>
+
+</html>
       `,
     })
     .catch((err) => console.log(err));
@@ -476,7 +484,7 @@ export const sendConfirmationEmail = (
       <body>
         <div class="container">
           <h1>Bienvenue sur notre site</h1>
-          <p>Cher</p> <h2> ${ name },</h2>
+           <h2> ${ name },</h2>
           <p>Nous sommes ravis de vous accueillir parmi nous !</p>
           <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
           <a href=http://localhost:3000/confirm/${activationCode}>Cliquez ici: http://localhost:3000/confirm/${activationCode}
