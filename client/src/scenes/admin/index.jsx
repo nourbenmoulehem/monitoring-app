@@ -50,7 +50,7 @@ const Admin = () => {
       return (
           <Box>
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              hi
+              -
             </Typography>
           </Box>
         )
@@ -65,11 +65,6 @@ const Admin = () => {
     {
       field: "occupation",
       headerName: "occupation",
-      flex: 1,
-    },
-    {
-      field: "phoneNumber",
-      headerName: "phoneNumber",
       flex: 1,
     },
     {
