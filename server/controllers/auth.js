@@ -5,9 +5,6 @@ import nodemailer from "nodemailer";
 
 //handle errors
 const handleErr = (err) => {
-  console.log("youre in the handleerr");
-  console.log("🚀 ~ file: auth.js:10 ~ handleErr ~ err.code:", err.code);
-  console.log("🚀 ~ file: auth.js:10 ~ handleErr ~ err.message:", err.message);
 
   let errors = {};
 
@@ -19,16 +16,11 @@ const handleErr = (err) => {
 
   // validation errors
   if (err.message.includes("User validation failed")) {
-    console.log(Object.values(err.errors));
-    console.log(
-      "🚀 ~ file: auth.js:17 ~ handleErr ~ Object.values(err.errors):",
-      Object.values(err.errors)
-    );
+   
     Object.values(err.errors).forEach(({ properties }) => {
-      // console.log(val);
-      // console.log(properties);
+
       errors[properties.path] = properties.message;
-      console.log("errors");
+
       console.log(errors);
     });
   }
@@ -47,13 +39,10 @@ const createToken = (_id) => {
 
 // refresh token
 export const refreshToken = (req, res, next) => {
-  console.log(
-    " in***********************************************************************************"
-  );
-  console.log(req.cookies);
+  
+
   const cookies = req.headers.cookie; //req.headers.cookie
 
-  console.log("🚀 ~ file: auth.js:53 ~ refreshToken ~ cookies:", cookies);
 
   const prevToken = cookies.split("=")[1];
   if (!prevToken) {
@@ -61,28 +50,20 @@ export const refreshToken = (req, res, next) => {
   }
   jwt.verify(prevToken, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      console.log(err);
+
       return res.status(403).json({ message: "Authentication failed" });
     }
-    console.log(user);
-    console.log("avant: user_id:", user._id);
-    console.log(
-      "avant: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:",
-      req.cookies
-    );
+    
     res.clearCookie(`${user._id}`);
 
     req.cookies[`${user._id}`] = "";
 
-    console.log(
-      "apres: 🚀 ~ file: auth.js:65 ~ jwt.verify ~ req.cookies:",
-      req.cookies
-    );
+    
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "6h",
     });
-    console.log("Regenerated Token\n", token);
+
 
     res.cookie(String(user._id), token, {
       path: "/",
@@ -92,8 +73,7 @@ export const refreshToken = (req, res, next) => {
     });
 
     req._id = user._id;
-    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ req._id:", req._id);
-    console.log("🚀 ~ file: auth.js:89 ~ jwt.verify ~ user._id:", user._id);
+
 
     next();
   });
@@ -117,7 +97,7 @@ export const register = async (req, res) => {
     const allowedDomains = ["@gmail.com", "@example.com"];
 
     const domain = email.substring(email.lastIndexOf("@"));
-    console.log("🚀 ~ file: auth.js:119 ~ register ~ domain:", domain)
+
 
     if (!allowedDomains.includes(domain)) {
       return res.status(400).json({ message: "Invalid email domain. Please use your corporate email address." });
@@ -143,7 +123,7 @@ export const register = async (req, res) => {
       role,
       activationCode
     });
-    console.log("🚀 ~ file: auth.js:74 ~ register ~ newUser:", newUser);
+
 
     // create a token
     // const token = createToken(newUser._id);
@@ -156,7 +136,7 @@ export const register = async (req, res) => {
     res.status(201).json({ email });
   } catch (err) {
     const errors = handleErr(err);
-    console.log("🚀 ~ file: auth.js:160 ~ register ~ errors:", errors)
+
     res.status(400).json({ errors });
   }
 };
@@ -196,7 +176,6 @@ export const login = async (req, res) => {
 
     const token = createToken(user._id);
 
-    console.log("Generated token from login\n", token);
 
     // Clear existing cookie (if any)
     res.clearCookie(String(user._id));
@@ -219,12 +198,12 @@ export const login = async (req, res) => {
 //for testing purposes
 export const getUser = async (req, res, next) => {
   const userId = req._id;
-  console.log("🚀 ~ file: auth.js:176 ~ getUser ~ userId:", userId);
+
 
   const cookies = req.headers.cookie;
-  console.log("🚀 ~ file: auth.js:5 ~ verifyToken ~ cookies:", cookies);
+
   const token = cookies.split("=")[1];
-  console.log("🚀 ~ file: auth.js:198 ~ getUser ~ token:", token);
+
 
   let user;
 
@@ -287,9 +266,6 @@ export const logout = (req, res, next) => {
 export const forgetPassword = async (req, res) => {
   const email = req.body.email;
 
-  console.log("🚀 ~ file: auth.js:289 ~ forgetPassword ~ req.body.email:", req.body.email)
-  console.log("🚀 ~ file: auth.js:289 ~ forgetPassword ~  req.body:",  req.body)
-  console.log("🚀 ~ file: auth.js:289 ~ forgetPassword ~ email:", email)
   try {
     const userdb = await User.findOne({ email });
     if (!userdb) {
@@ -411,7 +387,7 @@ export const resetPassword = async (req, res) => {
 
     return res.status(200).json({ msg: "Your Password has been updated successfully!" });
   } catch (error) {
-    console.log("🚀 ~ file: auth.js:344 ~ resetPassword ~ error:", error);
+
 
     return res.status(400).json({ msg: "something went wrong with bcrypt ot while saving the new password" });
     
@@ -501,7 +477,7 @@ export const sendConfirmationEmail = (
 // verify user when he clicks on confirmation link sent by email
 export const verifyUser = (req, res) => {
   const activationCode = req.params.activationCode;
-  console.log("🚀 ~ file: auth.js:312 ~ verifyUser ~ activationCode:", activationCode);
+
 
   // Use updateOne to directly update the user's isActive field
   User.updateOne({ activationCode: activationCode }, { $set: { isActive: true } })

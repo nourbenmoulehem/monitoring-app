@@ -2,18 +2,7 @@ import mongoose from "mongoose";
 
 const ClientSchema = new mongoose.Schema(
   {
-    // prenom: {
-    //   type: String,
-    //   required: true,
-    //   min: 2,
-    //   max: 100,
-    // },
-    // nom: {
-    //   type: String,
-    //   required: true,
-    //   min: 2,
-    //   max: 100,
-    // },
+
     name : {
       type: String,
       required: true,

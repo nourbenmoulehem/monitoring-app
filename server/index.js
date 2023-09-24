@@ -17,6 +17,9 @@ import creditRoute from "./routes/creditRoute.js";
 import virementRoute from "./routes/virementRoute.js";
 import userRoute from "./routes/userRoute.js";
 import eventsRouter from "./routes/eventsRouter.js";
+import http from "http"; // Import the 'http' module
+import jwt from "jsonwebtoken";
+import { WebSocketServer } from 'ws'
 
 // data imports
 import User from "./models/User.js";
@@ -28,6 +31,7 @@ import Agency from "./models/Agence.js";
 import Virement from "./models/Virement.js";
 import Chequier from "./models/Chequier.js";
 import Credit from "./models/Credit.js";
+import Message from "./models/Message.js";
 import {
   dataUser,
   dataProduct,
@@ -39,27 +43,25 @@ import {
   dataOverallStatClient
 } from "./data/index.js";
 import { agencies, sampleVirements, sampleChequiers, dataCredits } from "./data/dataAgency.js";
+import { log } from "console";
 
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
-app.use(express.json()); //middleware it takes json data within request and passes into a javascript code
+app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-
-
-// COOKIES
-app.use(cookieParser()) // middleware
+app.use(cookieParser());
 
 /* ROUTES */
 app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
 app.use("/total", totalRoutes);
-app.use("/auth", authRoutes); //any routes defined in authRoutes.js will be accessible under the /auth prefix
+app.use("/auth", authRoutes);
 app.use("/clients", clientStatRoutes)
 app.use("/agencies", agenceRoute)
 app.use("/chequiers", chequierRoute)
@@ -70,13 +72,80 @@ app.use("/events", eventsRouter)
 
 
 
-/* ROUTES WITH FILES */
-// app.post("/")
+// Initialize HTTP server
+const server = app.listen(4001);
+
+// Initialize WebSocket server
+const wss = new WebSocketServer({ server, perMessageDeflate: false }); // Use WebSocket from 'ws'
+
+// WebSocket connection handling (rest of your code remains the same)
+wss.on('connection', (connection, req) => {
+
+  // read every user connected and take its userid from jwt token
+  const cookies = req.headers.cookie;
+  let id, token; // Initialize id and token as undefined or null
+
+  if (cookies) {
+    const cookieArray = cookies.split(';');
+
+    for (const cookie of cookieArray) {
+      [id, token] = cookie.trim().split('=');
+    }
+
+    // Now, you can use 'id' and 'token' outside the loop
+    if(token){
+      jwt.verify(token, process.env.JWT_SECRET, {}, (err, userData) => {
+        if (err) throw err;
+        const userId = userData._id;
+
+        connection.userId = userId
+
+      })
+      
+    }
+  }
+
+  
+
+  // console.log([...wss.clients].map(client => client.userId)); //transformed into an array
+  // notify everyone about connected user
+  [...wss.clients].map(client =>{
+    client.send(JSON.stringify({
+      online : [...wss.clients].map(c => ({userId: c.userId}))
+    }));
+  });
 
 
+  connection.on('message', async (message) => {
+    const messageData = JSON.parse(message.toString())
+    const {recipient, text} = messageData.message;
+    if(recipient && text){
+      //one user can use many devices
 
+      //adding the message to the database
+      const messageDoc = await Message.create({
+        sender: connection.userId,
+        recipient,
+        text
+      });
+      console.log("🚀 ~ file: index.js:131 ~ connection.on ~ messageDoc:", messageDoc);
+
+      [...wss.clients]
+        .filter(client => client.userId === recipient) 
+        .forEach(client => client.send(JSON.stringify({
+          text, 
+          sender: connection.userId,
+          recipient,
+          id: messageDoc._id
+        }))) //connection fiha userId mtaa sender
+    }
+  })
+  
+
+});
 
 /* MONGOOSE SETUP */
+
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {
