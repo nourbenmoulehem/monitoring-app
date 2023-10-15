@@ -94,9 +94,10 @@ export const register = async (req, res) => {
     } = req.body;
 
     // verify if email domain
-    const allowedDomains = ["@gmail.com", "@example.com"];
+    const allowedDomains = ["@gmail.com", "@example.com", '@istic.ucar.tn'];
 
     const domain = email.substring(email.lastIndexOf("@"));
+    console.log("🚀 ~ file: auth.js:100 ~ register ~ domain:", domain)
 
 
     if (!allowedDomains.includes(domain)) {

@@ -36,6 +36,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import { useSelector } from "react-redux";
+import ThreePIcon from '@mui/icons-material/ThreeP';
 
 
 
@@ -82,6 +83,7 @@ const Sidebar = ({
       icon: null,
     },
     
+    
     // {
     //   text: "Admin",
     //   icon: null,
@@ -102,6 +104,14 @@ const Sidebar = ({
     //   text: "Breakdown",
     //   icon: <PieChartOutlined />,
     // },
+    {
+      text: "Chat",
+      icon: null,
+    },
+    {
+      text: "Chat",
+      icon: <ThreePIcon />,
+    },
     
     ...(user?.role === "user"
     ? []
@@ -111,7 +121,7 @@ const Sidebar = ({
           icon: null,
         },
         {
-          text: "Admin",
+          text: "Users",
           icon: <AdminPanelSettingsOutlined />,
         },
       ]),,

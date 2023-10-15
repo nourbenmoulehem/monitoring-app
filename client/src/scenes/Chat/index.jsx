@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Box,
   Typography,
@@ -15,11 +15,14 @@ import {
   styled,
   Badge,
   Stack,
+  TextField,
 } from "@mui/material";
 import { tokens } from "theme.js";
 import SendIcon from "@mui/icons-material/Send";
 import ForumIcon from "@mui/icons-material/Forum";
 import { useSelector } from "react-redux";
+// import { uniqBy } from "lodash";
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -50,28 +53,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
-
 function Chat() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [ws, setWs] = useState(null);
   const [onlinePeople, setOnlinePeople] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const user = useSelector((state) => state.global.user);
   const actualUserId = user._id;
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const divUnderMessages = useRef();
+
   useEffect(() => {
+    connectToWs();
+  }, [selectedUserId]);
+
+  function connectToWs() {
     const ws = new WebSocket("ws://localhost:4001");
     setWs(ws);
-    ws.addEventListener("message", handleMessage); // you're listening for the "message" event, which is triggered when the WebSocket server sends a message to the client.
-  }, []);
+    console.log(selectedUserId);
+    ws.addEventListener("message", handleMessage);
+  }
 
   function showOnlinePeople(people) {
     const peopleConnected = [];
@@ -86,28 +90,40 @@ function Chat() {
     setOnlinePeople(peopleConnected);
   }
 
-  function handleMessage(e) {
+  const handleMessage = async (e) => {
+    console.log("ahaya selected user fel handle message", selectedUserId);
     const messageData = JSON.parse(e.data);
-    console.log(e, messageData)
-    console.log("🚀 ~ file: index.jsx:92 ~ handleMessage ~ e:", e)
     if ("online" in messageData) {
       showOnlinePeople(messageData.online);
-    } else if ('text' in messageData) {
-      setMessages((prev) => [...prev, { ...messageData }]); // isOur: false means incoming message from the other part (the other user)
+    } else if ("text" in messageData) {
+      if (messageData.sender === selectedUserId) {
+        setMessages((prev) => [...prev, { ...messageData }]);
+      } 
     }
-  }
+  };
 
-  function selectedContact(userId) {
-    setSelectedUserId(userId);
-  }
-
-  const onlinePeopleExcludingUser = onlinePeople.filter(
-    (id) => id !== actualUserId
-  );
+  const styles = {
+    transparentScrollbar: {
+      scrollbarWidth: "thin", // For Firefox
+      scrollbarColor: "transparent transparent", // For Firefox
+      "&::-webkit-scrollbar": {
+        width: "8px", // Width of the scrollbar
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "transparent", // Color of the thumb
+        borderRadius: "4px", // Rounded corners of the thumb
+      },
+    },
+  };
 
   const handleSubmit = (e) => {
     //sendMessage()
     e.preventDefault();
+
+    console.log(
+      "🚀 ~ file: index.jsx:128 ~ handleSubmit ~ selectedUserId:",
+      selectedUserId
+    );
     ws.send(
       JSON.stringify({
         message: {
@@ -116,49 +132,61 @@ function Chat() {
         },
       })
     );
+
+    
     setNewMessage("");
-    console.log(
-      "🚀 ~ file: index.jsx:121 ~ handleSubmit ~ newMessage:",
-      newMessage
-    );
-    setMessages(prev => ([...prev,{
-      text: newMessage,
-      sender: actualUserId,
-      recipient: selectedUserId,
-      _id: Date.now(),
-    }]));
-    console.log(
-      "🚀 ~ file: index.jsx:122 ~ handleSubmit ~ messages:",
-      messages
-    );
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        text: newMessage,
+        sender: actualUserId,
+        recipient: selectedUserId,
+        _id: Date.now(),
+      },
+    ]);
+
+   
   };
 
-  function uniqBy(array, iteratee) {
-    const seen = new Map();
-    const result = [];
-  
-    for (const item of array) {
-      const key = typeof iteratee === 'function' ? iteratee(item) : item[iteratee];
-  
-      if (!seen.has(key)) {
-        seen.set(key, true);
-        result.push(item);
-      }
-    }
-  
-    return result;
-  }
-  
+  // useEffect(() => {
+  //   const div = divUnderMessages.current;
+  //   if (div) {
+  //     div.scrollIntoView({behavior:'smooth', block:'end'});
+  //   }
+  // }, [messages]);
 
-  // const messagesWithoutDupes = uniqBy(messages, 'id');
+  // function selectedContact(userId) {
+  //   setSelectedUserId(userId);
+  //   console.log("🚀 ~ file: index.jsx:113 ~ selectedContact ~ userId:", userId)
+  //   console.log("🚀 ~ file: index.jsx:113 ~ selectedContact ~ SelectedUserId:", selectedUserId)
+  // }
+
+  console.log("is the page being refreshed?");
+
+  const onlinePeopleExcludingUser = onlinePeople.filter(
+    (id) => id !== actualUserId
+  );
+
+  // const messagesWithoutDupes = uniqBy(messages, '_id');
+  // console.log("🚀 ~ file: index.jsx:141 ~ Chat ~ messagesWithoutDupes:", messagesWithoutDupes)
+  // console.log("ahaya selected user", selectedUserId);
   // console.log("🚀 ~ file: index.jsx:154 ~ Chat ~ messagesWithoutDupes:", messagesWithoutDupes)
   return (
-    <Grid container sx={{ height: "100%", flexDirection: "row" }}>
+    <Grid
+      container
+      sx={{
+        height: "100%",
+        flexDirection: "row",
+        overflowX: "hidden",
+        alignItems: "stretch",
+      }}
+    >
       <Grid
         item
         xs={4}
         component={Paper}
-        sx={{ p: 2, height: "100%", bgcolor: colors.primary[800] }}
+        sx={{ p: 2, height: "100%",  }}
       >
         <Box
           sx={{
@@ -178,7 +206,10 @@ function Chat() {
               {" "}
               {/* Add key prop here */}
               <ListItem
-                onClick={() => selectedContact(userId)}
+                onClick={() => {
+                  setSelectedUserId(userId);
+                  console.log({ userId });
+                }}
                 key={userId}
                 sx={{
                   display: "flex",
@@ -196,12 +227,13 @@ function Chat() {
                     variant="dot"
                   >
                     <Avatar alt="Nour Sharp" src="/static/images/avatar/1.jpg">
-                      {" "}
-                      {userId[0]}{" "}
+                      {/* {" "}
+                      {userId[0]}{" "} */}
                     </Avatar>
                   </StyledBadge>
                 </Stack>
-                <ListItemText primary={userId} />
+                {/* primary={userId} */}
+                <ListItemText primary="Nour bnm" /> 
               </ListItem>
               <Divider />
             </Box>
@@ -212,10 +244,27 @@ function Chat() {
         item
         xs={8}
         component={Paper}
-        sx={{ p: 2, height: "100%", bgcolor: colors.blueAccent[900] }}
+        backgroundColor={theme.palette.background.alt}
+        sx={{
+          p: 2,
+          height: "100%",
+          // bgcolor: colors.blueAccent[900],
+          overflowX: "hidden",
+          margin: 0,
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-          <div style={{ flex: 1 }}>
+          <div
+            style={{
+              flex: 1,
+              height: "100%",
+              overflowX: "hidden",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {!selectedUserId && (
               <Typography
                 variant="h6"
@@ -232,9 +281,73 @@ function Chat() {
             )}
 
             {!!selectedUserId && (
-              <Box>
-                {messages.map(message => (
-                  <Typography> {message.text} </Typography>
+              <Box
+                style={{
+                  overflowX: "hidden",
+                  flex: 1,
+                  maxHeight: "calc(100% - 5px)",
+                  ...styles.transparentScrollbar,
+                }}
+                sx={{ flex: 1, height: "100%", overflowY: "auto" }}
+                
+              >
+                {messages.map((message) => (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent:
+                        message.sender === actualUserId
+                          ? "flex-start"
+                          : "flex-end",
+                      mb: 2,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection:
+                          message.sender === actualUserId
+                            ? "row"
+                            : "row-reverse",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Paper
+                        variant="outlined"
+                        sx={{
+                          p: 2,
+                          ml: message.sender === actualUserId ? 1 : 0,
+                          mr: message.sender === actualUserId ? 0 : 1,
+                          backgroundColor:
+                            message.sender === actualUserId
+                              ? "primary.light"
+                              : "secondary.light",
+                          borderRadius:
+                            message.sender === actualUserId
+                              ? "20px 20px 20px 5px"
+                              : "20px 20px 5px 20px",
+                        }}
+                      >
+                        <Typography
+                          // style={{
+                          //   backgroundColor:
+                          //     message.sender === actualUserId
+                          //       ? colors.blueAccent[300]
+                          //       : colors.blueAccent[800],
+                          //   color: "white",
+                          //   paddingRight: "15px",
+                          //   marginBottom: "8px",
+                          // }}
+                        >
+                          {message.sender === actualUserId ? "Me: " : ""}
+                          {message.text} <br />
+                          {/* sender:{message.sender} <br />
+                          --------------------------------------------------------------- */}
+                        </Typography>
+                      </Paper>
+                      {/* <div ref={divUnderMessages}></div> */}
+                    </Box>
+                  </Box>
                 ))}
               </Box>
             )}
@@ -248,27 +361,53 @@ function Chat() {
                   justifyContent: "space-between",
                 }}
               >
-                <Input
+                <TextField
                   type="string"
                   sx={{
+                    width: "10px",
                     flex: 1,
                     bgcolor: "white",
                     borderRadius: "20px",
                     paddingLeft: "10px",
-                    border: "none",
-                    "&:focus": {
-                      border: "none",
+                    position: "relative",
+                    bottom: 0,
+                    zIndex: 1,
+                    "& fieldset": { border: "none" },
+                    "& .MuiInputBase-input": {
+                      padding: "7px", // Adjust the input padding to align with the button
                     },
                   }}
+                  size="small"
+                  fullWidth
+                  // variant="outlined"
+                  InputProps={{
+                    style: {
+                      border: "none", // Set border to none
+                    },
+                  }}
+                  // value={input}
                   placeholder="Write your message here"
                   onChange={(e) => setNewMessage(e.target.value)}
+                  autoComplete="off"
                 />
+
                 <Button
                   variant="contained"
                   type="submit"
-                  color="primary"
+                  sx={{
+                    backgroundColor: "#007BFF", // Change the background color
+                    color: "white", // Change the text color
+                    borderRadius: "20px", // Add border-radius
+                    paddingLeft: "20px",
+                    marginLeft: "8px", // Add some padding to the button
+                    "&:hover": {
+                      backgroundColor: "#0056b3", // Change the background color on hover
+                    },
+                  }}
                   startIcon={<SendIcon />}
-                />
+                >
+                  Send
+                </Button>
               </div>
             </form>
           )}

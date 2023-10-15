@@ -27,7 +27,7 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import EditUserForm from "components/EditUserForm";
-
+import {  List, ListItem, ListItemText, Modal } from "@mui/material";
 
 
 const Admin = () => {
@@ -39,8 +39,19 @@ const Admin = () => {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // model to create event
+
   const handleSelectionModelChange = (newSelection) => {
     setSelectedRows(newSelection);
+    
+  };
+  const handleDateClick = (selected) => {
+    
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
     
   };
   console.log("selected rows : ", selectedRows)
@@ -210,9 +221,7 @@ const Admin = () => {
                 padding: "10px 20px",
               }}
               onClick={() => {
-                setIsUpdate(false)
-                setOpenPopup(true);
-                setRecordForEdit(null);
+                setIsModalOpen(true)
               }}
             >
               ADD new user
@@ -265,6 +274,105 @@ const Admin = () => {
           ) : (
             <Typography>Loading...</Typography>
           )}
+
+<Modal
+        open={isModalOpen}
+        onClose={handleModalClose}
+        aria-labelledby="event-title-modal"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: theme.palette.background.paper,
+            borderRadius: "5px",
+            boxShadow: 24,
+            p: 4,
+            minWidth: "400px", // Adjust the width here
+          }}
+        >
+          Add a User
+          <form>
+            <Box
+              display="grid"
+              gap="30px"
+              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+              sx={{
+                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+              }}
+            >
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="First Name"
+                
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Last Name"
+                
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Email"
+                
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Phone Number"
+                
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Occupation"
+                
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Location"
+                
+                sx={{ gridColumn: "span 4" }}
+              />
+              
+            </Box>
+            
+          </form>
+          <Box mt={2} display="flex" justifyContent="flex-end">
+            <Button variant="outlined" onClick={handleModalClose} sx={{
+              backgroundColor:  theme.palette.background.alt,
+              color: theme.palette.secondary.light,
+              
+            }}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ ml: 2, bgcolor: theme.palette.secondary.light, '&:hover': { bgcolor: theme.palette.primary.dark } }}
+            >
+              Save
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
   

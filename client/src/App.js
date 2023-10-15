@@ -90,7 +90,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/clients" element={<Clients />} />
                 <Route path="/virements" element={<Virement />} />
-                {isAdmin && <Route path="/admin" element={<Admin />} />}
+                {isAdmin && <Route path="/users" element={<Admin />} />}
                 <Route path="/chequier" element={<Chequier />} />
                 <Route path="/credits" element={<Credit />} />
                 <Route path="/cards" element={<Cards />} />

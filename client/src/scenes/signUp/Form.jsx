@@ -257,7 +257,7 @@ const Form = () => {
 const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
-const allowedDomains = ['gmail.com', 'example.com'];
+const allowedDomains = ['gmail.com', 'example.com', 'istic.ucar.tn'];
 
 const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
