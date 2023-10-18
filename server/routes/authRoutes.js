@@ -1,5 +1,5 @@
 import express from "express";
-import { login, createNewUser, register, verifyUser, forgetPassword, resetPassword } from "../controllers/auth.js";
+import { login, createNewUser, register, verifyUser, forgetPassword, resetPassword, createPassword } from "../controllers/auth.js";
 import { verifyToken } from "../middleware/auth.js";
 import { refreshToken } from "../controllers/auth.js";
 import { getUser, logout } from "../controllers/auth.js";
@@ -23,6 +23,10 @@ router.post("/forgetPassword", forgetPassword);
 
 router.post("/reset-password/:id/:token", resetPassword);
 
+router.post("/create-password/:id/:token", createPassword);
+
 router.post('/logout', verifyToken, logout);
+
+router.post("/createNewUser", createNewUser)
 
 export default router;

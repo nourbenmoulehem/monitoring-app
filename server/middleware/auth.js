@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 export const verifyToken = async (req, res, next) => {
   const cookies = req.headers.cookie;
@@ -9,7 +10,12 @@ export const verifyToken = async (req, res, next) => {
   
 
   const  token = cookies.split("=")[1];
-  // console.log(token);
+
+  const  id = cookies.split("=")[0];
+
+  req.user = await User.findById(id);
+
+  console.log(token);
   try {
     
     if (!token) {

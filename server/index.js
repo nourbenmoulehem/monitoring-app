@@ -19,7 +19,8 @@ import userRoute from "./routes/userRoute.js";
 import eventsRouter from "./routes/eventsRouter.js";
 import http from "http"; // Import the 'http' module
 import jwt from "jsonwebtoken";
-import { WebSocketServer } from 'ws'
+import { WebSocketServer } from 'ws';
+import chatRoutes from "./routes/chatRoutes.js"
 
 // data imports
 import User from "./models/User.js";
@@ -69,6 +70,7 @@ app.use("/credits", creditRoute)
 app.use("/virements", virementRoute)
 app.use("/users", userRoute)
 app.use("/events", eventsRouter)
+app.use("/chats", chatRoutes)
 
 
 
