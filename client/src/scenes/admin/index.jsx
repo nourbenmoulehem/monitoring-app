@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FlexBetween from "../../components/FlexBetween";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
+import axios from "axios";
 import {
   AddIcon,
   Search,
@@ -41,6 +42,23 @@ const Admin = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // model to create event
 
+  const [formValues, setFormValues] = useState({
+    fName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    occupation: '',
+    location: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
   const handleSelectionModelChange = (newSelection) => {
     setSelectedRows(newSelection);
     
@@ -54,8 +72,22 @@ const Admin = () => {
     setIsModalOpen(false);
     
   };
+
+  const handleSubmit = async (event) => {
+    
+    const res = await axios
+        .post("http://localhost:5001/auth/createNewUser", {
+          fName: formValues.fName,
+          lName: formValues.lastName,
+          email: formValues.email,
+          agency: formValues.agency,
+          location: formValues.location,
+          occupation: formValues.occupation,
+          phoneNumber: formValues.phoneNumber
+        })
+        .catch((err) => console.log(err));
+  };
   console.log("selected rows : ", selectedRows)
-  const isAdmin = true;
   const columns = [
     { field: "_id", headerName: "ID", flex: 1, renderCell: ({ row: { role } }) => {
       return (
@@ -81,6 +113,16 @@ const Admin = () => {
     {
       field: "email",
       headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "phoneNumber",
+      headerName: "phoneNumber",
+      flex: 1,
+    },
+    {
+      field: "location",
+      headerName: "location",
       flex: 1,
     },
     {
@@ -286,89 +328,94 @@ const Admin = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            bgcolor: theme.palette.background.paper,
-            borderRadius: "5px",
+            backgroundColor: colors.blueAccent[900],
+            borderRadius: "10px", // Rounded corners
             boxShadow: 24,
             p: 4,
-            minWidth: "400px", // Adjust the width here
+            minWidth: "400px",
           }}
         >
-          Add a User
-          <form>
-            <Box
-              display="grid"
-              gap="30px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-              sx={{
-                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-              }}
-            >
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="First Name"
-                
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Email"
-                
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Phone Number"
-                
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Occupation"
-                
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Location"
-                
-                sx={{ gridColumn: "span 4" }}
-              />
-              
-            </Box>
-            
-          </form>
-          <Box mt={2} display="flex" justifyContent="flex-end">
-            <Button variant="outlined" onClick={handleModalClose} sx={{
-              backgroundColor:  theme.palette.background.alt,
-              color: theme.palette.secondary.light,
-              
-            }}>
-              Cancel
-            </Button>
+          <h2 style={{ marginBottom: "20px" }}>Add a User</h2>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              variant="outlined" // Use the outlined variant for a more modern look
+              type="text"
+              label="First Name"
+              name="fName"
+              value={formValues.fName}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              label="Last Name"
+              name="lastName"
+              value={formValues.lastName}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              label="Email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              label="Phone Number"
+              name="phoneNumber"
+              value={formValues.phoneNumber}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              label="Occupation"
+              name="occupation"
+              value={formValues.occupation}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              label="Location"
+              name="location"
+              value={formValues.location}
+              onChange={handleChange}
+              sx={{ my: 2 }}
+            />
             <Button
+              type="submit"
               variant="contained"
               color="primary"
-              sx={{ ml: 2, bgcolor: theme.palette.secondary.light, '&:hover': { bgcolor: theme.palette.primary.dark } }}
+              sx={{ mt: 2 }}
             >
               Save
+            </Button>
+          </form>
+          <Box mt={2} display="flex" justifyContent="flex-end">
+            <Button
+              variant="outlined"
+              onClick={handleModalClose}
+              sx={{
+                bgcolor: "#f8f8f8",
+                color: "#007bff",
+              }}
+            >
+              Cancel
             </Button>
           </Box>
         </Box>

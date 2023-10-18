@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useHistory } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useMemo } from "react";
@@ -21,7 +21,10 @@ import axios from "axios";
 import { setLogin, setLogout } from "./state/index";
 import PasswordReset from "components/PasswordReset";
 import ForgetPasswored from "components/ForgetPassword";
+import CreatePassword from "components/CreatePassword";
 import Chat from "scenes/Chat";
+// import Chatbox from "components/Chatbox";
+// import Chatpage from "scenes/Chats";
 axios.defaults.withCredentials = true;
 
 
@@ -33,6 +36,7 @@ function App() {
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.user:", useSelector((state) => state.global.user))
   console.log("🚀 ~ file: App.js:19 ~ App ~ state.global.token:", useSelector((state) => state.global.token))
   console.log("🚀 ~ file: App.js:19 ~ App ~ isAuth:", isAuth)
+  // const history = useHistory();
 
   const userRoles = useSelector((state) => state.global.user?.role || []);
   console.log("🚀 ~ file: App.js:32 ~ App ~ userRoles:", userRoles)
@@ -59,6 +63,7 @@ function App() {
           
           const { token: refreshedToken } = refreshResponse.data;
           
+          // history.pushState("/chats")
           dispatch(setLogin({ user, token: refreshedToken }));
         } else {
           dispatch(setLogout());
@@ -85,6 +90,7 @@ function App() {
             <Route path="/confirm/:activationCode" element={<ActivationPage />} />
             <Route path="/forgot-password" element={<ForgetPasswored />} />
             <Route path="/reset-password/:id/:token" element={<PasswordReset />} />
+            <Route path="/create-password/:id/:token" element={<CreatePassword />} />
 
             {isAuth &&<Route element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -97,6 +103,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/chat" element={<Chat />} />
+                {/* <Route path="/chatpage" element={<Chatpage />} /> */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Route>
             }

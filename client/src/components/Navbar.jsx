@@ -52,7 +52,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const agenciesdb = useGetAllAgenciesQuery();
   const agencies = agenciesdb.data;
     console.log("🚀 ~ file: FormAddUser.jsx:33 ~ FormAddUser ~ agencies:", agencies);
-    const [selectedAgency, setSelectedAgency] = useState("");
+    // const [selectedAgency, setSelectedAgency] = useState("");
 
   const sendLogoutReq = async () => {
     const res = await axios.post("http://localhost:5001/auth/logout", null, {
@@ -85,15 +85,6 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   const update = async (values, onSubmitProps) => {
-      
-    // const formData = new FormData();
-    console.log("values in register")
-    console.log(values)
-    console.log("hello register!")
-    // for (let value in values) {
-    //   formData.append(value, values[value]);
-    // }
-
     const res = await axios
       .post("http://localhost:5001/users/updateUser", {
         _id: user._id,
@@ -107,6 +98,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         phoneNumber: values.phoneNumber
       })
       .catch((err) => console.log(err));
+    console.log("🚀 ~ file: Navbar.jsx:101 ~ update ~ res:", res)
     
   };
 

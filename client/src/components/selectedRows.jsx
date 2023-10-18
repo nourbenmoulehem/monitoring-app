@@ -48,8 +48,7 @@ const SelectedRowsTable = ({ selectedRows }) => {
     try {
       // Make the DELETE request to delete the user
       await axios.delete(`http://localhost:5001/users/deleteUser/${user._id}`);
-      // Handle the success message or any other UI changes after the delete
-      console.log("User deleted successfully");
+      window.location.reload();
     } catch (error) {
       // Handle the error if the delete request fails
       console.error("Error deleting user:", error.message);

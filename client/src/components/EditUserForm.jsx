@@ -41,6 +41,7 @@
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const handleFormSubmit = (values) => {
       update(values);
+      window.location.reload();
     };
 
     const update = async (values, onSubmitProps) => {
